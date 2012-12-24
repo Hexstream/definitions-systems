@@ -2,20 +2,46 @@
 
 (defclass defsys:system () ())
 
+(defun %forward-ikeyword (forward continue system-name definition-name keys
+                          &optional (new nil newp))
+  (if (ikeywords:ikeywordp system-name)
+      (multiple-value-call forward
+        (if newp new (values))
+        (identity (intern (symbol-name system-name)
+                          #.(find-package '#:keyword)))
+        definition-name
+        (values-list keys))
+      (funcall continue)))
+
 (defgeneric defsys:locate (system definition-name &key errorp &allow-other-keys)
-  (:method :around ((system-name symbol) name &rest keys)
-    (if (ikeywords:ikeywordp system-name)
-        (apply #'defsys:locate
-               (intern (symbol-name system-name) #.(find-package '#:keyword))
-               keys)
-        (call-next-method)))
-  (:method ((system-name symbol) name &rest keys)
+  (:method :around ((system-name symbol) definition-name &rest keys)
+    (%forward-ikeyword #'defsys:locate #'call-next-method
+                       system-name definition-name keys))
+  (:method ((system-name symbol) definition-name &rest keys)
     (declare (ignore keys))
     (defsys:locate (defsys:locate 'defsys:system system-name)
-                   name)))
+                   definition-name)))
 
 (defgeneric (setf defsys:locate)
-    (new-definition system definition-name &key errorp))
+    (new-definition system definition-name &key errorp &allow-other-keys)
+  (:method :around (new-definition (system-name symbol) definition-name &rest keys)
+           (%forward-ikeyword #'(setf defsys:locate) #'call-next-method
+                              system-name definition-name keys new-definition))
+  (:method (new-definition (system-name symbol) definition-name &rest keys)
+    (setf (apply #'defsys:locate (defsys:locate 'defsys:system system-name)
+                 definition-name
+                 keys)
+          new-definition)))
+
+(defgeneric defsys:unbind (system definition-name &key &allow-other-keys)
+  (:method :around ((system-name symbol) definition-name &rest keys)
+    (%forward-ikeyword #'defsys:unbind #'call-next-method
+                       system-name definition-name keys))
+  (:method ((system-name symbol) definition-name &rest keys)
+    (apply #'defsys:unbind
+           (defsys:locate 'defsys:system system-name)
+           definition-name
+           keys)))
 
 
 (defgeneric defsys:locator (object))

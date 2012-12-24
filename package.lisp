@@ -4,6 +4,7 @@
   (:export #:system
            #:systems
            #:locate
+           #:unbind
            #:not-found
            #:locator
            #:hash-table-mixin
