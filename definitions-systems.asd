@@ -7,7 +7,8 @@
 
   :description "To be described."
 
-  :depends-on (#:incognito-keywords)
+  :depends-on (#:enhanced-multiple-value-bind
+               #:incognito-keywords)
 
   :version "0.0"
   :serial cl:t

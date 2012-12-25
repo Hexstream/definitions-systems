@@ -2,6 +2,7 @@
   (:nicknames #:defsys)
   (:use #:cl)
   (:export #:system
+           #:nil-to-not-found-mixin
            #:systems
            #:locate
            #:unbind
