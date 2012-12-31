@@ -37,15 +37,19 @@
   (:method :around
     ((system defsys:nil-to-not-found-mixin) definition-name
      &rest keys &key (errorp t))
-    (enhanced-mvb:multiple-value-bind (definition &rest rest)
+    (enhanced-mvb:multiple-value-bind (definition foundp &rest result-keys)
         (apply #'call-next-method
                system
                definition-name
                (%remove-keys '(:errorp) keys))
-      (cond (definition
-             (multiple-value-call #'values definition (values-list rest)))
-            (errorp (error 'defsys:not-found :system system :name definition-name))
-            (t nil)))))
+      (cond (foundp
+             (multiple-value-call #'values definition foundp (values-list result-keys)))
+            (errorp (apply #'defsys:not-found
+                           :system system
+                           :name definition-name
+                           :result-keys result-keys
+                           keys))
+            (t (multiple-value-call #'values nil nil (values-list result-keys)))))))
 
 (defgeneric (setf defsys:locate)
     (new-definition system definition-name &key errorp &allow-other-keys)
@@ -67,6 +71,10 @@
            (defsys:locate 'defsys:system system-name)
            definition-name
            keys)))
+
+(defgeneric defsys:boundp (system definition-name &key &allow-other-keys)
+  (:method (system definition-name &rest keys)
+    (not (null (nth-value 1 (apply #'defsys:locate system definition-name keys))))))
 
 
 (defgeneric defsys:locator (object))
@@ -118,8 +126,24 @@
     (prin1 (defsys:name mixin) stream)))
 
 
+(defgeneric defsys:make (system definition-name &rest initargs
+                                &key &allow-other-keys))
+
+(defgeneric defsys:make-and-bind (system definition-name &rest initargs
+                                         &key &allow-other-keys)
+  (:method (system definition-name &rest initargs)
+    (setf (apply #'defsys:locate system definition-name initargs)
+          (apply #'defsys:make system definition-name initargs))))
+
 (defgeneric defsys:ensure (system definition-name &rest [re]definition-initargs
-                                  &key &allow-other-keys))
+                                  &key &allow-other-keys)
+  (:method (system definition-name &rest keys)
+    (multiple-value-bind (existing existingp &rest result-keys)
+        (apply #'defsys:locate system definition-name keys)
+      (if existingp
+          (multiple-value-call #'values existing existingp
+                               (values-list result-keys))
+          (apply #'defsys:make-and-bind system definition-name keys)))))
 
 (defmacro defsys:define (name &body options)
   (declare (ignore name options)))
@@ -133,3 +157,12 @@
   (:report (lambda (condition stream)
              (format stream "No definition named ~S in system ~S."
                      (defsys:name condition) (defsys:system condition)))))
+
+(defgeneric defsys:not-found-class (system definition-name &key &allow-other-keys)
+  (:method (system definition-name &key)
+    'defsys:not-found))
+
+(defgeneric defsys:not-found (system definition-name &key &allow-other-keys)
+  (:method (system definition-name &rest keys)
+    (apply #'error (apply #'not-found-class system definition-name keys)
+           :system system :name definition-name keys)))
