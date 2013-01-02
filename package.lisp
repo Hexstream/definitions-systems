@@ -19,6 +19,7 @@
            #:make
            #:make-and-bind
            #:ensure
+           #:expand-definition
            #:define))
 
 (ikeywords:defpackage #:definitions-systems.ikeyword
