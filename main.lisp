@@ -145,12 +145,12 @@
                                (values-list result-keys))
           (apply #'defsys:make-and-bind system definition-name keys)))))
 
-(defgeneric defsys:expand-definition (system definition-name args &rest options
-                                             &key environment &allow-other-keys))
+(defgeneric defsys:expand-definition (system definition-name environment args
+                                             &rest options &key &allow-other-keys))
 
 (defmacro defsys:define ((kind definition-name &rest options &key &allow-other-keys)
                          &body args &environment env)
-  (apply #'defsys:expand-definition kind definition-name args :environment env options))
+  (apply #'defsys:expand-definition kind definition-name env args options))
 
 
 (define-condition defsys:not-found (error)
@@ -168,5 +168,5 @@
 
 (defgeneric defsys:not-found (system definition-name &key &allow-other-keys)
   (:method (system definition-name &rest keys)
-    (apply #'error (apply #'not-found-class system definition-name keys)
+    (apply #'error (apply #'defsys:not-found-class system definition-name keys)
            :system system :name definition-name keys)))
