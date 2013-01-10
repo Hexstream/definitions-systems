@@ -1,14 +1,14 @@
-(in-package #:definitions-systems)
+(in-package #:definitions-systems-cl)
 
-(defsys:define defsys:system
+(define defsys:system
   (:frontend (function defsys:systems)))
 
-(defsys:define package
-  (:class defsys:standard-proxy)
+(define (defsys:system package
+          (:class defsys-proxy:standard-proxy))
   (:backend (:locate #'find-package)))
 
-(defsys:define class
-  (:class defsys:standard-proxy)
+(define (defsys:system class
+          (:class defsys-proxy:standard-proxy))
   (:backend (:locate
              (lambda (class-name &key environment)
                (find-class class-name nil environment)))
@@ -16,7 +16,8 @@
              (lambda (new-class class-name &key environment)
                (setf (find-class class-name nil environment) new-class)))))
 
-(defsys:define i:macro
+(define (defsys:system i:macro
+          (:class defsys-proxy:standard-proxy))
   (:backend (:locate
              (lambda (name &key environment)
                (macro-function name environment)))

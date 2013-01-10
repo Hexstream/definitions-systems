@@ -22,8 +22,18 @@
            #:expand-definition
            #:define))
 
+(cl:defpackage #:definitions-systems-proxy
+  (:nicknames #:defsys-proxy)
+  (:use #:cl)
+  (:export #:standard-proxy))
+
 (ikeywords:defpackage #:definitions-systems.ikeyword
   (:nicknames #:defsys.ikeyword)
   (:export #:operator
            #:special-form
            #:macro))
+
+(cl:defpackage #:definitions-systems-cl
+  (:use #:cl)
+  (:import-from #:definitions-systems #:define)
+  (:documentation "An internal package for defining definitions-systems for CL (proxies)."))

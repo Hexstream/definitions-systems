@@ -13,4 +13,5 @@
   :version "0.0"
   :serial cl:t
   :components ((:file "package")
-	       (:file "main")))
+	       (:file "main")
+               (:file "standard-proxy")))

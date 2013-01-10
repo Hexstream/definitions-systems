@@ -148,7 +148,7 @@
 (defgeneric defsys:expand-definition (system definition-name environment args
                                              &rest options &key &allow-other-keys))
 
-(defmacro defsys:define ((kind definition-name &rest options &key &allow-other-keys)
+(defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)
   (apply #'defsys:expand-definition kind definition-name env args options))
 
