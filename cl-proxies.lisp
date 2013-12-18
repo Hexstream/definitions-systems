@@ -1,11 +1,11 @@
 (in-package #:definitions-systems-cl)
 
-(define defsys:system
-  (:frontend (function defsys:systems)))
-
 (define (defsys:system package
           (:class defsys-proxy:standard-proxy))
   (:backend (:locate #'find-package)))
+
+(defmethod defsys:locate ((system standard-proxy) string-designator-or-package &rest rest)
+  )
 
 (define (defsys:system class
           (:class defsys-proxy:standard-proxy))

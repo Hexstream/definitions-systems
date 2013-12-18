@@ -170,3 +170,7 @@
   (:method (system definition-name &rest keys)
     (apply #'error (apply #'defsys:not-found-class system definition-name keys)
            :system system :name definition-name keys)))
+
+#+nil
+(define defsys:system
+  (:frontend (function defsys:systems)))
