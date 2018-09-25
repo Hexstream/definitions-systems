@@ -14,4 +14,6 @@
   :serial cl:t
   :components ((:file "package")
 	       (:file "main")
-               (:file "standard-proxy")))
+               (:file "standard-proxy"))
+
+  :in-order-to ((asdf:test-op (asdf:test-op #:definitions-systems_tests))))
