@@ -42,14 +42,13 @@
                system
                definition-name
                (%remove-keys '(:errorp) keys))
-      (cond (foundp
-             (multiple-value-call #'values definition foundp (values-list result-keys)))
+      (cond (foundp (apply #'values definition foundp result-keys))
             (errorp (apply #'defsys:not-found
                            :system system
                            :name definition-name
                            :result-keys result-keys
                            keys))
-            (t (multiple-value-call #'values nil nil (values-list result-keys)))))))
+            (t (apply #'values nil nil result-keys))))))
 
 (defgeneric (setf defsys:locate)
     (new-definition system definition-name &key errorp &allow-other-keys)
@@ -141,8 +140,7 @@
     (multiple-value-bind (existing existingp &rest result-keys)
         (apply #'defsys:locate system definition-name keys)
       (if existingp
-          (multiple-value-call #'values existing existingp
-                               (values-list result-keys))
+          (apply #'values existing existingp result-keys)
           (apply #'defsys:make-and-bind system definition-name keys)))))
 
 (defgeneric defsys:expand-definition (system definition-name environment args
