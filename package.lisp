@@ -5,22 +5,17 @@
                           #:multiple-value-bind)
   (:shadow #:boundp)
   (:export #:system
-           #:nil-to-not-found-mixin
            #:systems
            #:locate
            #:unbind
            #:boundp
            #:not-found
-           #:not-found-class
-           #:locator
            #:hash-table-mixin
            #:name
            #:name-mixin
-           #:make
-           #:make-and-bind
-           #:ensure
            #:expand-definition
-           #:define))
+           #:define
+           #:standard-system))
 
 (ikeywords:defpackage #:definitions-systems.ikeyword
   (:nicknames #:defsys.ikeyword)

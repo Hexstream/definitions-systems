@@ -2,116 +2,6 @@
 
 (defclass defsys:system () ())
 
-(defclass defsys:nil-to-not-found-mixin () ())
-
-(defun %remove-keys (keys plist)
-  (if (get-properties plist keys)
-      (do (acc
-           (plist plist (cddr plist)))
-          ((endp plist) (nreverse acc))
-        (destructuring-bind (key value &rest rest) plist
-          (declare (ignore rest))
-          (unless (member key keys)
-            (setf acc (list* value key acc)))))
-      plist))
-
-(defun %forward-ikeyword (forward continue system-name definition-name keys
-                          &optional (new nil newp))
-  (if (ikeywords:ikeywordp system-name)
-      (multiple-value-call forward
-        (if newp new (values))
-        (identity
-         (intern (symbol-name system-name) #.(find-package '#:keyword)))
-        definition-name
-        (values-list keys))
-      (funcall continue)))
-
-(defgeneric defsys:locate (system definition-name &key errorp &allow-other-keys)
-  (:method :around ((system-name symbol) definition-name &rest keys)
-    (%forward-ikeyword #'defsys:locate #'call-next-method
-                       system-name definition-name keys))
-  (:method ((system-name symbol) definition-name &rest keys)
-    (declare (ignore keys))
-    (defsys:locate (defsys:locate 'defsys:system system-name)
-                   definition-name))
-  (:method :around
-    ((system defsys:nil-to-not-found-mixin) definition-name
-     &rest keys &key (errorp t))
-    (enhanced-mvb:multiple-value-bind (definition foundp &rest result-keys)
-        (apply #'call-next-method
-               system
-               definition-name
-               (%remove-keys '(:errorp) keys))
-      (cond (foundp (apply #'values definition foundp result-keys))
-            (errorp (apply #'defsys:not-found
-                           :system system
-                           :name definition-name
-                           :result-keys result-keys
-                           keys))
-            (t (apply #'values nil nil result-keys))))))
-
-(defgeneric (setf defsys:locate)
-    (new-definition system definition-name &key errorp &allow-other-keys)
-  (:method :around (new-definition (system-name symbol) definition-name &rest keys)
-    (%forward-ikeyword #'(setf defsys:locate) #'call-next-method
-                       system-name definition-name keys new-definition))
-  (:method (new-definition (system-name symbol) definition-name &rest keys)
-    (setf (apply #'defsys:locate (defsys:locate 'defsys:system system-name)
-                 definition-name
-                 keys)
-          new-definition)))
-
-(defgeneric defsys:unbind (system definition-name &key &allow-other-keys)
-  (:method :around ((system-name symbol) definition-name &rest keys)
-    (%forward-ikeyword #'defsys:unbind #'call-next-method
-                       system-name definition-name keys))
-  (:method ((system-name symbol) definition-name &rest keys)
-    (apply #'defsys:unbind
-           (defsys:locate 'defsys:system system-name)
-           definition-name
-           keys)))
-
-(defgeneric defsys:boundp (system definition-name &key &allow-other-keys)
-  (:method (system definition-name &rest keys)
-    (not (null (nth-value 1 (apply #'defsys:locate system definition-name keys))))))
-
-
-(defgeneric defsys:locator (object))
-
-(defclass defsys:hash-table-mixin ()
-  ((%hash :reader defsys:locator
-          :type hash-table)))
-
-(defun %hash-table-with-test-and-contents (test old-hash-table)
-  (let ((new (make-hash-table :test test
-                              :size (hash-table-size old-hash-table))))
-    (prog1 new
-      (maphash (lambda (key value)
-                 (setf (gethash key new) value))
-               old-hash-table))))
-
-(defmethod shared-initialize :before ((mixin defsys:hash-table-mixin)
-                                      slot-names
-                                      &key
-                                      ((#:aux boundp)
-                                       (slot-boundp mixin '%hash))
-                                      ((#:aux current-test)
-                                       (if boundp
-                                           (hash-table-test
-                                            (slot-value mixin '%hash))
-                                           'eq))
-                                      ((:hash-table-test new-test)
-                                       (if boundp
-                                           current-test
-                                           'eq)))
-  (when (and (not boundp)
-             (or (eq slot-names t) (member '%hash slot-names)))
-    (setf (slot-value mixin '%hash)
-          (make-hash-table :test new-test)))
-  (unless (eq current-test new-test)
-    (setf (slot-value mixin '%hash)
-          (%hash-table-with-test-and-contents new-test (slot-value mixin '%hash)))))
-
 
 (defgeneric defsys:name (system))
 
@@ -125,26 +15,92 @@
     (prin1 (defsys:name mixin) stream)))
 
 
-(defgeneric defsys:make (system definition-name &rest initargs
-                                &key &allow-other-keys))
+(defclass defsys:hash-table-mixin ()
+  ((%hash :type hash-table :initform (make-hash-table :test 'eq))))
 
-(defgeneric defsys:make-and-bind (system definition-name &rest initargs
-                                         &key &allow-other-keys)
-  (:method (system definition-name &rest initargs)
-    (setf (apply #'defsys:locate system definition-name initargs)
-          (apply #'defsys:make system definition-name initargs))))
 
-(defgeneric defsys:ensure (system definition-name &rest [re]definition-initargs
-                                  &key &allow-other-keys)
-  (:method (system definition-name &rest keys)
-    (multiple-value-bind (existing existingp &rest result-keys)
-        (apply #'defsys:locate system definition-name keys)
-      (if existingp
-          (apply #'values existing existingp result-keys)
-          (apply #'defsys:make-and-bind system definition-name keys)))))
+(defclass defsys:standard-system (defsys:name-mixin defsys:hash-table-mixin)
+  ())
+
+(defvar *root-system* (make-instance 'defsys:standard-system :name 'defsys:system))
+
+
+(defun %forward-ikeyword (forward continue system-name definition-name &rest keys)
+  (if (ikeywords:ikeywordp system-name)
+      (apply forward
+             (intern (symbol-name system-name) #.(find-package '#:keyword))
+             definition-name
+             keys)
+      (funcall continue)))
+
+(defun (setf %forward-ikeyword) (new forward continue system-name definition-name &rest keys)
+  (if (ikeywords:ikeywordp system-name)
+      (apply forward
+             new
+             (intern (symbol-name system-name) #.(find-package '#:keyword))
+             definition-name
+             keys)
+      (funcall continue)))
+
+(defgeneric defsys:locate (system definition-name &key errorp)
+  (:method :around (system definition-name &key (errorp t))
+    (or (call-next-method)
+        (when errorp
+          (error 'defsys:not-found :system system :name definition-name))))
+  (:method :around ((system-name symbol) definition-name &key (errorp t))
+    (%forward-ikeyword #'defsys:locate #'call-next-method
+                       system-name definition-name :errorp errorp))
+  (:method ((system-name symbol) definition-name &key (errorp t))
+    (defsys:locate (defsys:locate 'defsys:system system-name)
+                   definition-name :errorp errorp))
+  (:method ((system-name (eql 'defsys:system)) definition-name &key (errorp t))
+    (declare (ignore errorp))
+    *root-system*)
+  (:method ((system defsys:hash-table-mixin) definition-name &key (errorp t))
+    (declare (ignore errorp))
+    (identity (gethash definition-name (slot-value system '%hash)))))
+
+(defgeneric (setf defsys:locate) (new-definition system definition-name &key errorp)
+  (:method :around (new-definition (system-name symbol) definition-name &key (errorp nil))
+           (setf (%forward-ikeyword #'(setf defsys:locate) #'call-next-method
+                                    system-name definition-name :errorp errorp)
+                 new-definition))
+  (:method (new-definition (system-name symbol) definition-name &key (errorp nil))
+    (setf (defsys:locate (defsys:locate 'defsys:system system-name)
+                         definition-name
+                         :errorp errorp)
+          new-definition))
+  (:method (new-definition (system defsys:hash-table-mixin) definition-name &key (errorp nil))
+    (declare (ignore errorp))
+    (setf (gethash definition-name (slot-value system '%hash))
+          new-definition)))
+
+(defgeneric defsys:unbind (system definition-name)
+  (:method :around ((system-name symbol) definition-name)
+    (%forward-ikeyword #'defsys:unbind #'call-next-method
+                       system-name definition-name))
+  (:method ((system-name symbol) definition-name)
+    (defsys:unbind (defsys:locate 'defsys:system system-name)
+                   definition-name))
+  (:method ((system hash-table-mixin) definition-name)
+    (setf (gethash definition-name (slot-value system '%hash)) nil)))
+
+(defgeneric defsys:boundp (system definition-name)
+  (:method (system definition-name)
+    (not (null (defsys:locate system definition-name :errorp nil)))))
+
 
 (defgeneric defsys:expand-definition (system definition-name environment args
-                                             &rest options &key &allow-other-keys))
+                                      &rest options &key &allow-other-keys)
+  (:method :around ((system-name symbol) definition-name environment args
+                    &rest options &key &allow-other-keys)
+    (apply #'%forward-ikeyword #'defsys:expand-definition #'call-next-method
+           system-name definition-name environment args options))
+  (:method ((system-name symbol) definition-name environment args
+            &rest options &key &allow-other-keys)
+    (apply #'defsys:expand-definition
+           (defsys:locate 'defsys:system system-name)
+           definition-name environment args options)))
 
 (defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)
@@ -159,16 +115,3 @@
   (:report (lambda (condition stream)
              (format stream "No definition named ~S in system ~S."
                      (defsys:name condition) (defsys:system condition)))))
-
-(defgeneric defsys:not-found-class (system definition-name &key &allow-other-keys)
-  (:method (system definition-name &key)
-    'defsys:not-found))
-
-(defgeneric defsys:not-found (system definition-name &key &allow-other-keys)
-  (:method (system definition-name &rest keys)
-    (apply #'error (apply #'defsys:not-found-class system definition-name keys)
-           :system system :name definition-name keys)))
-
-#+nil
-(define defsys:system
-  (:frontend (function defsys:systems)))
