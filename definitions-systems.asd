@@ -13,6 +13,7 @@
   :version "0.0"
   :serial cl:t
   :components ((:file "package")
-	       (:file "main"))
+               (:file "main")
+               (:file "ikeywords"))
 
   :in-order-to ((asdf:test-op (asdf:test-op #:definitions-systems_tests))))
