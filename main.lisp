@@ -51,11 +51,8 @@
     (%forward-ikeyword #'defsys:locate #'call-next-method
                        system-name definition-name :errorp errorp))
   (:method ((system-name symbol) definition-name &key (errorp t))
-    (defsys:locate (defsys:locate 'defsys:system system-name)
+    (defsys:locate (defsys:locate *root-system* system-name)
                    definition-name :errorp errorp))
-  (:method ((system-name (eql 'defsys:system)) definition-name &key (errorp t))
-    (declare (ignore errorp))
-    *root-system*)
   (:method ((system defsys:hash-table-mixin) definition-name &key (errorp t))
     (declare (ignore errorp))
     (identity (gethash definition-name (slot-value system '%hash)))))
@@ -66,7 +63,7 @@
                                     system-name definition-name :errorp errorp)
                  new-definition))
   (:method (new-definition (system-name symbol) definition-name &key (errorp nil))
-    (setf (defsys:locate (defsys:locate 'defsys:system system-name)
+    (setf (defsys:locate (defsys:locate *root-system* system-name)
                          definition-name
                          :errorp errorp)
           new-definition))
@@ -80,7 +77,7 @@
     (%forward-ikeyword #'defsys:unbind #'call-next-method
                        system-name definition-name))
   (:method ((system-name symbol) definition-name)
-    (defsys:unbind (defsys:locate 'defsys:system system-name)
+    (defsys:unbind (defsys:locate *root-system* system-name)
                    definition-name))
   (:method ((system hash-table-mixin) definition-name)
     (setf (gethash definition-name (slot-value system '%hash)) nil)))
@@ -99,7 +96,7 @@
   (:method ((system-name symbol) definition-name environment args
             &rest options &key &allow-other-keys)
     (apply #'defsys:expand-definition
-           (defsys:locate 'defsys:system system-name)
+           (defsys:locate *root-system* system-name)
            definition-name environment args options)))
 
 (defmacro defsys:define ((kind definition-name &body options)
