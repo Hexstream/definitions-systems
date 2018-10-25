@@ -15,7 +15,8 @@
            #:name-mixin
            #:expand-definition
            #:define
-           #:standard-system))
+           #:standard-system
+           #:ikeywords-mixin))
 
 (ikeywords:defpackage #:definitions-systems.ikeyword
   (:nicknames #:defsys.ikeyword)

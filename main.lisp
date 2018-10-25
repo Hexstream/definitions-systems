@@ -25,31 +25,11 @@
 (defvar *root-system* (make-instance 'defsys:standard-system :name 'defsys:system))
 
 
-(defun %forward-ikeyword (forward continue system-name definition-name &rest keys)
-  (if (ikeywords:ikeywordp system-name)
-      (apply forward
-             (intern (symbol-name system-name) #.(find-package '#:keyword))
-             definition-name
-             keys)
-      (funcall continue)))
-
-(defun (setf %forward-ikeyword) (new forward continue system-name definition-name &rest keys)
-  (if (ikeywords:ikeywordp system-name)
-      (apply forward
-             new
-             (intern (symbol-name system-name) #.(find-package '#:keyword))
-             definition-name
-             keys)
-      (funcall continue)))
-
 (defgeneric defsys:locate (system definition-name &key errorp)
   (:method :around (system definition-name &key (errorp t))
     (or (call-next-method)
         (when errorp
           (error 'defsys:not-found :system system :name definition-name))))
-  (:method :around ((system-name symbol) definition-name &key (errorp t))
-    (%forward-ikeyword #'defsys:locate #'call-next-method
-                       system-name definition-name :errorp errorp))
   (:method ((system-name symbol) definition-name &key (errorp t))
     (defsys:locate (defsys:locate *root-system* system-name)
                    definition-name :errorp errorp))
@@ -58,10 +38,6 @@
     (identity (gethash definition-name (slot-value system '%hash)))))
 
 (defgeneric (setf defsys:locate) (new-definition system definition-name &key errorp)
-  (:method :around (new-definition (system-name symbol) definition-name &key (errorp nil))
-           (setf (%forward-ikeyword #'(setf defsys:locate) #'call-next-method
-                                    system-name definition-name :errorp errorp)
-                 new-definition))
   (:method (new-definition (system-name symbol) definition-name &key (errorp nil))
     (setf (defsys:locate (defsys:locate *root-system* system-name)
                          definition-name
@@ -73,9 +49,6 @@
           new-definition)))
 
 (defgeneric defsys:unbind (system definition-name)
-  (:method :around ((system-name symbol) definition-name)
-    (%forward-ikeyword #'defsys:unbind #'call-next-method
-                       system-name definition-name))
   (:method ((system-name symbol) definition-name)
     (defsys:unbind (defsys:locate *root-system* system-name)
                    definition-name))
@@ -89,10 +62,6 @@
 
 (defgeneric defsys:expand-definition (system definition-name environment args
                                       &rest options &key &allow-other-keys)
-  (:method :around ((system-name symbol) definition-name environment args
-                    &rest options &key &allow-other-keys)
-    (apply #'%forward-ikeyword #'defsys:expand-definition #'call-next-method
-           system-name definition-name environment args options))
   (:method ((system-name symbol) definition-name environment args
             &rest options &key &allow-other-keys)
     (apply #'defsys:expand-definition
@@ -112,3 +81,43 @@
   (:report (lambda (condition stream)
              (format stream "No definition named ~S in system ~S."
                      (defsys:name condition) (defsys:system condition)))))
+
+
+(defclass defsys:ikeywords-mixin ()
+  ())
+
+(defun %forward-ikeyword (forward continue system definition-name &rest keys)
+  (if (ikeywords:ikeywordp definition-name)
+      (apply forward
+             system
+             (intern (symbol-name definition-name) #.(find-package '#:keyword))
+             keys)
+      (funcall continue)))
+
+(defun (setf %forward-ikeyword) (new forward continue system definition-name &rest keys)
+  (if (ikeywords:ikeywordp definition-name)
+      (apply forward
+             new
+             system
+             (intern (symbol-name definition-name) #.(find-package '#:keyword))
+             keys)
+      (funcall continue)))
+
+(defmethod defsys:locate :around ((system defsys:ikeywords-mixin) (definition-name symbol) &key (errorp t))
+  (%forward-ikeyword #'defsys:locate #'call-next-method system definition-name :errorp errorp))
+
+(defmethod (setf defsys:locate) :around (new-definition (system defsys:ikeywords-mixin) (definition-name symbol) &key (errorp nil))
+  (setf (%forward-ikeyword #'(setf defsys:locate) #'call-next-method
+                           system definition-name :errorp errorp)
+        new-definition))
+
+(defmethod defsys:unbind :around ((system defsys:ikeywords-mixin) (definition-name symbol))
+  (%forward-ikeyword #'defsys:unbind #'call-next-method system definition-name))
+
+(defmethod defsys:boundp :around ((system defsys:ikeywords-mixin) (definition-name symbol))
+  (%forward-ikeyword #'defsys:boundp #'call-next-method system definition-name))
+
+(defmethod defsys:expand-definition :around ((system defsys:ikeywords-mixin) (definition-name symbol)
+                                             environment args &rest options &key &allow-other-keys)
+  (apply #'%forward-ikeyword #'defsys:expand-definition #'call-next-method
+         system definition-name environment args options))
