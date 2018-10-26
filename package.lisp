@@ -5,7 +5,9 @@
                           #:multiple-value-bind)
   (:shadow #:boundp)
   (:export #:system
-           #:systems
+           #:standard-system
+           #:ikeywords-mixin
+           #:root-system
            #:locate
            #:unbind
            #:boundp
@@ -14,9 +16,7 @@
            #:name
            #:name-mixin
            #:expand-definition
-           #:define
-           #:standard-system
-           #:ikeywords-mixin))
+           #:define))
 
 (ikeywords:defpackage #:definitions-systems.ikeyword
   (:nicknames #:defsys.ikeyword)

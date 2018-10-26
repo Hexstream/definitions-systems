@@ -27,6 +27,9 @@
 
 (defvar *root-system* (make-instance 'defsys:standard-system :name 'defsys:system))
 
+(defun defsys:root-system ()
+  *root-system*)
+
 
 (defgeneric defsys:locate (system definition-name &key errorp)
   (:method :around (system definition-name &key (errorp t))
