@@ -5,7 +5,7 @@
   ;; See the UNLICENSE file for details.
   :license "Public Domain"
 
-  :description "To be described."
+  :description "Provides a simple unified extensible way of processing named definitions."
 
   :depends-on (#:enhanced-multiple-value-bind
                #:incognito-keywords)
