@@ -66,10 +66,8 @@
     (not (null (defsys:locate system definition-name :errorp nil)))))
 
 
-(defgeneric defsys:expand-definition (system definition-name environment args
-                                      &rest options &key &allow-other-keys)
-  (:method ((system-name symbol) definition-name environment args
-            &rest options &key &allow-other-keys)
+(defgeneric defsys:expand-definition (system definition-name environment args &rest options)
+  (:method ((system-name symbol) definition-name environment args &rest options)
     (apply #'defsys:expand-definition
            (defsys:locate *root-system* system-name)
            definition-name environment args options)))
