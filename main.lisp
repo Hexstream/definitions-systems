@@ -59,7 +59,7 @@
     (defsys:unbind (defsys:locate *root-system* system-name)
                    definition-name))
   (:method ((system hash-table-mixin) definition-name)
-    (setf (gethash definition-name (slot-value system '%hash)) nil)))
+    (remhash definition-name (slot-value system '%hash))))
 
 (defgeneric defsys:boundp (system definition-name)
   (:method (system definition-name)
