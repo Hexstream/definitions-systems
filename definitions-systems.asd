@@ -10,7 +10,7 @@
   :depends-on (#:enhanced-multiple-value-bind
                #:incognito-keywords)
 
-  :version "0.0"
+  :version "1.0"
   :serial cl:t
   :components ((:file "package")
                (:file "main")
