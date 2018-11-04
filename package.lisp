@@ -13,8 +13,8 @@
            #:boundp
            #:not-found
            #:hash-table-mixin
-           #:name
            #:name-mixin
+           #:name
            #:expand-definition
            #:define))
 
