@@ -7,8 +7,7 @@
 
   :description "Provides a simple unified extensible way of processing named definitions."
 
-  :depends-on (#:enhanced-multiple-value-bind
-               #:incognito-keywords)
+  :depends-on (#:incognito-keywords)
 
   :version "1.0"
   :serial cl:t

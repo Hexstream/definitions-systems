@@ -1,8 +1,6 @@
 (cl:defpackage #:definitions-systems
   (:nicknames #:defsys)
   (:use #:cl)
-  (:shadowing-import-from #:enhanced-multiple-value-bind
-                          #:multiple-value-bind)
   (:shadow #:boundp)
   (:export #:system
            #:standard-system
