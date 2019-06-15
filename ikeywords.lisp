@@ -1,5 +1,8 @@
 (in-package #:definitions-systems)
 
+(defclass defsys:ikeywords-mixin ()
+  ())
+
 (defun %forward-ikeyword (forward continue system definition-name &rest keys)
   (if (ikeywords:ikeywordp definition-name)
       (apply forward

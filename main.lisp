@@ -22,9 +22,6 @@
 (defclass defsys:standard-system (defsys:name-mixin defsys:hash-table-mixin)
   ())
 
-(defclass defsys:ikeywords-mixin ()
-  ())
-
 (defvar *root-system* (make-instance 'defsys:standard-system :name 'defsys:system))
 
 (defun defsys:root-system ()
