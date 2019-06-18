@@ -74,6 +74,13 @@
   (apply #'defsys:expand-definition kind definition-name env args options))
 
 
+(defgeneric defsys:ensure (system definition-name class &rest initargs)
+  (:method ((system-name symbol) definition-name class &rest initargs)
+    (apply #'defsys:ensure
+           (defsys:locate *root-system* system-name)
+           definition-name class initargs)))
+
+
 (define-condition defsys:not-found (error)
   ((%system :initarg :system
             :reader defsys:system)

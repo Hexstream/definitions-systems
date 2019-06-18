@@ -14,7 +14,9 @@
            #:name-mixin
            #:name
            #:expand-definition
-           #:define))
+           #:define
+
+           #:ensure))
 
 (ikeywords:defpackage #:definitions-systems.ikeyword
   (:nicknames #:defsys.ikeyword)
