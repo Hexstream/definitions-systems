@@ -74,11 +74,23 @@
   (apply #'defsys:expand-definition kind definition-name env args options))
 
 
+
 (defgeneric defsys:ensure (system definition-name class &rest initargs)
   (:method ((system-name symbol) definition-name class &rest initargs)
     (apply #'defsys:ensure
            (defsys:locate *root-system* system-name)
-           definition-name class initargs)))
+           definition-name class initargs))
+  (:method ((system defsys:system) definition-name definition-class &rest initargs)
+    (let ((existing (defsys:locate system definition-name :errorp nil)))
+      (if existing
+          (let ((target-class (etypecase definition-class
+                                (class definition-class)
+                                (symbol (find-class definition-class)))))
+            (if (eq (class-of existing) target-class)
+                (apply #'reinitialize-instance existing initargs)
+                (apply #'change-class existing target-class initargs)))
+          (setf (defsys:locate system definition-name)
+                (apply #'make-instance definition-class :name definition-name initargs))))))
 
 
 (define-condition defsys:not-found (error)
