@@ -22,7 +22,9 @@
 (defclass defsys:standard-system (defsys:name-mixin defsys:hash-table-mixin defsys:system)
   ())
 
-(defvar *root-system* (make-instance 'defsys:standard-system :name 'defsys:system))
+(defclass %root-system (defsys:standard-system) ())
+
+(defvar *root-system* (make-instance '%root-system :name 'defsys:system))
 
 (defun defsys:root-system ()
   *root-system*)
@@ -38,7 +40,12 @@
                    definition-name :errorp errorp))
   (:method ((system defsys:hash-table-mixin) definition-name &key (errorp t))
     (declare (ignore errorp))
-    (identity (gethash definition-name (slot-value system '%hash)))))
+    (identity (gethash definition-name (slot-value system '%hash))))
+  (:method ((system %root-system) definition-name &key (errorp t))
+    (declare (ignore errorp))
+    (if (eq definition-name 'defsys:system)
+        system
+        (call-next-method))))
 
 (defgeneric (setf defsys:locate) (new-definition system definition-name &key errorp)
   (:method (new-definition (system-name symbol) definition-name &key (errorp nil))
@@ -67,7 +74,11 @@
   (:method ((system-name symbol) definition-name environment args &rest options)
     (apply #'defsys:expand-definition
            (defsys:locate *root-system* system-name)
-           definition-name environment args options)))
+           definition-name environment args options))
+  (:method ((system %root-system) name environment args &key)
+    (declare (ignore environment))
+    (destructuring-bind (class &rest args) args
+      `(defsys:ensure ',(defsys:name system) ',name ',class ,@args))))
 
 (defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)
