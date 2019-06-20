@@ -19,7 +19,7 @@
   ((%hash :type hash-table :initform (make-hash-table :test 'eq))))
 
 
-(defclass defsys:standard-system (defsys:name-mixin defsys:hash-table-mixin)
+(defclass defsys:standard-system (defsys:name-mixin defsys:hash-table-mixin defsys:system)
   ())
 
 (defvar *root-system* (make-instance 'defsys:standard-system :name 'defsys:system))
