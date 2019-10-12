@@ -6,6 +6,7 @@
            #:standard-system
            #:ikeywords-mixin
            #:root-system
+           #:standard-root-system
            #:locate
            #:unbind
            #:boundp

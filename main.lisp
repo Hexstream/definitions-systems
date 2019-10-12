@@ -22,9 +22,11 @@
 (defclass defsys:standard-system (defsys:name-mixin defsys:hash-table-mixin defsys:system)
   ())
 
-(defclass %root-system (defsys:standard-system) ())
+(defclass defsys:root-system (defsys:system) ())
 
-(defvar *root-system* (make-instance '%root-system :name 'defsys:system))
+(defclass defsys:standard-root-system (defsys:root-system defsys:standard-system) ())
+
+(defvar *root-system* (make-instance 'defsys:standard-root-system :name 'defsys:system))
 
 (defun defsys:root-system ()
   *root-system*)
@@ -41,7 +43,7 @@
   (:method ((system defsys:hash-table-mixin) definition-name &key (errorp t))
     (declare (ignore errorp))
     (identity (gethash definition-name (slot-value system '%hash))))
-  (:method ((system %root-system) definition-name &key (errorp t))
+  (:method ((system defsys:standard-root-system) definition-name &key (errorp t))
     (declare (ignore errorp))
     (if (eq definition-name 'defsys:system)
         system
@@ -75,7 +77,7 @@
     (apply #'defsys:expand-definition
            (defsys:locate *root-system* system-name)
            definition-name environment args options))
-  (:method ((system %root-system) name environment args &key)
+  (:method ((system defsys:standard-root-system) name environment args &key)
     (declare (ignore environment))
     (destructuring-bind (class &rest args) args
       `(defsys:ensure ',(defsys:name system) ',name ',class ,@args))))
