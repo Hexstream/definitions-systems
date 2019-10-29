@@ -152,7 +152,9 @@
             <li><a href="#dictionary_definitions-systems"><span class="type">Package</span> <code>definitions-systems</code></a></li>
             <li><a href="#dictionary_system"><span class="type">Class</span> <code>system</code></a></li>
             <li><a href="#dictionary_standard-system"><span class="type">Class</span> <code>standard-system</code></a></li>
+            <li><a href="#dictionary_root-system"><span class="type">Class</span> <code>root-system</code></a></li>
             <li><a href="#dictionary_root-system"><span class="type">Function</span> <code>root-system</code></a></li>
+            <li><a href="#dictionary_standard-root-system"><span class="type">Class</span> <code>standard-root-system</code></a></li>
             <li><a href="#dictionary_locate"><span class="type">Generic Function</span> <code>locate</code></a></li>
             <li><a href="#dictionary_unbind"><span class="type">Generic Function</span> <code>unbind</code></a></li>
             <li><a href="#dictionary_boundp"><span class="type">Generic Function</span> <code>boundp</code></a></li>
@@ -253,6 +255,18 @@
             </span>
           </h1>
 
+          <article class="class definition">
+
+            <h1><span class="type">Class</span> <span class="name self">defsys:root-system</span></h1>
+            <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
+
+            <section class="description">
+              <h1>Description</h1>
+              <p>All root definitions-systems inherit from this class. (There is currently only one of these.)</p>
+            </section>
+
+          </article>
+
           <article class="function definition">
 
             <h1><span class="type">Function</span> <span class="name self">defsys:root-system</span></h1>
@@ -270,6 +284,32 @@
               <h1>Description</h1>
               <p>Returns the root system.</p>
               <p>The root system is the definitions-system whose definitions are the top-level definitions-systems.</p>
+            </section>
+
+          </article>
+
+        </section>
+
+        <section id="dictionary_standard-root-system">
+
+          <h1 class="breadcrumbs-bar">
+            <span class="section-relative-nav">
+              <a href="#dictionary_standard-root-system" class="anchor">⚓</a>
+            </span>
+            <span class="breadcrumbs">
+              <a href="#dictionary">Dictionary</a>
+              <span class="crumb"><span class="s"> » </span><a class="here">standard-root-system</a></span>
+            </span>
+          </h1>
+
+          <article class="class definition">
+
+            <h1><span class="type">Class</span> <span class="name self">defsys:standard-root-system</span></h1>
+            <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code> <code class="relevant"><a href="#dictionary_standard-root-system">defsys:standard-root-system</a></code></p>
+
+            <section class="description">
+              <h1>Description</h1>
+              <p>The standard root definitions-systems (as returned by function <code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code>) inherits from this class.</p>
             </section>
 
           </article>
@@ -347,6 +387,20 @@
                 <section class="description">
                   <h1>Description</h1>
                   <p>Retrieves the definition (or lack thereof) using the internal hash-table.</p>
+                </section>
+
+              </article>
+
+              <article class="method definition" id="dictionary_locate_standard-root-system_t">
+
+                <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
+
+                <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_standard-root-system">defsys:standard-root-system</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>If <var>definition-name</var> is the symbol <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, returns <var>system</var>, else calls the next method.</p>
+                  <p>This method notably ensures that the symbol <code class="relevant"><a href="#dictionary_system">defsys:system</a></code> can be used as a <a href="#concepts_definitions-system-designator">designator</a> for the <a href="#dictionary_root-system">root definitions-system</a>.</p>
                 </section>
 
               </article>
