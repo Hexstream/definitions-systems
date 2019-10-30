@@ -10,14 +10,15 @@
            #:locate
            #:unbind
            #:boundp
+           #:ensure
+
            #:not-found
            #:hash-table-mixin
            #:name-mixin
            #:name
-           #:expand-definition
-           #:define
 
-           #:ensure))
+           #:expand-definition
+           #:define))
 
 (ikeywords:defpackage #:definitions-systems.ikeyword
   (:nicknames #:defsys.ikeyword)

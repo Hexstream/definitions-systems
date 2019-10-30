@@ -72,22 +72,6 @@
     (not (null (defsys:locate system definition-name :errorp nil)))))
 
 
-(defgeneric defsys:expand-definition (system definition-name environment args &rest options)
-  (:method ((system-name symbol) definition-name environment args &rest options)
-    (apply #'defsys:expand-definition
-           (defsys:locate *root-system* system-name)
-           definition-name environment args options))
-  (:method ((system defsys:standard-root-system) name environment args &key)
-    (declare (ignore environment))
-    (destructuring-bind (class &rest args) args
-      `(defsys:ensure ',(defsys:name system) ',name ',class ,@args))))
-
-(defmacro defsys:define ((kind definition-name &body options)
-                         &body args &environment env)
-  (apply #'defsys:expand-definition kind definition-name env args options))
-
-
-
 (defgeneric defsys:ensure (system definition-name class &rest initargs)
   (:method ((system-name symbol) definition-name class &rest initargs)
     (apply #'defsys:ensure
@@ -104,6 +88,21 @@
                 (apply #'change-class existing target-class initargs)))
           (setf (defsys:locate system definition-name)
                 (apply #'make-instance definition-class :name definition-name initargs))))))
+
+
+(defgeneric defsys:expand-definition (system definition-name environment args &rest options)
+  (:method ((system-name symbol) definition-name environment args &rest options)
+    (apply #'defsys:expand-definition
+           (defsys:locate *root-system* system-name)
+           definition-name environment args options))
+  (:method ((system defsys:standard-root-system) name environment args &key)
+    (declare (ignore environment))
+    (destructuring-bind (class &rest args) args
+      `(defsys:ensure ',(defsys:name system) ',name ',class ,@args))))
+
+(defmacro defsys:define ((kind definition-name &body options)
+                         &body args &environment env)
+  (apply #'defsys:expand-definition kind definition-name env args options))
 
 
 (define-condition defsys:not-found (error)
