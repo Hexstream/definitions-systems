@@ -39,7 +39,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-10-29">29 october 2019</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-10-30">30 october 2019</time><span>.</span></p>
 
     </nav>
 
@@ -158,6 +158,7 @@
             <li><a href="#dictionary_locate"><span class="type">Generic Function</span> <code>locate</code></a></li>
             <li><a href="#dictionary_unbind"><span class="type">Generic Function</span> <code>unbind</code></a></li>
             <li><a href="#dictionary_boundp"><span class="type">Generic Function</span> <code>boundp</code></a></li>
+            <li><a href="#dictionary_ensure"><span class="type">Generic Function</span> <code>ensure</code></a></li>
             <li><a href="#dictionary_not-found"><span class="type">Condition</span> <code>not-found</code></a></li>
             <li><a href="#dictionary_hash-table-mixin"><span class="type">Class</span> <code>hash-table-mixin</code></a></li>
             <li><a href="#dictionary_name-mixin"><span class="type">Class</span> <code>name-mixin</code></a></li>
@@ -590,6 +591,79 @@
                 <section class="description">
                   <h1>Description</h1>
                   <p>Simply attempts to <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> the <var>definition-name</var> with <var>errorp</var> being false, returns true if this was successful, else false.</p>
+                </section>
+
+              </article>
+
+            </section>
+
+          </article>
+
+        </section>
+
+        <section id="dictionary_ensure">
+
+          <h1 class="breadcrumbs-bar">
+            <span class="section-relative-nav">
+              <a href="#dictionary_ensure" class="anchor">⚓</a>
+            </span>
+            <span class="breadcrumbs">
+              <a href="#dictionary">Dictionary</a>
+              <span class="crumb"><span class="s"> » </span><a class="here">ensure</a></span>
+            </span>
+          </h1>
+
+          <article class="generic-function definition">
+
+            <h1><span class="type">Generic Function</span> <span class="name self">defsys:ensure</span></h1>
+
+            <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+
+            <section class="arguments-and-values">
+              <h1>Arguments and Values</h1>
+              <ul>
+                <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                <li><var>definition-name</var> -- A definition name.</li>
+                <li><var>class</var> -- A class designator.</li>
+                <li><var>definition</var> -- An object.</li>
+              </ul>
+            </section>
+
+            <section class="description">
+              <h1>Description</h1>
+              <p>Creates or reinitializes the definition named <var>definition-name</var> in <var>system</var>.</p>
+            </section>
+
+            <section class="methods">
+              <h1>Methods</h1>
+
+              <article class="method definition" id="dictionary_ensure_symbol_t">
+
+                <h1><span class="type">Method</span> <span class="name self">ensure</span></h1>
+
+                <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                </section>
+
+              </article>
+
+              <article class="method definition" id="dictionary_ensure_system_t_t">
+
+                <h1><span class="type">Method</span> <span class="name self">ensure</span></h1>
+
+                <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_system">defsys:system</a></span>) <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>If there is not already a definition named <var>definition-name</var> in <var>system</var>, then create such a definition by calling <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_mk_ins.htm" target="_blank">make-instance</a> with <var>definition-class</var>, <code>:name <var>definition-name</var></code> and <var>initargs</var>, and then associate this new definition with the system using <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>.</p>
+                  <p>If there <em>is</em> already a definition named <var>definition-name</var> in <var>system</var>, then reinitialize that <var>existing</var> definition:</p>
+                  <ul>
+                    <li>If <var>existing</var> is already of the class designated by <var>definition-class</var>, then call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_reinit.htm#reinitialize-instance" target="_blank">reinitialize-instance</a> with <var>existing</var> and <var>initargs</var>.</li>
+                    <li>Else, call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_chg_cl.htm" target="_blank">change-class</a> with <var>existing</var>, <var>definition-class</var> and <var>initargs</var>.</li>
+                  </ul>
                 </section>
 
               </article>
