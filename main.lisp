@@ -3,23 +3,11 @@
 (defclass defsys:system () ())
 
 
-(defgeneric defsys:name (system))
-
-(defclass defsys:name-mixin ()
-  ((%name :initarg :name
-          :reader defsys:name
-          :type symbol)))
-
-(defmethod print-object ((mixin name-mixin) stream)
-  (print-unreadable-object (mixin stream :type t)
-    (prin1 (defsys:name mixin) stream)))
-
-
 (defclass defsys:hash-table-mixin ()
   ((%hash :type hash-table :initform (make-hash-table :test 'eq))))
 
 
-(defclass defsys:standard-system (defsys:name-mixin defsys:hash-table-mixin defsys:system)
+(defclass defsys:standard-system (defsys:system defsys:standard-definition defsys:hash-table-mixin)
   ())
 
 (defclass defsys:root-system (defsys:system) ())
@@ -30,6 +18,10 @@
 
 (defun defsys:root-system ()
   *root-system*)
+
+(defmethod make-load-form ((root-system defsys:standard-root-system) &optional environment)
+  (declare (ignore environment))
+  '(defsys:root-system))
 
 
 (defgeneric defsys:locate (system definition-name &key errorp)
@@ -98,7 +90,7 @@
   (:method ((system defsys:standard-root-system) name environment args &key)
     (declare (ignore environment))
     (destructuring-bind (class &rest args) args
-      `(defsys:ensure ',(defsys:name system) ',name ',class ,@args))))
+      `(defsys:ensure ,system ',name ',class ,@args))))
 
 (defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)

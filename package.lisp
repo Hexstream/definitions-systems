@@ -2,7 +2,14 @@
   (:nicknames #:defsys)
   (:use #:cl)
   (:shadow #:boundp)
-  (:export #:system
+  (:export #:definition
+           #:name-mixin
+           #:name
+           #:owner-mixin
+           #:owner
+           #:standard-definition
+
+           #:system
            #:standard-system
            #:ikeywords-mixin
            #:root-system
@@ -14,8 +21,6 @@
 
            #:not-found
            #:hash-table-mixin
-           #:name-mixin
-           #:name
 
            #:expand-definition
            #:define))
