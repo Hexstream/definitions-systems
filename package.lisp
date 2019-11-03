@@ -16,6 +16,7 @@
            #:standard-root-system
            #:locate
            #:unbind
+           #:unbind-definition
            #:boundp
            #:ensure
 
