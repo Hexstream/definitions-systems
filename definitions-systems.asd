@@ -13,7 +13,8 @@
   :serial cl:t
   :components ((:file "package")
                (:file "definitions")
-               (:file "main")
+               (:file "systems")
+               (:file "protocols")
                (:file "ikeywords"))
 
   :in-order-to ((asdf:test-op (asdf:test-op #:definitions-systems_tests))))

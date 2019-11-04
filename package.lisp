@@ -10,21 +10,26 @@
            #:standard-definition
 
            #:system
+           #:hash-table-mixin
+           #:base-definition-class-mixin
+           #:base-definition-class
+           #:unsuitable-definition-error
+           #:details
+           #:check-definition
            #:standard-system
-           #:ikeywords-mixin
            #:root-system
            #:standard-root-system
+           #:not-found
+
            #:locate
            #:unbind
            #:unbind-definition
            #:boundp
            #:ensure
-
-           #:not-found
-           #:hash-table-mixin
-
            #:expand-definition
-           #:define))
+           #:define
+
+           #:ikeywords-mixin))
 
 (ikeywords:defpackage #:definitions-systems.ikeyword
   (:nicknames #:defsys.ikeyword)

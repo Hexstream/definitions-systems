@@ -1,29 +1,5 @@
 (in-package #:definitions-systems)
 
-(defclass defsys:system () ())
-
-
-(defclass defsys:hash-table-mixin ()
-  ((%hash :type hash-table :initform (make-hash-table :test 'eq))))
-
-
-(defclass defsys:standard-system (defsys:system defsys:standard-definition defsys:hash-table-mixin)
-  ())
-
-(defclass defsys:root-system (defsys:system) ())
-
-(defclass defsys:standard-root-system (defsys:root-system defsys:standard-system) ())
-
-(defvar *root-system* (make-instance 'defsys:standard-root-system :name 'defsys:system))
-
-(defun defsys:root-system ()
-  *root-system*)
-
-(defmethod make-load-form ((root-system defsys:standard-root-system) &optional environment)
-  (declare (ignore environment))
-  '(defsys:root-system))
-
-
 (defgeneric defsys:locate (system definition-name &key errorp)
   (:method :around (system definition-name &key (errorp t))
     (or (call-next-method)
@@ -47,6 +23,9 @@
                          definition-name
                          :errorp errorp)
           new-definition))
+  (:method :before (new-definition (system defsys:system) definition-name &key errorp)
+    (declare (ignore errorp))
+    (check-definition system new-definition definition-name))
   (:method :after ((new-definition defsys:owner-mixin) (system defsys:system) definition-name &key errorp)
     (declare (ignore errorp))
     (unless (defsys:owner new-definition)
@@ -111,13 +90,3 @@
 (defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)
   (apply #'defsys:expand-definition kind definition-name env args options))
-
-
-(define-condition defsys:not-found (error)
-  ((%system :initarg :system
-            :reader defsys:system)
-   (%name :initarg :name
-          :reader defsys:name))
-  (:report (lambda (condition stream)
-             (format stream "No definition named ~S in system ~S."
-                     (defsys:name condition) (defsys:system condition)))))
