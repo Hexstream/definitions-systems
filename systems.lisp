@@ -6,21 +6,28 @@
 (defclass defsys:hash-table-mixin ()
   ((%hash :type hash-table :initform (make-hash-table :test 'eq))))
 
+(defgeneric defsys:base-definition-class (system))
 
 (defclass defsys:base-definition-class-mixin ()
   ((%base-definition-class :initarg :base-definition-class
                            :reader defsys:base-definition-class
+                           :type class
                            :initform (find-class 'defsys:definition))))
 
 (define-condition defsys:unsuitable-definition-error (error)
   ((%system :initarg :system
-            :reader defsys:system)
+            :reader defsys:system
+            :type defsys:system
+            :initform (error "~S is required." :system))
    (%definition :initarg :definition
-                :reader defsys:definition)
+                :reader defsys:definition
+                :initform (error "~S is required." :definition))
    (%name :initarg :name
-          :reader defsys:name)
-   (%details :initarg :name
-             :reader defsys:details))
+          :reader defsys:name
+          :initform (error "~S is required." :name))
+   (%details :initarg :details
+             :reader defsys:details
+             :initform nil))
   (:report (lambda (error stream)
              (format stream "~S is not a suitable definition for system ~S (and name ~S). ~@
                              Details: ~S"
@@ -64,7 +71,8 @@
 
 (define-condition defsys:not-found (error)
   ((%system :initarg :system
-            :reader defsys:system)
+            :reader defsys:system
+            :type defsys:system)
    (%name :initarg :name
           :reader defsys:name))
   (:report (lambda (condition stream)

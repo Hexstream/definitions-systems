@@ -45,7 +45,7 @@
         (defsys:unbind-definition system definition definition-name)))))
 
 (defgeneric defsys:unbind-definition (system definition definition-name)
-  (:method ((system hash-table-mixin) definition definition-name)
+  (:method ((system defsys:hash-table-mixin) definition definition-name)
     (declare (ignore definition))
     (remhash definition-name (slot-value system '%hash)))
   (:method :after ((system defsys:system) (definition defsys:owner-mixin) definition-name)
@@ -85,7 +85,7 @@
   (:method ((system defsys:standard-root-system) name environment args &key)
     (declare (ignore environment))
     (destructuring-bind (class &rest args) args
-      `(defsys:ensure ,system ',name ',class ,@args))))
+      `(defsys:ensure ,system ',name ,class ,@args))))
 
 (defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)

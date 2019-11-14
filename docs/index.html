@@ -14,6 +14,7 @@
     <link href="https://www.hexstreamsoft.com/css/global.css" rel="stylesheet" type="text/css" />
     <link href="https://www.hexstreamsoft.com/libraries/libraries.css" rel="stylesheet" type="text/css" />
     <link href="https://global.hexstream.dev/css/cl-definitions.css" rel="stylesheet" type="text/css" />
+    <link href="index.css" rel="stylesheet" type="text/css" />
     <script src="https://global.hexstream.dev/scripts/global.js"></script>
     <script src="https://www.hexstreamsoft.com/scripts/global.js"></script>
     <script src="https://www.hexstreamsoft.com/libraries/libraries.js" defer></script>
@@ -39,7 +40,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-10-30">30 october 2019</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-11-13">13 november 2019</time><span>.</span></p>
 
     </nav>
 
@@ -150,21 +151,9 @@
         <nav class="tabs">
           <ul>
             <li><a href="#dictionary_definitions-systems"><span class="type">Package</span> <code>definitions-systems</code></a></li>
-            <li><a href="#dictionary_system"><span class="type">Class</span> <code>system</code></a></li>
-            <li><a href="#dictionary_standard-system"><span class="type">Class</span> <code>standard-system</code></a></li>
-            <li><a href="#dictionary_root-system"><span class="type">Class</span> <code>root-system</code></a></li>
-            <li><a href="#dictionary_root-system"><span class="type">Function</span> <code>root-system</code></a></li>
-            <li><a href="#dictionary_standard-root-system"><span class="type">Class</span> <code>standard-root-system</code></a></li>
-            <li><a href="#dictionary_locate"><span class="type">Generic Function</span> <code>locate</code></a></li>
-            <li><a href="#dictionary_unbind"><span class="type">Generic Function</span> <code>unbind</code></a></li>
-            <li><a href="#dictionary_boundp"><span class="type">Generic Function</span> <code>boundp</code></a></li>
-            <li><a href="#dictionary_ensure"><span class="type">Generic Function</span> <code>ensure</code></a></li>
-            <li><a href="#dictionary_not-found"><span class="type">Condition</span> <code>not-found</code></a></li>
-            <li><a href="#dictionary_hash-table-mixin"><span class="type">Class</span> <code>hash-table-mixin</code></a></li>
-            <li><a href="#dictionary_name-mixin"><span class="type">Class</span> <code>name-mixin</code></a></li>
-            <li><a href="#dictionary_name"><span class="type">Generic Function</span> <code>name</code></a></li>
-            <li><a href="#dictionary_expand-definition"><span class="type">Generic Function</span> <code>expand-definition</code></a></li>
-            <li><a href="#dictionary_define"><span class="type">Macro</span> <code>define</code></a></li>
+            <li><a href="#dictionary_systems">Systems</a></li>
+            <li><a href="#dictionary_definitions">Definitions</a></li>
+            <li><a href="#dictionary_protocols">Protocols</a></li>
           </ul>
         </nav>
 
@@ -193,722 +182,1198 @@
 
         </section>
 
-        <section id="dictionary_system">
+        <section id="dictionary_systems">
 
           <h1 class="breadcrumbs-bar">
             <span class="section-relative-nav">
-              <a href="#dictionary_system" class="anchor">⚓</a>
+              <a href="#dictionary_systems" class="anchor">⚓</a>
             </span>
             <span class="breadcrumbs">
               <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">system</a></span>
+              <span class="crumb"><span class="s"> » </span><a class="here">Systems</a></span>
             </span>
           </h1>
 
-          <article class="class definition">
+          <nav class="tabs">
+            <ul>
+              <li><a href="#dictionary_system"><span class="type">Class</span> <code>system</code></a></li>
+              <li><a href="#dictionary_hash-table-mixin"><span class="type">Class</span> <code>hash-table-mixin</code></a></li>
+              <li><a href="#dictionary_base-definition-class-mixin"><span class="type">Class</span> <code>base-definition-class-mixin</code></a></li>
+              <li><a href="#dictionary_base-definition-class"><span class="type">Generic Function</span> <code>base-definition-class</code></a></li>
+              <li><a href="#dictionary_unsuitable-definition-error"><span class="type">Condition</span> <code>unsuitable-definition-error</code></a></li>
+              <li><a href="#dictionary_details"><span class="type">Generic Function</span> <code>details</code></a></li>
+              <li><a href="#dictionary_check-definition"><span class="type">Generic Function</span> <code>check-definition</code></a></li>
+              <li><a href="#dictionary_standard-system"><span class="type">Class</span> <code>standard-system</code></a></li>
+              <li><a href="#dictionary_root-system"><span class="type">Class</span> <code>root-system</code></a></li>
+              <li><a href="#dictionary_root-system"><span class="type">Function</span> <code>root-system</code></a></li>
+              <li><a href="#dictionary_standard-root-system"><span class="type">Class</span> <code>standard-root-system</code></a></li>
+              <li><a href="#dictionary_not-found"><span class="type">Condition</span> <code>not-found</code></a></li>
+            </ul>
+          </nav>
 
-            <h1><span class="type">Class</span> <span class="name self">defsys:system</span></h1>
+          <section id="dictionary_system">
 
-            <section class="description">
-              <h1>Description</h1>
-              <p>All definitions-systems inherit from this class. At least <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code>, <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>, <code class="relevant"><a href="#dictionary_unbind">defsys:unbind</a></code> and <code class="relevant"><a href="#dictionary_boundp">defsys:boundp</a></code> must be supported. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> provides a ready-to-use implementation.</p>
-            </section>
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_system" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">system</a></span>
+              </span>
+            </h1>
 
-          </article>
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:system</span></h1>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>All definitions-systems inherit from this class. At least <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code>, <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>, <code class="relevant"><a href="#dictionary_unbind">defsys:unbind</a></code> and <code class="relevant"><a href="#dictionary_boundp">defsys:boundp</a></code> must be supported. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> provides a ready-to-use implementation.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_hash-table-mixin">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_hash-table-mixin" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">hash-table-mixin</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:hash-table-mixin</span></h1>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>This class adds implementations for all generic functions required by marker class <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, backed by an internal <code>eq</code> hash-table. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> inherits from this class.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_base-definition-class-mixin">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_base-definition-class-mixin" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">base-definition-class-mixin</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:base-definition-class-mixin</span></h1>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Provides a slot of type <code>class</code>, filled by initarg <code>:base-definition-class</code>, whose value is retrieved by <code class="relevant"><a href="#dictionary_base-definition-class">defsys:base-definition-class</a></code>.</p>
+                <p>Provides a method on <code class="relevant"><a href="#dictionary_check-definition">defsys:check-definition</a></code> that ensures that the <var>definition</var> is a generalized instance of the <var>system</var>'s <code class="relevant"><a href="#dictionary_base-definition-class">defsys:base-definition-class</a></code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_base-definition-class">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_base-definition-class" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">base-definition-class</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function reader definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:base-definition-class</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> =&gt; <var>class</var></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the <var>class</var> that definitions of this <var>system</var> must be a generalized instance of. A method is defined for <code class="relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_unsuitable-definition-error">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_unsuitable-definition-error" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">unsuitable-definition-error</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Condition</span> <span class="name self">defsys:unsuitable-definition-error</span></h1>
+              <p class="direct-superclasses"><a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>This condition class provides four slots:</p>
+                <ul>
+                  <li>one of type <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, initialized by initarg <code>:system</code> and retrieved by <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, which indicates to which <var>system</var> the <var>definition</var> was attempted to be added;</li>
+                  <li>one initialized by initarg <code>:definition</code> and retrieved by <code class="relevant"><a href="#dictionary_name">defsys:definition</a></code>, which indicates the <var>definition</var> that was found unsuitable for the system;</li>
+                  <li>one initialized by initarg <code>:name</code> and retrieved by <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>, which indicates the <var>name</var> that was attempted to be bound to <var>definition</var> in <var>system</var>;</li>
+                  <li>one initialized by initarg <code>:details</code> and retrieved by <code class="relevant"><a href="#dictionary_details">defsys:details</a></code>, which provides further details on the problem that makes the <var>definition</var> be unsuitable as a binding for <var>name</var> in <var>system</var>, usually in the form of a <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_cnd.htm" target="_blank">condition</a>.</li>
+                </ul>
+                <p>The consequences are undefined if the <code>:system</code>, <code>:definition</code> or <code>:name</code> initargs are unsupplied. The <var>details</var> slot defaults to <code>nil</code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_details">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_details" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">details</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function reader definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:details</span></h1>
+
+              <p class="args-and-retvals"><var>object</var> =&gt; <var>details</var></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the <var>details</var> (usually a <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_cnd.htm" target="_blank">condition</a>) associated with the <var>object</var>. A method is defined for <code class="relevant"><a href="#dictionary_unsuitable-definition-error">defsys:unsuitable-definition-error</a></code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_check-definition">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_check-definition" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">check-definition</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:check-definition</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> <var>definition</var> <var>definition-name</var> =&gt; <var>definition</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A system.</li>
+                  <li><var>definition</var> -- A non-nil object, usually a <code class="relevant"><a href="#dictionary_definition">definition</a></code>.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns <var>definition</var> if it appears to be a suitable binding for name <var>definition-name</var> in system <var>system</var>, else throws an error of type <code class="relevant"><a href="#dictionary_unsuitable-definition">unsuitable-definition</a></code>.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_check-definition_system_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">defsys:check-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition</var> <var>definition-name</var> =&gt; <var>definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Returns <var>definition</var>.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_check-definition_base-definition-class-mixin_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">defsys:check-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code>) <var>definition</var> <var>definition-name</var> =&gt; <var>definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Returns <var>definition</var> if it is a subtype of <code>(<code class="relevant"><a href="#dictionary_base-definition-class">defsys:base-definition-class</a></code> <var>system</var>)</code>, else throws an error of type <code class="relevant"><a href="#dictionary_unsuitable-definition">unsuitable-definition</a></code> of which the <code class="relevant"><a href="#dictionary_details">details</a></code> is a condition of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_tp_err.htm" target="_blank">type-error</a>.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_standard-system">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_standard-system" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">standard-system</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:standard-system</span></h1>
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code> <code class="relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code> <code class="relevant"><a href="#dictionary_standard-definition">defsys:standard-definition</a></code> <code class="relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>A ready-to-use implementation of <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_root-system">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_root-system" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">root-system</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:root-system</span></h1>
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>All root definitions-systems inherit from this class.</p>
+              </section>
+
+            </article>
+
+            <article class="function definition">
+
+              <h1><span class="type">Function</span> <span class="name self">defsys:root-system</span></h1>
+
+              <p class="args-and-retvals">=&gt; <var>root-system</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>root-system</var> -- The root system.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the root system.</p>
+                <p>The root system is the definitions-system whose definitions are the top-level definitions-systems.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_standard-root-system">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_standard-root-system" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">standard-root-system</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:standard-root-system</span></h1>
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code> <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>The standard root definitions-systems (as returned by function <code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code>) inherits from this class.</p>
+                <p>Provides a <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_mk_ld_.htm" target="_blank">make-load-form</a> method that returns the form <code>(<code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code>)</code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_not-found">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_not-found" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">not-found</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Condition</span> <span class="name self">defsys:not-found</span></h1>
+              <p class="direct-superclasses"><a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Thrown when <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> cannot find any definition named <var>definition-name</var> in the designated <var>system</var> and <var>errorp</var> is true (the default).</p>
+                <p>This condition class provides two slots, one of type <code class="relevant"><a href="#dictionary_system">defsys:system</a></code> and initialized by initarg <code>:system</code> and retrieved by <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, and another initialized by initarg <code>:name</code> and retrieved by <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <nav class="end-of-section-indicator">
+            <a href="#dictionary_systems">
+              "<span>Systems</span>" end.
+            </a>
+          </nav>
 
         </section>
 
-        <section id="dictionary_standard-system">
+        <section id="dictionary_definitions">
 
           <h1 class="breadcrumbs-bar">
             <span class="section-relative-nav">
-              <a href="#dictionary_standard-system" class="anchor">⚓</a>
+              <a href="#dictionary_definitions" class="anchor">⚓</a>
             </span>
             <span class="breadcrumbs">
               <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">standard-system</a></span>
+              <span class="crumb"><span class="s"> » </span><a class="here">Definitions</a></span>
             </span>
           </h1>
 
-          <article class="class definition">
+          <nav class="tabs">
+            <ul>
+              <li><a href="#dictionary_definition"><span class="type">Class</span> <code>definition</code></a></li>
+              <li><a href="#dictionary_name-mixin"><span class="type">Class</span> <code>name-mixin</code></a></li>
+              <li><a href="#dictionary_name"><span class="type">Generic Function</span> <code>name</code></a></li>
+              <li><a href="#dictionary_owner-mixin"><span class="type">Class</span> <code>owner-mixin</code></a></li>
+              <li><a href="#dictionary_owner"><span class="type">Generic Function</span> <code>owner</code></a></li>
+              <li><a href="#dictionary_standard-definition"><span class="type">Class</span> <code>standard-definition</code></a></li>
+            </ul>
+          </nav>
 
-            <h1><span class="type">Class</span> <span class="name self">defsys:standard-system</span></h1>
-            <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code> <code class="relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code></p>
+          <section id="dictionary_definition">
 
-            <section class="description">
-              <h1>Description</h1>
-              <p>A ready-to-use implementation of <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>.</p>
-            </section>
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_definition" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">definition</a></span>
+              </span>
+            </h1>
 
-          </article>
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:definition</span></h1>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Definitions usually inherit from this class.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_name-mixin">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_name-mixin" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">name-mixin</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:name-mixin</span></h1>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Provides a slot of type <code>symbol</code>, filled by initarg <code>:name</code>, whose value is retrieved by <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>. The default is <code>nil</code>, usually indicating an anonymous definition.</p>
+                <p>Provides a <code>print-object</code> method that includes the name of the object in its output.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_name">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_name" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">name</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function reader definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:name</span></h1>
+
+              <p class="args-and-retvals"><var>object</var> =&gt; <var>name</var></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the <var>name</var> of the <var>object</var>. Methods are defined for <code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code> and <code class="relevant"><a href="#dictionary_not-found">defsys:not-found</a></code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_owner-mixin">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_owner-mixin" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">owner-mixin</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:owner-mixin</span></h1>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Provides a slot of type <code>(or null defsys:system)</code>, whose value is retrieved by <code class="relevant"><a href="#dictionary_owner">defsys:owner</a></code>. The default value is <code>nil</code>.</p>
+              </section>
+
+            </article>
+
+            <article class="method definition" id="dictionary_make-load-form_owner-mixin">
+
+              <h1><span class="type">Method</span> <span class="name self">make-load-form</span></h1>
+
+              <p class="args-and-retvals">(<var>definition</var> <code class="specializer relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>) &amp;optional environment =&gt; <var>creation-form</var>, <var>initialization-form</var></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>If <var>definition</var> does not have an <code class="relevant"><a href="#dictionary_owner">owner</a></code>, then throw an error of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a>.</p>
+                <p>Else, return a <var>creation-form</var> and <var>initialization-form</var> based on the results <var>owner-locate</var> and <var>owner-init</var> returned by <code>(make-load-form <var>owner</var> <var>environment</var>)</code>.<br /><var>creation-form</var> is <code>`(defsys:locate ,<var>owner-locate</var> (defsys:name <var>definition</var>))</code> and <var>initialization-form</var> is <var>owner-init</var>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_owner">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_owner" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">owner</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function reader definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:owner</span></h1>
+
+              <p class="args-and-retvals"><var>object</var> =&gt; <var>owner</var></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the <var>owner</var> of the <var>object</var> if it has one, else <code>nil</code>. A method is defined for <code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_standard-definition">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_standard-definition" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">standard-definition</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:standard-definition</span></h1>
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code> <code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code> <code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>A ready-to-use implementation of <code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code>.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <nav class="end-of-section-indicator">
+            <a href="#dictionary_definitions">
+              "<span>Definitions</span>" end.
+            </a>
+          </nav>
 
         </section>
 
-        <section id="dictionary_root-system">
+        <section id="dictionary_protocols">
 
           <h1 class="breadcrumbs-bar">
             <span class="section-relative-nav">
-              <a href="#dictionary_root-system" class="anchor">⚓</a>
+              <a href="#dictionary_protocols" class="anchor">⚓</a>
             </span>
             <span class="breadcrumbs">
               <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">root-system</a></span>
+              <span class="crumb"><span class="s"> » </span><a class="here">Protocols</a></span>
             </span>
           </h1>
 
-          <article class="class definition">
+          <nav class="tabs">
+            <ul>
+              <li class="setfable">
+                <a href="#dictionary_locate" class="reader"><span class="type">Generic Function</span> <code>locate</code></a>
+                <a href="#dictionary_setf_locate" class="writer">(setfable)</a>
+              </li>
+              <li><a href="#dictionary_unbind"><span class="type">Generic Function</span> <code>unbind</code></a></li>
+              <li><a href="#dictionary_unbind-definition"><span class="type">Generic Function</span> <code>unbind-definition</code></a></li>
+              <li><a href="#dictionary_boundp"><span class="type">Generic Function</span> <code>boundp</code></a></li>
+              <li><a href="#dictionary_ensure"><span class="type">Generic Function</span> <code>ensure</code></a></li>
+              <li><a href="#dictionary_expand-definition"><span class="type">Generic Function</span> <code>expand-definition</code></a></li>
+              <li><a href="#dictionary_define"><span class="type">Macro</span> <code>define</code></a></li>
+            </ul>
+          </nav>
 
-            <h1><span class="type">Class</span> <span class="name self">defsys:root-system</span></h1>
-            <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
+          <section id="dictionary_locate">
 
-            <section class="description">
-              <h1>Description</h1>
-              <p>All root definitions-systems inherit from this class. (There is currently only one of these.)</p>
-            </section>
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_locate" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">locate</a></span>
+              </span>
+            </h1>
 
-          </article>
+            <article class="generic-function definition">
 
-          <article class="function definition">
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:locate</span></h1>
 
-            <h1><span class="type">Function</span> <span class="name self">defsys:root-system</span></h1>
+              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> &amp;key errorp =&gt; <var>definition-or-nil</var></p>
 
-            <p class="args-and-retvals">=&gt; <var>root-system</var></p>
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                  <li><var>errorp</var> -- A generalized boolean. The default is true.</li>
+                  <li><var>definition-or-nil</var> -- An object or nil.</li>
+                </ul>
+              </section>
 
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>root-system</var> -- The root system.</li>
-              </ul>
-            </section>
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the definition named <var>definition-name</var> in <var>system</var>.</p>
+              </section>
 
-            <section class="description">
-              <h1>Description</h1>
-              <p>Returns the root system.</p>
-              <p>The root system is the definitions-system whose definitions are the top-level definitions-systems.</p>
-            </section>
+              <section class="methods">
+                <h1>Methods</h1>
 
-          </article>
+                <article class="method definition" id="dictionary_locate_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">locate</span> :around</h1>
+
+                  <p class="args-and-retvals"><var>system</var> <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Calls the next method and throws a <code class="relevant"><a href="#dictionary_not-found">defsys:not-found</a></code> error if the definition was not found and <var>errorp</var> is true.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_locate_symbol_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
+
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_locate_hash-table-mixin_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Retrieves the definition (or lack thereof) using the internal hash-table.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_locate_standard-root-system_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_standard-root-system">defsys:standard-root-system</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>If <var>definition-name</var> is the symbol <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, returns <var>system</var>, else calls the next method.</p>
+                    <p>This method notably ensures that the symbol <code class="relevant"><a href="#dictionary_system">defsys:system</a></code> can be used as a <a href="#concepts_definitions-system-designator">designator</a> for the <a href="#dictionary_root-system">root definitions-system</a>.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_setf_locate">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_setf_locate" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">(setf locate)</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">(setf defsys:locate)</span></h1>
+
+              <p class="args-and-retvals"><var>new-definition</var> <var>system</var> <var>definition-name</var> &amp;key <var>errorp</var> =&gt; <var>new-definition</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>new-definition</var> -- A non-nil object.</li>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                  <li><var>errorp</var> -- Ignored.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Makes <var>new-definition</var> the definition associated with name <var>definition-name</var> in <var>system</var>.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_setf_locate_t_symbol_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">(setf locate)</span></h1>
+
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_before_setf_locate_t_system_t">
+
+                  <h1><span class="type">Before-Method</span> <span class="name self">(setf locate)</span></h1>
+
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Calls <code>(<code class="relevant"><a href="#dictionary_check-definition">defsys:check-definition</a></code> <var>system</var> <var>new-definition</var> <var>definition-name</var>)</code>.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_after_setf_locate_owner-mixin_system_t">
+
+                  <h1><span class="type">After-Method</span> <span class="name self">(setf locate)</span></h1>
+
+                  <p class="args-and-retvals">(<var>new-definition</var> <code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>) (<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Assigns <var>system</var> as the new <code class="relevant"><a href="#dictionary_owner">defsys:owner</a></code> of <var>new-definition</var> if it does not already have one.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_setf_locate_t_hash-table-mixin_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">(setf locate)</span></h1>
+
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Sets the definition using the internal hash-table.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_unbind">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_unbind" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">unbind</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:unbind</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>removedp</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                  <li><var>removedp</var> -- A generalized boolean.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Removes the definition named <var>definition-name</var> in <var>system</var>. Returns true if such a definition was present, else returns false.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_unbind_symbol_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">unbind</span></h1>
+
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> =&gt; <var>removedp</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_unbind_system_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">unbind</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition-name</var> =&gt; <var>removedp</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>If there is a <var>definition</var> named <var>definition-name</var> in <var>system</var>, then call <code>(<code class="relevant"><a href="#dictionary_unbind-definition">defsys:unbind-definition</a></code> <var>system</var> <var>definition</var> <var>definition-name</var>)</code> and return what it returns, else return false.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_unbind-definition">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_unbind-definition" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">unbind-definition</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:unbind-definition</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> <var>definition</var> <var>definition-name</var> =&gt; true</p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>definition</var> -- A definition.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Removes the definition <var>definition</var> named <var>definition-name</var> in <var>system</var>. Returns true.</p>
+                <p>The consequences are undefined if <var>definition</var> is not the definition named <var>definition-name</var> in <var>system</var>.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_unbind-definition_hash-table-mixin_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">defsys:unbind-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></span>) <var>definition</var> <var>definition-name</var> =&gt; true</p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Removes the definition named <var>definition-name</var> from the internal hash-table.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_unbind-definition_hash-table-mixin_t_t">
+
+                  <h1><span class="type">After-Method</span> <span class="name self">defsys:unbind-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_system">defsys:system</a></span>) (<var>definition</var> <span class="specializer relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></span>) <var>definition-name</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>If <var>definition</var>'s <code class="relevant"><a href="#dictionary_owner">defsys:owner</a></code> is <var>system</var>, then set it to <code>nil</code>.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_boundp">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_boundp" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">boundp</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:boundp</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>generalized-boolean</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                  <li><var>generalized-boolean</var> -- A generalized boolean.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns true if there is a definition named <var>definition-name</var> in <var>system</var>, else returns false.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_boundp_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">boundp</span></h1>
+
+                  <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>generalized-boolean</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Simply attempts to <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> the <var>definition-name</var> with <var>errorp</var> being false, returns true if this was successful, else false.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_ensure">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_ensure" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">ensure</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:ensure</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                  <li><var>class</var> -- A class designator.</li>
+                  <li><var>definition</var> -- An object.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Creates or reinitializes the definition named <var>definition-name</var> in <var>system</var>.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_ensure_symbol_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">ensure</span></h1>
+
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_ensure_system_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">ensure</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_system">defsys:system</a></span>) <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>If there is not already a definition named <var>definition-name</var> in <var>system</var>, then create such a definition by calling <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_mk_ins.htm" target="_blank">make-instance</a> with <var>definition-class</var>, <code>:name <var>definition-name</var></code> and <var>initargs</var>, and then associate this new definition with the system using <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>.</p>
+                    <p>If there <em>is</em> already a definition named <var>definition-name</var> in <var>system</var>, then reinitialize that <var>existing</var> definition:</p>
+                    <ul>
+                      <li>If <var>existing</var> is already of the class designated by <var>definition-class</var>, then call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_reinit.htm#reinitialize-instance" target="_blank">reinitialize-instance</a> with <var>existing</var> and <var>initargs</var>.</li>
+                      <li>Else, call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_chg_cl.htm" target="_blank">change-class</a> with <var>existing</var>, <var>definition-class</var> and <var>initargs</var>.</li>
+                    </ul>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_expand-definition">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_expand-definition" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">expand-definition</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:expand-definition</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest <var>options</var> =&gt; <var>expansion</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                  <li><var>environment</var> -- The environment captured by <code>defsys:define</code>.</li>
+                  <li><var>args</var> -- A list. The body of the definition.</li>
+                  <li><var>options</var> -- A list.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Called by <code class="relevant"><a href="#dictionary_define">defsys:define</a></code> to determine its expansion.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_expand-definition_symbol_t_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">expand-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest options =&gt; <var>expansion</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_expand-definition_standard-root-system_t_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">expand-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <span class="specializer"><code class="relevant"><a href="#dictionary_standard-root-system">defsys:standard-root-system</a></code></span>) <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest options =&gt; <var>expansion</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Returns <code>`(defsys:ensure ,<var>system</var> ',<var>definition-name</var> ,@<var>args</var>)</code>.<br />Note that the first <var>arg</var> is the <var>class</var> of the definitions-system being defined or redefined.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_define">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_define" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">define</a></span>
+              </span>
+            </h1>
+
+            <article class="macro definition">
+
+              <h1><span class="type">Macro</span> <span class="name self">defsys:define</span></h1>
+
+              <p class="args-and-retvals">(<var>kind</var> <var>definition-name</var> &amp;body <var>options</var>) &amp;body <var>args</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>kind</var> -- A symbol naming the kind of definition.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                  <li><var>options</var> -- A list.</li>
+                  <li><var>args</var> -- A list. The body of the definition.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Calls <code class="relevant"><a href="#dictionary_expand-definition">defsys:expand-definition</a></code> and returns whatever it returns.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <nav class="end-of-section-indicator">
+            <a href="#dictionary_protocols">
+              "<span>Protocols</span>" end.
+            </a>
+          </nav>
 
         </section>
 
-        <section id="dictionary_standard-root-system">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_standard-root-system" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">standard-root-system</a></span>
-            </span>
-          </h1>
-
-          <article class="class definition">
-
-            <h1><span class="type">Class</span> <span class="name self">defsys:standard-root-system</span></h1>
-            <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code> <code class="relevant"><a href="#dictionary_standard-root-system">defsys:standard-root-system</a></code></p>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>The standard root definitions-systems (as returned by function <code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code>) inherits from this class.</p>
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_locate">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_locate" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">locate</a></span>
-            </span>
-          </h1>
-
-          <article class="generic-function definition">
-
-            <h1><span class="type">Generic Function</span> <span class="name self">defsys:locate</span></h1>
-
-            <p class="args-and-retvals"><var>system</var> <var>definition-name</var> &amp;key errorp =&gt; <var>definition-or-nil</var></p>
-
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
-                <li><var>definition-name</var> -- A definition name.</li>
-                <li><var>errorp</var> -- A generalized boolean. The default is true.</li>
-                <li><var>definition-or-nil</var> -- An object or nil.</li>
-              </ul>
-            </section>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Returns the definition named <var>definition-name</var> in <var>system</var>.</p>
-            </section>
-
-            <section class="methods">
-              <h1>Methods</h1>
-
-              <article class="method definition" id="dictionary_locate_t_t">
-
-                <h1><span class="type">Method</span> <span class="name self">locate</span> :around</h1>
-
-                <p class="args-and-retvals"><var>system</var> <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>Calls the next method and throws a <code class="relevant"><a href="#dictionary_not-found">defsys:not-found</a></code> error if the definition was not found and <var>errorp</var> is true.</p>
-                </section>
-
-              </article>
-
-              <article class="method definition" id="dictionary_locate_symbol_t">
-
-                <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
-
-                <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
-                </section>
-
-              </article>
-
-              <article class="method definition" id="dictionary_locate_hash-table-mixin_t">
-
-                <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
-
-                <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>Retrieves the definition (or lack thereof) using the internal hash-table.</p>
-                </section>
-
-              </article>
-
-              <article class="method definition" id="dictionary_locate_standard-root-system_t">
-
-                <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
-
-                <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_standard-root-system">defsys:standard-root-system</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>If <var>definition-name</var> is the symbol <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, returns <var>system</var>, else calls the next method.</p>
-                  <p>This method notably ensures that the symbol <code class="relevant"><a href="#dictionary_system">defsys:system</a></code> can be used as a <a href="#concepts_definitions-system-designator">designator</a> for the <a href="#dictionary_root-system">root definitions-system</a>.</p>
-                </section>
-
-              </article>
-
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_setf_locate">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_setf_locate" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">(setf locate)</a></span>
-            </span>
-          </h1>
-
-          <article class="generic-function definition">
-
-            <h1><span class="type">Generic Function</span> <span class="name self">(setf defsys:locate)</span></h1>
-
-            <p class="args-and-retvals"><var>new-definition</var> <var>system</var> <var>definition-name</var> &amp;key <var>errorp</var> =&gt; <var>new-definition</var></p>
-
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>new-definition</var> -- A non-nil object.</li>
-                <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
-                <li><var>definition-name</var> -- A definition name.</li>
-                <li><var>errorp</var> -- Ignored.</li>
-              </ul>
-            </section>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Makes <var>new-definition</var> the definition associated with name <var>definition-name</var> in <var>system</var>.</p>
-            </section>
-
-            <section class="methods">
-              <h1>Methods</h1>
-
-              <article class="method definition" id="dictionary_setf_locate_t_symbol_t">
-
-                <h1><span class="type">Method</span> <span class="name self">(setf locate)</span></h1>
-
-                <p class="args-and-retvals"><var>new-definition</var> (<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
-                </section>
-
-              </article>
-
-              <article class="method definition" id="dictionary_locate_hash-table-mixin_t">
-
-                <h1><span class="type">Method</span> <span class="name self">(setf locate)</span></h1>
-
-                <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>Sets the definition using the internal hash-table.</p>
-                </section>
-
-              </article>
-
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_unbind">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_unbind" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">unbind</a></span>
-            </span>
-          </h1>
-
-          <article class="generic-function definition">
-
-            <h1><span class="type">Generic Function</span> <span class="name self">defsys:unbind</span></h1>
-
-            <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>removedp</var></p>
-
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
-                <li><var>definition-name</var> -- A definition name.</li>
-                <li><var>removedp</var> -- A generalized boolean.</li>
-              </ul>
-            </section>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Removes the definition named <var>definition-name</var> in <var>system</var>. Returns true if such a definition was present, else returns false.</p>
-            </section>
-
-            <section class="methods">
-              <h1>Methods</h1>
-
-              <article class="method definition" id="dictionary_unbind_symbol_t">
-
-                <h1><span class="type">Method</span> <span class="name self">unbind</span></h1>
-
-                <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> =&gt; <var>removedp</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
-                </section>
-
-              </article>
-
-              <article class="method definition" id="dictionary_unbind_hash-table-mixin_t">
-
-                <h1><span class="type">Method</span> <span class="name self">unbind</span></h1>
-
-                <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> =&gt; <var>removedp</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>Removes the definition named <var>definition-name</var> from the internal hash-table.</p>
-                </section>
-
-              </article>
-
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_boundp">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_boundp" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">boundp</a></span>
-            </span>
-          </h1>
-
-          <article class="generic-function definition">
-
-            <h1><span class="type">Generic Function</span> <span class="name self">defsys:boundp</span></h1>
-
-            <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>generalized-boolean</var></p>
-
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
-                <li><var>definition-name</var> -- A definition name.</li>
-                <li><var>generalized-boolean</var> -- A generalized boolean.</li>
-              </ul>
-            </section>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Returns true if there is a definition named <var>definition-name</var> in <var>system</var>, else returns false.</p>
-            </section>
-
-            <section class="methods">
-              <h1>Methods</h1>
-
-              <article class="method definition" id="dictionary_boundp_t_t">
-
-                <h1><span class="type">Method</span> <span class="name self">boundp</span></h1>
-
-                <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>generalized-boolean</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>Simply attempts to <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> the <var>definition-name</var> with <var>errorp</var> being false, returns true if this was successful, else false.</p>
-                </section>
-
-              </article>
-
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_ensure">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_ensure" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">ensure</a></span>
-            </span>
-          </h1>
-
-          <article class="generic-function definition">
-
-            <h1><span class="type">Generic Function</span> <span class="name self">defsys:ensure</span></h1>
-
-            <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
-
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
-                <li><var>definition-name</var> -- A definition name.</li>
-                <li><var>class</var> -- A class designator.</li>
-                <li><var>definition</var> -- An object.</li>
-              </ul>
-            </section>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Creates or reinitializes the definition named <var>definition-name</var> in <var>system</var>.</p>
-            </section>
-
-            <section class="methods">
-              <h1>Methods</h1>
-
-              <article class="method definition" id="dictionary_ensure_symbol_t">
-
-                <h1><span class="type">Method</span> <span class="name self">ensure</span></h1>
-
-                <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
-                </section>
-
-              </article>
-
-              <article class="method definition" id="dictionary_ensure_system_t_t">
-
-                <h1><span class="type">Method</span> <span class="name self">ensure</span></h1>
-
-                <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_system">defsys:system</a></span>) <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>If there is not already a definition named <var>definition-name</var> in <var>system</var>, then create such a definition by calling <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_mk_ins.htm" target="_blank">make-instance</a> with <var>definition-class</var>, <code>:name <var>definition-name</var></code> and <var>initargs</var>, and then associate this new definition with the system using <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>.</p>
-                  <p>If there <em>is</em> already a definition named <var>definition-name</var> in <var>system</var>, then reinitialize that <var>existing</var> definition:</p>
-                  <ul>
-                    <li>If <var>existing</var> is already of the class designated by <var>definition-class</var>, then call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_reinit.htm#reinitialize-instance" target="_blank">reinitialize-instance</a> with <var>existing</var> and <var>initargs</var>.</li>
-                    <li>Else, call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_chg_cl.htm" target="_blank">change-class</a> with <var>existing</var>, <var>definition-class</var> and <var>initargs</var>.</li>
-                  </ul>
-                </section>
-
-              </article>
-
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_not-found">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_not-found" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">not-found</a></span>
-            </span>
-          </h1>
-
-          <article class="class definition">
-
-            <h1><span class="type">Condition</span> <span class="name self">defsys:not-found</span></h1>
-            <p class="direct-superclasses">error</p>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Thrown when <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> cannot find any definition named <var>definition-name</var> in the designated <var>system</var> and <var>errorp</var> is true (the default).</p>
-            <p>This condition class provides two slots, one initialized by initarg <code>:system</code> and retrieved by <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, and another initialized by initarg <code>:name</code> and retrieved by <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>.</p>
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_hash-table-mixin">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_hash-table-mixin" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">hash-table-mixin</a></span>
-            </span>
-          </h1>
-
-          <article class="class definition">
-
-            <h1><span class="type">Class</span> <span class="name self">defsys:hash-table-mixin</span></h1>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>This class adds implementations for all generic functions required by marker class <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, backed by an internal <code>eq</code> hash-table. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> inherits from this class.</p>
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_name-mixin">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_name-mixin" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">name-mixin</a></span>
-            </span>
-          </h1>
-
-          <article class="class definition">
-
-            <h1><span class="type">Class</span> <span class="name self">defsys:name-mixin</span></h1>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Provides a slot of type <code>symbol</code>, filled by initarg <code>:name</code>, whose value is retrieved by <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>. Also provides a <code>print-object</code> method that includes the name of the object in its output.</p>
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_name">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_name" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">name</a></span>
-            </span>
-          </h1>
-
-          <article class="generic-function definition">
-
-            <h1><span class="type">Generic Function</span> <span class="name self">defsys:name</span></h1>
-
-            <p class="args-and-retvals"><var>object</var> =&gt; <var>name</var></p>
-
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>object</var> -- An object.</li>
-                <li><var>name</var> -- An object.</li>
-              </ul>
-            </section>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Returns the <var>name</var> of the <var>object</var>.</p>
-            </section>
-
-            <section class="methods">
-              <h1>Methods</h1>
-
-              <article class="method definition" id="dictionary_name_name-mixin">
-
-                <h1><span class="type">Method</span> <span class="name self">name</span></h1>
-
-                <p class="args-and-retvals">(<var>object</var> <code class="specializer relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code>) =&gt; <var>name</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>Returns the value of the internal name slot.</p>
-                </section>
-
-              </article>
-
-              <article class="method definition" id="dictionary_name_not-found">
-
-                <h1><span class="type">Method</span> <span class="name self">name</span></h1>
-
-                <p class="args-and-retvals">(<var>object</var> <code class="specializer relevant"><a href="#dictionary_not-found">defsys:not-found</a></code>) =&gt; <var>name</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p>Returns the name of the definition that was not found.</p>
-                </section>
-
-              </article>
-
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_expand-definition">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_expand-definition" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">expand-definition</a></span>
-            </span>
-          </h1>
-
-          <article class="generic-function definition">
-
-            <h1><span class="type">Generic Function</span> <span class="name self">defsys:expand-definition</span></h1>
-
-            <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest <var>options</var> =&gt; <var>expansion</var></p>
-
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
-                <li><var>definition-name</var> -- A definition name.</li>
-                <li><var>environment</var> -- The environment captured by <code>defsys:define</code></li>
-                <li><var>args</var> -- A list. The body of the definition.</li>
-                <li><var>options</var> -- A list.</li>
-              </ul>
-            </section>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Called by <code class="relevant"><a href="#dictionary_define">defsys:define</a></code> to determine its expansion.</p>
-            </section>
-
-            <section class="methods">
-              <h1>Methods</h1>
-
-              <article class="method definition" id="dictionary_expand-definition_symbol_t_t_t">
-
-                <h1><span class="type">Method</span> <span class="name self">expand-definition</span></h1>
-
-                <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest options =&gt; <var>expansion</var></p>
-
-                <section class="description">
-                  <h1>Description</h1>
-                  <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
-                </section>
-
-              </article>
-
-            </section>
-
-          </article>
-
-        </section>
-
-        <section id="dictionary_define">
-
-          <h1 class="breadcrumbs-bar">
-            <span class="section-relative-nav">
-              <a href="#dictionary_define" class="anchor">⚓</a>
-            </span>
-            <span class="breadcrumbs">
-              <a href="#dictionary">Dictionary</a>
-              <span class="crumb"><span class="s"> » </span><a class="here">define</a></span>
-            </span>
-          </h1>
-
-          <article class="macro definition">
-
-            <h1><span class="type">Macro</span> <span class="name self">defsys:define</span></h1>
-
-            <p class="args-and-retvals">(<var>kind</var> <var>definition-name</var> &amp;body <var>options</var>) &amp;body <var>args</var></p>
-
-            <section class="arguments-and-values">
-              <h1>Arguments and Values</h1>
-              <ul>
-                <li><var>kind</var> -- A symbol naming the kind of definition.</li>
-                <li><var>definition-name</var> -- A definition name.</li>
-                <li><var>options</var> -- A list.</li>
-                <li><var>args</var> -- A list. The body of the definition.</li>
-              </ul>
-            </section>
-
-            <section class="description">
-              <h1>Description</h1>
-              <p>Calls <code class="relevant"><a href="#dictionary_expand-definition">defsys:expand-definition</a></code> and returns whatever it returns.</p>
-            </section>
-
-          </article>
-
-        </section>
+        <nav class="end-of-section-indicator">
+          <a href="#dictionary">
+            "<span>Dictionary</span>" end.
+          </a>
+        </nav>
 
       </section>
 

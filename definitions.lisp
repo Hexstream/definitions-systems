@@ -7,7 +7,8 @@
 (defclass defsys:name-mixin ()
   ((%name :initarg :name
           :reader defsys:name
-          :type symbol)))
+          :type symbol
+          :initform nil)))
 
 (defmethod print-object ((mixin name-mixin) stream)
   (print-unreadable-object (mixin stream :type t)
