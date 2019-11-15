@@ -11,6 +11,7 @@
 
            #:system
            #:hash-table-mixin
+           #:check-definition-mixin
            #:base-definition-class-mixin
            #:base-definition-class
            #:unsuitable-definition-error

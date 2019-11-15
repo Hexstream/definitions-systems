@@ -40,7 +40,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-11-13">13 november 2019</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-11-15">15 november 2019</time><span>.</span></p>
 
     </nav>
 
@@ -198,6 +198,7 @@
             <ul>
               <li><a href="#dictionary_system"><span class="type">Class</span> <code>system</code></a></li>
               <li><a href="#dictionary_hash-table-mixin"><span class="type">Class</span> <code>hash-table-mixin</code></a></li>
+              <li><a href="#dictionary_check-definition-mixin"><span class="type">Class</span> <code>check-definition-mixin</code></a></li>
               <li><a href="#dictionary_base-definition-class-mixin"><span class="type">Class</span> <code>base-definition-class-mixin</code></a></li>
               <li><a href="#dictionary_base-definition-class"><span class="type">Generic Function</span> <code>base-definition-class</code></a></li>
               <li><a href="#dictionary_unsuitable-definition-error"><span class="type">Condition</span> <code>unsuitable-definition-error</code></a></li>
@@ -254,7 +255,32 @@
 
               <section class="description">
                 <h1>Description</h1>
-                <p>This class adds implementations for all generic functions required by marker class <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, backed by an internal <code>eq</code> hash-table. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> inherits from this class.</p>
+                <p>This class provides implementations for all generic functions required by marker class <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, backed by an internal <code>eq</code> hash-table. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> inherits from this class.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_check-definition-mixin">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_check-definition-mixin" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">check-definition-mixin</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:check-definition-mixin</span></h1>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>This class provides a before-method on <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code> that calls <code class="relevant"><a href="#dictionary_check-definition">(defsys:check-definition)</a></code>.</p>
               </section>
 
             </article>
@@ -276,6 +302,8 @@
             <article class="class definition">
 
               <h1><span class="type">Class</span> <span class="name self">defsys:base-definition-class-mixin</span></h1>
+
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_check-definition-mixin">defsys:check-definition-mixin</a></code></p>
 
               <section class="description">
                 <h1>Description</h1>
@@ -952,7 +980,7 @@
 
                   <h1><span class="type">Before-Method</span> <span class="name self">(setf locate)</span></h1>
 
-                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_check-definition-mixin">defsys:check-definition-mixin</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>

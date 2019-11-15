@@ -6,9 +6,11 @@
 (defclass defsys:hash-table-mixin ()
   ((%hash :type hash-table :initform (make-hash-table :test 'eq))))
 
+(defclass defsys:check-definition-mixin () ())
+
 (defgeneric defsys:base-definition-class (system))
 
-(defclass defsys:base-definition-class-mixin ()
+(defclass defsys:base-definition-class-mixin (defsys:check-definition-mixin)
   ((%base-definition-class :initarg :base-definition-class
                            :reader defsys:base-definition-class
                            :type class
