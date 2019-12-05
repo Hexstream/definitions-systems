@@ -28,9 +28,10 @@
            #:expand-definition
            #:define
 
+           #:default-definition-class-mixin
+           #:default-definition-class
            #:simple-expansion-mixin
            #:explicit-definition-class-p
-           #:default-definition-class
            #:definition-class
            #:expand-definition-args
 

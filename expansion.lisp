@@ -1,12 +1,7 @@
 (in-package #:definitions-systems)
 
-(defclass defsys:simple-expansion-mixin ()
-  ((%explicit-definition-class-p :initarg :explicit-definition-class-p
-                                 :reader defsys:explicit-definition-class-p
-                                 :type boolean
-                                 :initform nil)
-   (%default-definition-class :initarg :default-definition-class
-                              ;:reader defsys:default-definition-class (see method below)
+(defclass defsys:default-definition-class-mixin ()
+  ((%default-definition-class :initarg :default-definition-class
                               :type (or null class)
                               :initform nil)))
 
@@ -15,9 +10,16 @@
     (or (call-next-method)
         (when errorp
           (error "There is no ~S for system ~S." 'defsys:default-definition-class system))))
-  (:method ((system defsys:simple-expansion-mixin) &key (errorp t))
+  (:method ((system defsys:default-definition-class-mixin) &key (errorp t))
     (declare (ignore errorp))
     (slot-value system '%default-definition-class)))
+
+
+(defclass defsys:simple-expansion-mixin (defsys:default-definition-class-mixin)
+  ((%explicit-definition-class-p :initarg :explicit-definition-class-p
+                                 :reader defsys:explicit-definition-class-p
+                                 :type boolean
+                                 :initform nil)))
 
 (defgeneric defsys:definition-class (system definition-name &rest initargs)
   (:method ((system defsys:system) name &rest initargs)
