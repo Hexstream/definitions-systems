@@ -7,12 +7,14 @@
                                  :initform nil)
    (%default-definition-class :initarg :default-definition-class
                               :reader defsys:default-definition-class
-                              :type class)))
+                              :type (or null class)
+                              :initform nil)))
 
 (defgeneric defsys:definition-class (system definition-name &rest initargs)
   (:method ((system defsys:system) name &rest initargs)
     (declare (ignore name initargs))
-    (defsys:default-definition-class system)))
+    (or (defsys:default-definition-class system)
+        (error "There is no ~S for system ~S." 'defsys:default-definition-class system))))
 
 (defgeneric defsys:expand-definition-args (system definition-name &rest initargs)
   (:method ((system-name symbol) definition-name &rest initargs)
