@@ -31,6 +31,8 @@
            #:simple-expansion-mixin
            #:explicit-definition-class-p
            #:default-definition-class
+           #:definition-class
+           #:expand-definition-args
 
            #:root-system
            #:standard-root-system
