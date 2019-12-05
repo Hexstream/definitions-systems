@@ -57,19 +57,6 @@
                                   defsys:hash-table-mixin)
   ())
 
-(defclass defsys:root-system (defsys:system) ())
-
-(defclass defsys:standard-root-system (defsys:root-system defsys:standard-system) ())
-
-(defvar *root-system* (make-instance 'defsys:standard-root-system :name 'defsys:system))
-
-(defun defsys:root-system ()
-  *root-system*)
-
-(defmethod make-load-form ((root-system defsys:standard-root-system) &optional environment)
-  (declare (ignore environment))
-  '(defsys:root-system))
-
 
 (define-condition defsys:not-found (error)
   ((%system :initarg :system

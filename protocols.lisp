@@ -6,20 +6,15 @@
         (when errorp
           (error 'defsys:not-found :system system :name definition-name))))
   (:method ((system-name symbol) definition-name &key (errorp t))
-    (defsys:locate (defsys:locate *root-system* system-name)
+    (defsys:locate (defsys:locate (defsys:root-system) system-name)
                    definition-name :errorp errorp))
   (:method ((system defsys:hash-table-mixin) definition-name &key (errorp t))
     (declare (ignore errorp))
-    (identity (gethash definition-name (slot-value system '%hash))))
-  (:method ((system defsys:standard-root-system) definition-name &key (errorp t))
-    (declare (ignore errorp))
-    (if (eq definition-name 'defsys:system)
-        system
-        (call-next-method))))
+    (identity (gethash definition-name (slot-value system '%hash)))))
 
 (defgeneric (setf defsys:locate) (new-definition system definition-name &key errorp)
   (:method (new-definition (system-name symbol) definition-name &key (errorp nil))
-    (setf (defsys:locate (defsys:locate *root-system* system-name)
+    (setf (defsys:locate (defsys:locate (defsys:root-system) system-name)
                          definition-name
                          :errorp errorp)
           new-definition))
@@ -37,7 +32,7 @@
 
 (defgeneric defsys:unbind (system definition-name)
   (:method ((system-name symbol) definition-name)
-    (defsys:unbind (defsys:locate *root-system* system-name)
+    (defsys:unbind (defsys:locate (defsys:root-system) system-name)
                    definition-name))
   (:method ((system defsys:system) definition-name)
     (let ((definition (defsys:locate system definition-name :errorp nil)))
@@ -62,7 +57,7 @@
 (defgeneric defsys:ensure (system definition-name class &rest initargs)
   (:method ((system-name symbol) definition-name class &rest initargs)
     (apply #'defsys:ensure
-           (defsys:locate *root-system* system-name)
+           (defsys:locate (defsys:root-system) system-name)
            definition-name class initargs))
   (:method ((system defsys:system) definition-name definition-class &rest initargs)
     (let ((existing (defsys:locate system definition-name :errorp nil)))
@@ -80,12 +75,8 @@
 (defgeneric defsys:expand-definition (system definition-name environment args &rest options)
   (:method ((system-name symbol) definition-name environment args &rest options)
     (apply #'defsys:expand-definition
-           (defsys:locate *root-system* system-name)
-           definition-name environment args options))
-  (:method ((system defsys:standard-root-system) name environment args &key)
-    (declare (ignore environment))
-    (destructuring-bind (class &rest args) args
-      `(defsys:ensure ,system ',name ,class ,@args))))
+           (defsys:locate (defsys:root-system) system-name)
+           definition-name environment args options)))
 
 (defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)

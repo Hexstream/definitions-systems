@@ -18,8 +18,6 @@
            #:details
            #:check-definition
            #:standard-system
-           #:root-system
-           #:standard-root-system
            #:not-found
 
            #:locate
@@ -29,6 +27,13 @@
            #:ensure
            #:expand-definition
            #:define
+
+           #:simple-expansion-mixin
+           #:explicit-definition-class-p
+           #:default-definition-class
+
+           #:root-system
+           #:standard-root-system
 
            #:ikeywords-mixin))
 
