@@ -6,15 +6,23 @@
                                  :type boolean
                                  :initform nil)
    (%default-definition-class :initarg :default-definition-class
-                              :reader defsys:default-definition-class
+                              ;:reader defsys:default-definition-class (see method below)
                               :type (or null class)
                               :initform nil)))
+
+(defgeneric defsys:default-definition-class (system &key errorp)
+  (:method :around (system &key (errorp t))
+    (or (call-next-method)
+        (when errorp
+          (error "There is no ~S for system ~S." 'defsys:default-definition-class system))))
+  (:method ((system defsys:simple-expansion-mixin) &key (errorp t))
+    (declare (ignore errorp))
+    (slot-value system '%default-definition-class)))
 
 (defgeneric defsys:definition-class (system definition-name &rest initargs)
   (:method ((system defsys:system) name &rest initargs)
     (declare (ignore name initargs))
-    (or (defsys:default-definition-class system)
-        (error "There is no ~S for system ~S." 'defsys:default-definition-class system))))
+    (defsys:default-definition-class system)))
 
 (defgeneric defsys:expand-definition-args (system definition-name &rest initargs)
   (:method ((system-name symbol) definition-name &rest initargs)
