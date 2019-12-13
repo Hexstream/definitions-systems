@@ -21,17 +21,17 @@
                                  :type boolean
                                  :initform nil)))
 
-(defgeneric defsys:definition-class (system definition-name &rest initargs)
-  (:method ((system defsys:system) name &rest initargs)
-    (declare (ignore name initargs))
+(defgeneric defsys:definition-class (system &rest initargs)
+  (:method ((system defsys:system) &rest initargs)
+    (declare (ignore initargs))
     (defsys:default-definition-class system)))
 
-(defgeneric defsys:expand-definition-args (system definition-name &rest initargs)
-  (:method ((system-name symbol) definition-name &rest initargs)
+(defgeneric defsys:expand-definition-args (system &rest initargs)
+  (:method ((system-name symbol) &rest initargs)
     (apply #'defsys:expand-definition-args
            (defsys:locate (defsys:root-system) system-name)
            initargs))
-  (:method ((system defsys:system) definition-name &rest initargs)
+  (:method ((system defsys:system) &rest initargs)
     initargs))
 
 (defun %canonicalize-definition-class (maybe-explicit-definition-class implicit-definition-class)
@@ -51,5 +51,5 @@
                                                          ,implicit-definition-class-form)
                         args))
               (values implicit-definition-class-form args)))
-      `(let ((,initargs-var (list ,@(apply #'defsys:expand-definition-args system name args))))
+      `(let ((,initargs-var (list ,@(apply #'defsys:expand-definition-args system args))))
          (apply #'defsys:ensure ,system ',name ,definition-class-form ,initargs-var)))))

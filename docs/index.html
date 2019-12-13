@@ -374,9 +374,6 @@
  (<var>definition</var> :initarg :definition
              :reader <code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code>
              :documentation "Indicates the <var>definition</var> that was found to be unsuitable for the <var>system</var>.")
- (<var>name</var> :initarg :name
-       :reader <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>
-       :documentation "Indicates the name that was attempted to be bound to <var>definition</var> in <var>system</var>".)
  (<var>details</var> :initarg :details
           :reader <code class="relevant"><a href="#dictionary_details">defsys:details</a></code>
           :initform nil
@@ -432,30 +429,29 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:check-definition</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> <var>definition</var> <var>definition-name</var> =&gt; <var>definition</var></p>
+              <p class="args-and-retvals"><var>system</var> <var>definition</var> =&gt; <var>definition</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
                 <ul>
                   <li><var>system</var> -- A system.</li>
                   <li><var>definition</var> -- A non-nil object, usually a <code class="relevant"><a href="#dictionary_definition">definition</a></code>.</li>
-                  <li><var>definition-name</var> -- A definition name.</li>
                 </ul>
               </section>
 
               <section class="description">
                 <h1>Description</h1>
-                <p>Returns <var>definition</var> if it appears to be a suitable binding for name <var>definition-name</var> in system <var>system</var>, else throws an error of type <code class="relevant"><a href="#dictionary_unsuitable-definition-error">unsuitable-definition-error</a></code>.</p>
+                <p>Returns <var>definition</var> if it appears to be a suitable definition in system <var>system</var>, else throws an error of type <code class="relevant"><a href="#dictionary_unsuitable-definition-error">unsuitable-definition-error</a></code>.</p>
               </section>
 
               <section class="methods">
                 <h1>Methods</h1>
 
-                <article class="method definition" id="dictionary_check-definition_system_t_t">
+                <article class="method definition" id="dictionary_check-definition_system_t">
 
                   <h1><span class="type">Method</span> <span class="name self">defsys:check-definition</span></h1>
 
-                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition</var> <var>definition-name</var> =&gt; <var>definition</var></p>
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition</var> =&gt; <var>definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -464,11 +460,11 @@
 
                 </article>
 
-                <article class="method definition" id="dictionary_check-definition_base-definition-class-mixin_t_t">
+                <article class="method definition" id="dictionary_check-definition_base-definition-class-mixin_t">
 
                   <h1><span class="type">Method</span> <span class="name self">defsys:check-definition</span></h1>
 
-                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code>) <var>definition</var> <var>definition-name</var> =&gt; <var>definition</var></p>
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code>) <var>definition</var> =&gt; <var>definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1620,11 +1616,12 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:definition-class</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> &amp;rest <var>initargs</var> =&gt; <var>class</var></p>
+              <p class="args-and-retvals"><var>system</var> &amp;rest <var>initargs</var> =&gt; <var>class</var></p>
 
               <section class="description">
                 <h1>Description</h1>
-                <p>Returns the <var>class</var> that should be used for the definition according to <var>definition-name</var> and <var>initargs</var> if no class has been explicitly specified.</p>
+                <p>Returns the <var>class</var> that should be used for the definition according to <var>initargs</var> if no class has been explicitly specified.</p>
+                <p>(To be written: method. And this is not a reader.)</p>
               </section>
 
             </article>
@@ -1647,13 +1644,12 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:expand-definition-args</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> &amp;rest <var>initargs</var> =&gt; <var>expanded-initargs</var></p>
+              <p class="args-and-retvals"><var>system</var> &amp;rest <var>initargs</var> =&gt; <var>expanded-initargs</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
                 <ul>
                   <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
-                  <li><var>definition-name</var> -- A definition name.</li>
                   <li><var>initargs</var> -- A plist.</li>
                   <li><var>expanded-initargs</var> -- A plist.</li>
                 </ul>
@@ -1668,11 +1664,11 @@
 
                 <h1>Methods</h1>
 
-                <article class="method definition" id="dictionary_expand-definition-args_symbol_t">
+                <article class="method definition" id="dictionary_expand-definition-args_symbol">
 
                   <h1><span class="type">Method</span> <span class="name self">expand-definition-args</span></h1>
 
-                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;rest <var>initargs</var> =&gt; <var>expanded-initargs</var></p>
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) &amp;rest <var>initargs</var> =&gt; <var>expanded-initargs</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1685,7 +1681,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">expand-definition-args</span></h1>
 
-                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition-name</var> &amp;rest <var>initargs</var> =&gt; <var>transformed-initargs</var></p>
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) &amp;rest <var>initargs</var> =&gt; <var>transformed-initargs</var></p>
 
                   <section class="description">
                     <h1>Description</h1>

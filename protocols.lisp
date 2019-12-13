@@ -20,7 +20,7 @@
           new-definition))
   (:method :before (new-definition (system defsys:check-definition-mixin) definition-name &key errorp)
     (declare (ignore errorp))
-    (check-definition system new-definition definition-name))
+    (check-definition system new-definition))
   (:method :after ((new-definition defsys:owner-mixin) (system defsys:system) definition-name &key errorp)
     (declare (ignore errorp))
     (unless (defsys:owner new-definition)

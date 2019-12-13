@@ -24,28 +24,23 @@
    (%definition :initarg :definition
                 :reader defsys:definition
                 :initform (error "~S is required." :definition))
-   (%name :initarg :name
-          :reader defsys:name
-          :initform (error "~S is required." :name))
    (%details :initarg :details
              :reader defsys:details
              :initform nil))
   (:report (lambda (error stream)
-             (format stream "~S is not a suitable definition for system ~S (and name ~S). ~@
+             (format stream "~S is not a suitable definition for system ~S ~@
                              Details: ~S"
-                     (defsys:definition error) (defsys:system error) (defsys:name error)
-                     (defsys:details error)))))
+                     (defsys:definition error) (defsys:system error) (defsys:details error)))))
 
-(defgeneric defsys:check-definition (system definition definition-name)
-  (:method ((system defsys:system) definition definition-name)
-    (declare (ignore definition-name))
+(defgeneric defsys:check-definition (system definition)
+  (:method ((system defsys:system) definition)
     definition)
-  (:method ((system defsys:base-definition-class-mixin) definition definition-name)
+  (:method ((system defsys:base-definition-class-mixin) definition)
     (let ((base-definition-class (defsys:base-definition-class system)))
       (if (typep definition base-definition-class)
           definition
           (error 'defsys:unsuitable-definition-error
-                 :system system :definition definition :name definition-name
+                 :system system :definition definition
                  :details (make-condition 'type-error
                                           :datum definition
                                           :expected-type base-definition-class))))))
