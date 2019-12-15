@@ -40,7 +40,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-12-11">11 december 2019</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-12-14">14 december 2019</time><span>.</span></p>
 
     </nav>
 
@@ -208,6 +208,8 @@
               <li><a href="#dictionary_standard-system"><span class="type">Class</span> <code>standard-system</code></a></li>
               <li><a href="#dictionary_root-system"><span class="type">Class</span> <code>root-system</code></a></li>
               <li><a href="#dictionary_root-system"><span class="type">Function</span> <code>root-system</code></a></li>
+              <li><a href="#dictionary_location-mixin"><span class="type">Class</span> <code>location-mixin</code></a></li>
+              <li><a href="#dictionary_location"><span class="type">Generic Function</span> <code>location</code></a></li>
               <li><a href="#dictionary_standard-root-system"><span class="type">Class</span> <code>standard-root-system</code></a></li>
               <li><a href="#dictionary_not-found"><span class="type">Condition</span> <code>not-found</code></a></li>
             </ul>
@@ -546,6 +548,102 @@
                 <h1>Description</h1>
                 <p>Returns the root system.</p>
                 <p>The root system is the definitions-system whose definitions are the top-level definitions-systems.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_location-mixin">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_location-mixin" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">location-mixin</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:location-mixin</span></h1>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Slots:</p>
+                <pre><code>((<var>location</var> :initarg :location
+           :reader <code class="relevant"><a href="#dictionary_location">defsys:location</a></code>
+           :initform nil
+           :documentation "A value of nil means the location of this root system is not known, thus this system may not be externalizable."))</code></pre>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_location">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_location" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">location</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:location</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> &amp;key <var>errorp</var> =&gt; <var>location-or-nil</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A definitions-system.</li>
+                  <li><var>errorp</var> -- A generalized boolean. The default is true.</li>
+                  <li><var>definition-or-nil</var> -- A form or nil.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the location of this <var>system</var> (a form that, when evaluated, returns <var>system</var>), else returns <code>nil</code> if <var>errorp</var> is false or throws an error if <var>errorp</var> is true.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_location_around_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">location</span> :around</h1>
+
+                  <p class="args-and-retvals"><var>system</var> &amp;key (<var>errorp</var> t) =&gt; <var>location-or-nil</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Calls the next method and throws an error of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm">error</a> if there is no location and <var>errorp</var> is true.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_location_location-mixin">
+
+                  <h1><span class="type">Method</span> <span class="name self">location</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_location-mixin">defsys:location-mixin</a></code>) &amp;key (<var>errorp</var> t) =&gt; <var>location-or-nil</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Retrieves the location from the internal slot.</p>
+                  </section>
+
+                </article>
+
               </section>
 
             </article>

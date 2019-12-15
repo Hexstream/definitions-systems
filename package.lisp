@@ -36,6 +36,8 @@
            #:expand-definition-args
 
            #:root-system
+           #:location-mixin
+           #:location
            #:standard-root-system
 
            #:ikeywords-mixin))
