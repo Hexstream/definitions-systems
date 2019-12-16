@@ -14,6 +14,7 @@
   :components ((:file "package")
                (:file "definitions")
                (:file "systems")
+               (:file "checking")
                (:file "protocols")
                (:file "expansion")
                (:file "root")

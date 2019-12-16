@@ -11,14 +11,15 @@
 
            #:system
            #:hash-table-mixin
+           #:standard-system
+           #:not-found
+
            #:check-definition-mixin
            #:base-definition-class-mixin
            #:base-definition-class
            #:unsuitable-definition-error
            #:details
            #:check-definition
-           #:standard-system
-           #:not-found
 
            #:locate
            #:unbind
