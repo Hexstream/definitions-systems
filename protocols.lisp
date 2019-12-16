@@ -12,6 +12,16 @@
     (declare (ignore errorp))
     (identity (gethash definition-name (slot-value system '%hash)))))
 
+(define-condition defsys:not-found (error)
+  ((%system :initarg :system
+            :reader defsys:system
+            :type defsys:system)
+   (%name :initarg :name
+          :reader defsys:name))
+  (:report (lambda (condition stream)
+             (format stream "No definition named ~S in system ~S."
+                     (defsys:name condition) (defsys:system condition)))))
+
 (defgeneric (setf defsys:locate) (new-definition system definition-name &key errorp)
   (:method (new-definition (system-name symbol) definition-name &key (errorp nil))
     (setf (defsys:locate (defsys:locate (defsys:root-system) system-name)
