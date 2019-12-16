@@ -91,3 +91,10 @@
 (defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)
   (apply #'defsys:expand-definition kind definition-name env args options))
+
+
+(defgeneric defsys:map-definitions (function system)
+  (:method (function (system-name symbol))
+    (defsys:map-definitions function (defsys:locate (defsys:root-system) system-name)))
+  (:method (function (system defsys:hash-table-mixin))
+    (maphash function (slot-value system '%hash))))

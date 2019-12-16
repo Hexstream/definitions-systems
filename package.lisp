@@ -28,6 +28,7 @@
            #:ensure
            #:expand-definition
            #:define
+           #:map-definitions
 
            #:default-definition-class-mixin
            #:default-definition-class

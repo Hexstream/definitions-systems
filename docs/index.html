@@ -40,7 +40,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-12-15">15 december 2019</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-12-16">16 december 2019</time><span>.</span></p>
 
     </nav>
 
@@ -969,6 +969,7 @@
               <li><a href="#dictionary_ensure"><span class="type">Generic Function</span> <code>ensure</code></a></li>
               <li><a href="#dictionary_expand-definition"><span class="type">Generic Function</span> <code>expand-definition</code></a></li>
               <li><a href="#dictionary_define"><span class="type">Macro</span> <code>define</code></a></li>
+              <li><a href="#dictionary_map-definitions"><span class="type">Generic Function</span> <code>map-definitions</code></a></li>
             </ul>
           </nav>
 
@@ -1558,6 +1559,73 @@
               <section class="description">
                 <h1>Description</h1>
                 <p>Calls <code class="relevant"><a href="#dictionary_expand-definition">defsys:expand-definition</a></code> and returns whatever it returns.</p>
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_map-definitions">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_map-definitions" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">map-definitions</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:map-definitions</span></h1>
+
+              <p class="args-and-retvals"><var>function</var> <var>system</var> =&gt; nil</p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>function</var> -- A function designator.</li>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>For each <var>definition</var> named <var>name</var> in <var>system</var>, <var>function</var> is called with arguments <var>name</var> and <var>definition</var> in an implementation-defined order.</p>
+                <p>The consequences are undefined if an attempt is made to add or remove any <var>definition</var> in <var>system</var> while such a mapping operation is in progress.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_map-definitions_t_symbol">
+
+                  <h1><span class="type">Method</span> <span class="name self">map-definitions</span></h1>
+
+                  <p class="args-and-retvals"><var>function</var> (<var>system-name</var> <span class="specializer">symbol</span>) =&gt; nil</p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_map-definitions_t_hash-table-mixin">
+
+                  <h1><span class="type">Method</span> <span class="name self">map-definitions</span></h1>
+
+                  <p class="args-and-retvals"><var>function</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) =&gt; nil</p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Calls <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_maphas.htm" target="_blank">maphash</a> on <var>function</var> and <var>system</var>'s internal hash-table.</p>
+                  </section>
+
+                </article>
+
               </section>
 
             </article>
