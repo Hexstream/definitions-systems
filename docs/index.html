@@ -199,7 +199,6 @@
             <ul>
               <li><a href="#dictionary_system"><span class="type">Class</span> <code>system</code></a></li>
               <li><a href="#dictionary_hash-table-mixin"><span class="type">Class</span> <code>hash-table-mixin</code></a></li>
-              <li><a href="#dictionary_not-found"><span class="type">Condition</span> <code>not-found</code></a></li>
               <li><a href="#dictionary_standard-system"><span class="type">Class</span> <code>standard-system</code></a></li>
               <li><a href="#dictionary_definition-checking">Definition checking</a></li>
               <li><a href="#dictionary_root-systems">Root systems</a></li>
@@ -250,38 +249,6 @@
               <section class="description">
                 <h1>Description</h1>
                 <p>This class provides implementations for all generic functions required by marker class <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, backed by an internal <code>eq</code> hash-table. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> inherits from this class.</p>
-              </section>
-
-            </article>
-
-          </section>
-
-          <section id="dictionary_not-found">
-
-            <h1 class="breadcrumbs-bar">
-              <span class="section-relative-nav">
-                <a href="#dictionary_not-found" class="anchor">⚓</a>
-              </span>
-              <span class="breadcrumbs">
-                <a href="#dictionary">Dictionary</a>
-                <span class="crumb"><span class="s"> » </span><a class="here">not-found</a></span>
-              </span>
-            </h1>
-
-            <article class="class definition">
-
-              <h1><span class="type">Condition</span> <span class="name self">defsys:not-found</span></h1>
-              <p class="direct-superclasses"><a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a></p>
-
-              <section class="description">
-                <h1>Description</h1>
-                <p>Thrown when <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> cannot find any definition named <var>definition-name</var> in the designated <var>system</var> and <var>errorp</var> is true (the default).</p>
-                <p>Slots:</p>
-                <pre><code>((<var>system</var> :initarg :system
-         :reader <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>
-         :type <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>)
- (<var>name</var> :initarg :name
-       :reader <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>))</code></pre>
               </section>
 
             </article>
@@ -995,6 +962,7 @@
                 <a href="#dictionary_locate" class="reader"><span class="type">Generic Function</span> <code>locate</code></a>
                 <a href="#dictionary_setf_locate" class="writer">(setfable)</a>
               </li>
+              <li><a href="#dictionary_not-found"><span class="type">Condition</span> <code>not-found</code></a></li>
               <li><a href="#dictionary_unbind"><span class="type">Generic Function</span> <code>unbind</code></a></li>
               <li><a href="#dictionary_unbind-definition"><span class="type">Generic Function</span> <code>unbind-definition</code></a></li>
               <li><a href="#dictionary_boundp"><span class="type">Generic Function</span> <code>boundp</code></a></li>
@@ -1187,6 +1155,38 @@
 
                 </article>
 
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_not-found">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_not-found" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">not-found</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Condition</span> <span class="name self">defsys:not-found</span></h1>
+              <p class="direct-superclasses"><a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Thrown when <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> cannot find any definition named <var>definition-name</var> in the designated <var>system</var> and <var>errorp</var> is true (the default).</p>
+                <p>Slots:</p>
+                <pre><code>((<var>system</var> :initarg :system
+         :reader <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>
+         :type <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>)
+ (<var>name</var> :initarg :name
+       :reader <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>))</code></pre>
               </section>
 
             </article>
