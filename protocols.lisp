@@ -82,19 +82,19 @@
                 (apply #'make-instance definition-class :name definition-name initargs))))))
 
 
-(defgeneric defsys:expand-definition (system definition-name environment args &rest options)
+(defgeneric defsys:expand (system definition-name environment args &rest options)
   (:method ((system-name symbol) definition-name environment args &rest options)
-    (apply #'defsys:expand-definition
+    (apply #'defsys:expand
            (defsys:locate (defsys:root-system) system-name)
            definition-name environment args options)))
 
 (defmacro defsys:define ((kind definition-name &body options)
                          &body args &environment env)
-  (apply #'defsys:expand-definition kind definition-name env args options))
+  (apply #'defsys:expand kind definition-name env args options))
 
 
-(defgeneric defsys:map-definitions (function system)
+(defgeneric defsys:map (function system)
   (:method (function (system-name symbol))
-    (defsys:map-definitions function (defsys:locate (defsys:root-system) system-name)))
+    (defsys:map function (defsys:locate (defsys:root-system) system-name)))
   (:method (function (system defsys:hash-table-mixin))
     (maphash function (slot-value system '%hash))))

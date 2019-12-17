@@ -1,7 +1,8 @@
 (cl:defpackage #:definitions-systems
   (:nicknames #:defsys)
   (:use #:cl)
-  (:shadow #:boundp)
+  (:shadow #:boundp
+           #:map)
   (:export #:definition
            #:name-mixin
            #:name
@@ -26,16 +27,16 @@
            #:unbind-definition
            #:boundp
            #:ensure
-           #:expand-definition
+           #:expand
            #:define
-           #:map-definitions
+           #:map
 
            #:default-definition-class-mixin
            #:default-definition-class
            #:simple-expansion-mixin
            #:explicit-definition-class-p
            #:definition-class
-           #:expand-definition-args
+           #:expand-args
 
            #:root-system
            #:location-mixin

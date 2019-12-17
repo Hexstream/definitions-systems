@@ -125,7 +125,7 @@
 
           <p>The definitions system is <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code>d in the <a class="relevant" href="#dictionary_root-system">root system</a>.</p>
 
-          <p>This is implemented by appropriate trivial methods on <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code>, <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>, <code class="relevant"><a href="#dictionary_unbind">unbind</a></code> and <code class="relevant"><a href="#dictionary_expand-definition">defsys:expand-definition</a></code>.</p>
+          <p>This is implemented by appropriate trivial methods on <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code>, <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>, <code class="relevant"><a href="#dictionary_unbind">unbind</a></code> and <code class="relevant"><a href="#dictionary_expand">defsys:expand</a></code>.</p>
 
           <div class="scroll">
             <pre><code class="common-lisp">(<code class="relevant">defsys:locate</code> 'my-system-name 'my-definition-name)
@@ -806,7 +806,7 @@
                 <pre><code>((<var>name</var> :initarg :name
        :reader <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>
        :initform nil
-       :documentation "A <var>name</var> of <code>nil</code> usually indicates an anonymous definition".))</code></pre>
+       :documentation "A <var>name</var> of <code>nil</code> usually indicates an anonymous definition."))</code></pre>
                 <p>Provides a <code>print-object</code> method that includes the name of the object in its output.</p>
               </section>
 
@@ -967,9 +967,9 @@
               <li><a href="#dictionary_unbind-definition"><span class="type">Generic Function</span> <code>unbind-definition</code></a></li>
               <li><a href="#dictionary_boundp"><span class="type">Generic Function</span> <code>boundp</code></a></li>
               <li><a href="#dictionary_ensure"><span class="type">Generic Function</span> <code>ensure</code></a></li>
-              <li><a href="#dictionary_expand-definition"><span class="type">Generic Function</span> <code>expand-definition</code></a></li>
+              <li><a href="#dictionary_expand"><span class="type">Generic Function</span> <code>expand</code></a></li>
               <li><a href="#dictionary_define"><span class="type">Macro</span> <code>define</code></a></li>
-              <li><a href="#dictionary_map-definitions"><span class="type">Generic Function</span> <code>map-definitions</code></a></li>
+              <li><a href="#dictionary_map"><span class="type">Generic Function</span> <code>map</code></a></li>
             </ul>
           </nav>
 
@@ -1456,21 +1456,21 @@
 
           </section>
 
-          <section id="dictionary_expand-definition">
+          <section id="dictionary_expand">
 
             <h1 class="breadcrumbs-bar">
               <span class="section-relative-nav">
-                <a href="#dictionary_expand-definition" class="anchor">⚓</a>
+                <a href="#dictionary_expand" class="anchor">⚓</a>
               </span>
               <span class="breadcrumbs">
                 <a href="#dictionary">Dictionary</a>
-                <span class="crumb"><span class="s"> » </span><a class="here">expand-definition</a></span>
+                <span class="crumb"><span class="s"> » </span><a class="here">expand</a></span>
               </span>
             </h1>
 
             <article class="generic-function definition">
 
-              <h1><span class="type">Generic Function</span> <span class="name self">defsys:expand-definition</span></h1>
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:expand</span></h1>
 
               <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest <var>options</var> =&gt; <var>expansion</var></p>
 
@@ -1493,9 +1493,9 @@
               <section class="methods">
                 <h1>Methods</h1>
 
-                <article class="method definition" id="dictionary_expand-definition_symbol_t_t_t">
+                <article class="method definition" id="dictionary_expand_symbol_t_t_t">
 
-                  <h1><span class="type">Method</span> <span class="name self">expand-definition</span></h1>
+                  <h1><span class="type">Method</span> <span class="name self">expand</span></h1>
 
                   <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest options =&gt; <var>expansion</var></p>
 
@@ -1506,9 +1506,9 @@
 
                 </article>
 
-                <article class="method definition" id="dictionary_expand-definition_simple-expansion-mixin_t_t_t">
+                <article class="method definition" id="dictionary_expand_simple-expansion-mixin_t_t_t">
 
-                  <h1><span class="type">Method</span> <span class="name self">expand-definition</span></h1>
+                  <h1><span class="type">Method</span> <span class="name self">expand</span></h1>
 
                   <p class="args-and-retvals">(<var>system</var> <span class="specializer"><code class="relevant"><a href="#dictionary_simple-expansion-mixin">defsys:simple-expansion-mixin</a></code></span>) <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest options =&gt; <var>expansion</var></p>
 
@@ -1558,28 +1558,28 @@
 
               <section class="description">
                 <h1>Description</h1>
-                <p>Calls <code class="relevant"><a href="#dictionary_expand-definition">defsys:expand-definition</a></code> and returns whatever it returns.</p>
+                <p>Calls <code class="relevant"><a href="#dictionary_expand">defsys:expand</a></code> and returns whatever it returns.</p>
               </section>
 
             </article>
 
           </section>
 
-          <section id="dictionary_map-definitions">
+          <section id="dictionary_map">
 
             <h1 class="breadcrumbs-bar">
               <span class="section-relative-nav">
-                <a href="#dictionary_map-definitions" class="anchor">⚓</a>
+                <a href="#dictionary_map" class="anchor">⚓</a>
               </span>
               <span class="breadcrumbs">
                 <a href="#dictionary">Dictionary</a>
-                <span class="crumb"><span class="s"> » </span><a class="here">map-definitions</a></span>
+                <span class="crumb"><span class="s"> » </span><a class="here">map</a></span>
               </span>
             </h1>
 
             <article class="generic-function definition">
 
-              <h1><span class="type">Generic Function</span> <span class="name self">defsys:map-definitions</span></h1>
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:map</span></h1>
 
               <p class="args-and-retvals"><var>function</var> <var>system</var> =&gt; nil</p>
 
@@ -1600,9 +1600,9 @@
               <section class="methods">
                 <h1>Methods</h1>
 
-                <article class="method definition" id="dictionary_map-definitions_t_symbol">
+                <article class="method definition" id="dictionary_map_t_symbol">
 
-                  <h1><span class="type">Method</span> <span class="name self">map-definitions</span></h1>
+                  <h1><span class="type">Method</span> <span class="name self">map</span></h1>
 
                   <p class="args-and-retvals"><var>function</var> (<var>system-name</var> <span class="specializer">symbol</span>) =&gt; nil</p>
 
@@ -1613,9 +1613,9 @@
 
                 </article>
 
-                <article class="method definition" id="dictionary_map-definitions_t_hash-table-mixin">
+                <article class="method definition" id="dictionary_map_t_hash-table-mixin">
 
-                  <h1><span class="type">Method</span> <span class="name self">map-definitions</span></h1>
+                  <h1><span class="type">Method</span> <span class="name self">map</span></h1>
 
                   <p class="args-and-retvals"><var>function</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) =&gt; nil</p>
 
@@ -1659,7 +1659,7 @@
               <li><a href="#dictionary_simple-expansion-mixin"><span class="type">Class</span> <code>simple-expansion-mixin</code></a></li>
               <li><a href="#dictionary_explicit-definition-class-p"><span class="type">Generic Function</span> <code>explicit-definition-class-p</code></a></li>
               <li><a href="#dictionary_definition-class"><span class="type">Generic Function</span> <code>definition-class</code></a></li>
-              <li><a href="#dictionary_expand-definition-args"><span class="type">Generic Function</span> <code>expand-definition-args</code></a></li>
+              <li><a href="#dictionary_expand-args"><span class="type">Generic Function</span> <code>expand-args</code></a></li>
             </ul>
           </nav>
 
@@ -1811,7 +1811,7 @@
 
               <section class="description">
                 <h1>Description</h1>
-                <p>Indicates whether or not <code class="relevant"><a href="#dictionary_expand-definition">defsys:expand-definition</a></code> should accept a <var>class</var> argument before the <var>initargs</var>. A method is defined for <code class="relevant"><a href="#dictionary_simple-expansion-mixin">defsys:simple-expansion-mixin</a></code>.</p>
+                <p>Indicates whether or not <code class="relevant"><a href="#dictionary_expand">defsys:expand</a></code> should accept a <var>class</var> argument before the <var>initargs</var>. A method is defined for <code class="relevant"><a href="#dictionary_simple-expansion-mixin">defsys:simple-expansion-mixin</a></code>.</p>
               </section>
 
             </article>
@@ -1846,21 +1846,21 @@
 
           </section>
 
-          <section id="dictionary_expand-definition-args">
+          <section id="dictionary_expand-args">
 
             <h1 class="breadcrumbs-bar">
               <span class="section-relative-nav">
-                <a href="#dictionary_expand-definition-args" class="anchor">⚓</a>
+                <a href="#dictionary_expand-args" class="anchor">⚓</a>
               </span>
               <span class="breadcrumbs">
                 <a href="#dictionary">Dictionary</a>
-                <span class="crumb"><span class="s"> » </span><a class="here">expand-definition-args</a></span>
+                <span class="crumb"><span class="s"> » </span><a class="here">expand-args</a></span>
               </span>
             </h1>
 
             <article class="generic-function definition">
 
-              <h1><span class="type">Generic Function</span> <span class="name self">defsys:expand-definition-args</span></h1>
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:expand-args</span></h1>
 
               <p class="args-and-retvals"><var>system</var> &amp;rest <var>initargs</var> =&gt; <var>expanded-initargs</var></p>
 
@@ -1882,9 +1882,9 @@
 
                 <h1>Methods</h1>
 
-                <article class="method definition" id="dictionary_expand-definition-args_symbol">
+                <article class="method definition" id="dictionary_expand-args_symbol">
 
-                  <h1><span class="type">Method</span> <span class="name self">expand-definition-args</span></h1>
+                  <h1><span class="type">Method</span> <span class="name self">expand-args</span></h1>
 
                   <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) &amp;rest <var>initargs</var> =&gt; <var>expanded-initargs</var></p>
 
@@ -1895,9 +1895,9 @@
 
                 </article>
 
-                <article class="method definition" id="dictionary_expand-definition-args">
+                <article class="method definition" id="dictionary_expand-args">
 
-                  <h1><span class="type">Method</span> <span class="name self">expand-definition-args</span></h1>
+                  <h1><span class="type">Method</span> <span class="name self">expand-args</span></h1>
 
                   <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) &amp;rest <var>initargs</var> =&gt; <var>transformed-initargs</var></p>
 

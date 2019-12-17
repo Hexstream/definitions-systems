@@ -34,7 +34,7 @@
 (defmethod defsys:boundp :around ((system defsys:ikeywords-mixin) (definition-name symbol))
   (%forward-ikeyword #'defsys:boundp #'call-next-method system definition-name))
 
-(defmethod defsys:expand-definition :around ((system defsys:ikeywords-mixin) (definition-name symbol)
-                                             environment args &rest options &key &allow-other-keys)
-  (apply #'%forward-ikeyword #'defsys:expand-definition #'call-next-method
+(defmethod defsys:expand :around ((system defsys:ikeywords-mixin) (definition-name symbol)
+                                  environment args &rest options &key &allow-other-keys)
+  (apply #'%forward-ikeyword #'defsys:expand #'call-next-method
          system definition-name environment args options))
