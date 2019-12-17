@@ -970,6 +970,7 @@
               <li><a href="#dictionary_expand"><span class="type">Generic Function</span> <code>expand</code></a></li>
               <li><a href="#dictionary_define"><span class="type">Macro</span> <code>define</code></a></li>
               <li><a href="#dictionary_map"><span class="type">Generic Function</span> <code>map</code></a></li>
+              <li><a href="#dictionary_count"><span class="type">Generic Function</span> <code>count</code></a></li>
             </ul>
           </nav>
 
@@ -1622,6 +1623,85 @@
                   <section class="description">
                     <h1>Description</h1>
                     <p>Calls <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_maphas.htm" target="_blank">maphash</a> on <var>function</var> and <var>system</var>'s internal hash-table.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_count">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_count" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">count</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:count</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> =&gt; count</p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>count</var> -- A non-negative integer.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the number of definitions in <var>system</var>.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_count_symbol">
+
+                  <h1><span class="type">Method</span> <span class="name self">count</span></h1>
+
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) =&gt; <var>count</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_count_system">
+
+                  <h1><span class="type">Method</span> <span class="name self">count</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) =&gt; <var>count</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Returns the number of times that <code class="relevant"><a href="#dictionary_map">defsys:map</a></code> calls its <var>function</var> argument given <var>system</var>. Slow, obviously. May signal a warning.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_count_hash-table-mixin">
+
+                  <h1><span class="type">Method</span> <span class="name self">count</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) =&gt; <var>count</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Calls <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_hash_1.htm" target="_blank">hash-table-count</a> on <var>system</var>'s internal hash-table.</p>
                   </section>
 
                 </article>

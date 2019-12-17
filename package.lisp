@@ -2,7 +2,8 @@
   (:nicknames #:defsys)
   (:use #:cl)
   (:shadow #:boundp
-           #:map)
+           #:map
+           #:count)
   (:export #:definition
            #:name-mixin
            #:name
@@ -30,6 +31,7 @@
            #:expand
            #:define
            #:map
+           #:count
 
            #:default-definition-class-mixin
            #:default-definition-class
