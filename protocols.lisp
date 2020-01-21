@@ -10,7 +10,7 @@
                    definition-name :errorp errorp))
   (:method ((system defsys:hash-table-mixin) definition-name &key (errorp t))
     (declare (ignore errorp))
-    (identity (gethash definition-name (slot-value system '%hash)))))
+    (identity (gethash definition-name (%hash system)))))
 
 (define-condition defsys:not-found (error)
   ((%system :initarg :system
@@ -37,7 +37,7 @@
       (setf (slot-value new-definition '%owner) system)))
   (:method (new-definition (system defsys:hash-table-mixin) definition-name &key errorp)
     (declare (ignore errorp))
-    (setf (gethash definition-name (slot-value system '%hash))
+    (setf (gethash definition-name (%hash system))
           new-definition)))
 
 (defgeneric defsys:unbind (system definition-name)
@@ -52,7 +52,7 @@
 (defgeneric defsys:unbind-definition (system definition definition-name)
   (:method ((system defsys:hash-table-mixin) definition definition-name)
     (declare (ignore definition))
-    (remhash definition-name (slot-value system '%hash)))
+    (remhash definition-name (%hash system)))
   (:method :after ((system defsys:system) (definition defsys:owner-mixin) definition-name)
     (declare (ignore definition-name))
     (let ((owner (defsys:owner definition)))
@@ -97,7 +97,7 @@
   (:method (function (system-name symbol))
     (defsys:map function (defsys:locate (defsys:root-system) system-name)))
   (:method (function (system defsys:hash-table-mixin))
-    (maphash function (slot-value system '%hash))))
+    (maphash function (%hash system))))
 
 (defgeneric defsys:count (system)
   (:method ((system-name symbol))
@@ -111,4 +111,4 @@
                   system)
       count))
   (:method ((system defsys:hash-table-mixin))
-    (hash-table-count (slot-value system '%hash))))
+    (hash-table-count (%hash system))))

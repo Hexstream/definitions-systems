@@ -3,7 +3,9 @@
 (defclass defsys:system () ())
 
 (defclass defsys:hash-table-mixin ()
-  ((%hash :type hash-table :initform (make-hash-table :test 'eq))))
+  ((%hash :reader %hash
+          :type hash-table
+          :initform (make-hash-table :test 'eq))))
 
 (defclass defsys:standard-system (defsys:system
                                   defsys:base-definition-class-mixin
