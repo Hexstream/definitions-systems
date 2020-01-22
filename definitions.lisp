@@ -15,7 +15,8 @@
     (prin1 (defsys:name mixin) stream)))
 
 (defclass defsys:owner-mixin ()
-  ((%owner :reader defsys:owner
+  ((%owner :initarg :owner
+           :reader defsys:owner
            :type (or null defsys:system)
            :initform nil)))
 
