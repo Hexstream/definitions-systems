@@ -35,9 +35,7 @@
     (declare (ignore errorp))
     (let ((existing-owner (defsys:owner new-definition)))
       (if existing-owner
-          (when (typep new-definition 'defsys:name-mixin)
-            (setf (defsys:locate existing-owner (defsys:name new-definition))
-                  new-definition))
+          (setf (defsys:locate existing-owner definition-name) new-definition)
           (setf (slot-value new-definition '%owner) system))))
   (:method (new-definition (system defsys:hash-table-mixin) definition-name &key errorp)
     (declare (ignore errorp))
