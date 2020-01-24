@@ -9,6 +9,7 @@
            #:name
            #:owner-mixin
            #:owner
+           #:primary-binding-mixin
            #:standard-definition
 
            #:system

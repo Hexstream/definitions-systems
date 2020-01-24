@@ -31,12 +31,16 @@
   (:method :before (new-definition (system defsys:check-definition-mixin) definition-name &key errorp)
     (declare (ignore errorp))
     (check-definition system new-definition))
-  (:method :after ((new-definition defsys:owner-mixin) (system defsys:system) definition-name &key errorp)
+  (:method :after ((new-definition defsys:primary-binding-mixin) (system defsys:system) definition-name
+                   &key errorp (binding-type :auto))
     (declare (ignore errorp))
-    (let ((existing-owner (defsys:owner new-definition)))
-      (if existing-owner
-          (setf (defsys:locate existing-owner definition-name) new-definition)
-          (setf (slot-value new-definition '%owner) system))))
+    (let ((previous-owner (defsys:owner new-definition)))
+      (when (or (and (eq binding-type :auto) (not previous-owner))
+                (eq binding-type :primary))
+        (when previous-owner
+          (defsys:unbind previous-owner (defsys:name new-definition)))
+        (setf (%owner new-definition) system
+              (%name new-definition) definition-name))))
   (:method (new-definition (system defsys:hash-table-mixin) definition-name &key errorp)
     (declare (ignore errorp))
     (setf (gethash definition-name (%hash system))
@@ -55,11 +59,11 @@
   (:method ((system defsys:hash-table-mixin) definition definition-name)
     (declare (ignore definition))
     (remhash definition-name (%hash system)))
-  (:method :after ((system defsys:system) (definition defsys:owner-mixin) definition-name)
+  (:method :after ((system defsys:system) (definition defsys:primary-binding-mixin) definition-name)
     (declare (ignore definition-name))
     (let ((owner (defsys:owner definition)))
       (when (eq owner system)
-        (setf (slot-value definition '%owner) nil)))))
+        (setf (%owner definition) nil)))))
 
 (defgeneric defsys:boundp (system definition-name)
   (:method (system definition-name)

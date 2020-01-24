@@ -5,8 +5,8 @@
 (defgeneric defsys:name (definition))
 
 (defclass defsys:name-mixin ()
-  ((%name :initarg :name
-          :reader defsys:name
+  ((%name :reader defsys:name
+          :writer (setf %name)
           :type symbol
           :initform nil)))
 
@@ -14,9 +14,11 @@
   (print-unreadable-object (mixin stream :type t)
     (prin1 (defsys:name mixin) stream)))
 
+(defgeneric defsys:owner (definition))
+
 (defclass defsys:owner-mixin ()
-  ((%owner :initarg :owner
-           :reader defsys:owner
+  ((%owner :reader defsys:owner
+           :writer (setf %owner)
            :type (or null defsys:system)
            :initform nil)))
 
@@ -29,4 +31,25 @@
         (error "Don't know how to ~S for definition ~S because it has no owner."
                'make-load-form definition))))
 
-(defclass defsys:standard-definition (defsys:definition defsys:name-mixin defsys:owner-mixin) ())
+(defclass defsys:primary-binding-mixin (defsys:owner-mixin defsys:name-mixin)
+  ())
+
+(defmethod shared-initialize :after ((definition defsys:primary-binding-mixin) slot-names
+                                     &key (owner nil owner-supplied-p) (name nil name-supplied-p))
+  (when (or owner-supplied-p name-supplied-p)
+    (let ((previous-owner (defsys:owner definition))
+          (previous-name (defsys:name definition)))
+      (let ((new-owner (if owner-supplied-p owner previous-owner))
+            (new-name (if name-supplied-p name previous-name)))
+        (if new-owner
+            (setf (defsys:locate new-owner new-name :binding-type :primary) definition)
+            (when previous-owner
+              (defsys:unbind previous-owner previous-name)))))))
+
+(defmethod (setf defsys:owner) (new-owner (definition defsys:primary-binding-mixin))
+  (reinitialize-instance definition :owner new-owner))
+
+(defmethod (setf defsys:name) (new-name (definition defsys:primary-binding-mixin))
+  (reinitialize-instance definition :name new-name))
+
+(defclass defsys:standard-definition (defsys:primary-binding-mixin defsys:definition) ())
