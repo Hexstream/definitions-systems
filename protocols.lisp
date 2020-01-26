@@ -41,6 +41,12 @@
           (defsys:unbind previous-owner (defsys:name new-definition)))
         (setf (%owner new-definition) system
               (%name new-definition) definition-name))))
+  (:method :after ((new-definition defsys:alias-bindings-mixin) (system defsys:system) definition-name
+                   &key errorp (binding-type :auto))
+    (declare (ignore errorp))
+    (when (or (and (eq binding-type :auto) (defsys:owner new-definition))
+              (eq binding-type :alias))
+      (pushnew definition-name (gethash system (%aliasing-systems new-definition)) :test #'eq)))
   (:method (new-definition (system defsys:hash-table-mixin) definition-name &key errorp)
     (declare (ignore errorp))
     (setf (gethash definition-name (%hash system))
@@ -63,7 +69,12 @@
     (declare (ignore definition-name))
     (let ((owner (defsys:owner definition)))
       (when (eq owner system)
-        (setf (%owner definition) nil)))))
+        (setf (%owner definition) nil))))
+  (:method :after ((system defsys:system) (definition defsys:alias-bindings-mixin) definition-name)
+    (let* ((aliasing-systems (%aliasing-systems definition))
+           (aliases (gethash system aliasing-systems)))
+      (when (member definition-name aliases :test #'eq)
+        (setf (gethash system aliasing-systems) (delete definition-name aliases :test #'eq))))))
 
 (defgeneric defsys:boundp (system definition-name)
   (:method (system definition-name)

@@ -10,6 +10,8 @@
            #:owner-mixin
            #:owner
            #:primary-binding-mixin
+           #:alias-bindings-mixin
+           #:map-aliasing-systems
            #:standard-definition
 
            #:system

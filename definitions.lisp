@@ -52,4 +52,16 @@
 (defmethod (setf defsys:name) (new-name (definition defsys:primary-binding-mixin))
   (reinitialize-instance definition :name new-name))
 
+(defclass defsys:alias-bindings-mixin ()
+  ((%aliasing-systems :reader %aliasing-systems
+                      :type hash-table
+                      :initform (make-hash-table :test 'eq))))
+
+(defgeneric defsys:map-aliasing-systems (function definition)
+  (:method (function (definition defsys:alias-bindings-mixin))
+    (maphash (lambda (system aliases)
+               (funcall function system (lambda (function)
+                                          (mapcar function aliases))))
+             (%aliasing-systems definition))))
+
 (defclass defsys:standard-definition (defsys:primary-binding-mixin defsys:definition) ())
