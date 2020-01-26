@@ -17,7 +17,6 @@
                (:file "checking")
                (:file "protocols")
                (:file "expansion")
-               (:file "root")
-               (:file "ikeywords"))
+               (:file "root"))
 
   :in-order-to ((asdf:test-op (asdf:test-op #:definitions-systems_tests))))

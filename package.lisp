@@ -46,12 +46,4 @@
            #:root-system
            #:location-mixin
            #:location
-           #:standard-root-system
-
-           #:ikeywords-mixin))
-
-(ikeywords:defpackage #:definitions-systems.ikeyword
-  (:nicknames #:defsys.ikeyword)
-  (:export #:operator
-           #:special-form
-           #:macro))
+           #:standard-root-system))
