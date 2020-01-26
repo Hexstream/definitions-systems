@@ -74,7 +74,7 @@
     (let* ((aliasing-systems (%aliasing-systems definition))
            (aliases (gethash system aliasing-systems)))
       (when (member definition-name aliases :test #'eq)
-        (setf (gethash system aliasing-systems) (delete definition-name aliases :test #'eq))))))
+        (setf (gethash system aliasing-systems) (remove definition-name aliases :test #'eq))))))
 
 (defgeneric defsys:boundp (system definition-name)
   (:method (system definition-name)
