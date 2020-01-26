@@ -64,4 +64,4 @@
                                           (mapcar function aliases))))
              (%aliasing-systems definition))))
 
-(defclass defsys:standard-definition (defsys:primary-binding-mixin defsys:definition) ())
+(defclass defsys:standard-definition (defsys:primary-binding-mixin defsys:alias-bindings-mixin defsys:definition) ())
