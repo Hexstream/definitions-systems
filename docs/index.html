@@ -40,7 +40,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2019-12-16">16 december 2019</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2020-01-27">27 january 2020</time><span>.</span></p>
 
     </nav>
 
@@ -70,7 +70,7 @@
           <span class="s">, </span>
           <span class="tag hv">
             <span class="h">Project complexity<span>:</span></span>
-            <span class="v">Simple/Medium</span>
+            <span class="v">Medium</span>
           </span>
         </div>
       </div>
@@ -751,11 +751,8 @@
           <nav class="tabs">
             <ul>
               <li><a href="#dictionary_definition"><span class="type">Class</span> <code>definition</code></a></li>
-              <li><a href="#dictionary_name-mixin"><span class="type">Class</span> <code>name-mixin</code></a></li>
-              <li><a href="#dictionary_name"><span class="type">Generic Function</span> <code>name</code></a></li>
-              <li><a href="#dictionary_owner-mixin"><span class="type">Class</span> <code>owner-mixin</code></a></li>
-              <li><a href="#dictionary_owner"><span class="type">Generic Function</span> <code>owner</code></a></li>
               <li><a href="#dictionary_standard-definition"><span class="type">Class</span> <code>standard-definition</code></a></li>
+              <li><a href="#dictionary_bindings-tracking">Bindings tracking</a></li>
             </ul>
           </nav>
 
@@ -778,132 +775,6 @@
               <section class="description">
                 <h1>Description</h1>
                 <p>Definitions usually inherit from this class.</p>
-              </section>
-
-            </article>
-
-          </section>
-
-          <section id="dictionary_name-mixin">
-
-            <h1 class="breadcrumbs-bar">
-              <span class="section-relative-nav">
-                <a href="#dictionary_name-mixin" class="anchor">⚓</a>
-              </span>
-              <span class="breadcrumbs">
-                <a href="#dictionary">Dictionary</a>
-                <span class="crumb"><span class="s"> » </span><a class="here">name-mixin</a></span>
-              </span>
-            </h1>
-
-            <article class="class definition">
-
-              <h1><span class="type">Class</span> <span class="name self">defsys:name-mixin</span></h1>
-
-              <section class="description">
-                <h1>Description</h1>
-                <p>Slots:</p>
-                <pre><code>((<var>name</var> :initarg :name
-       :reader <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>
-       :initform nil
-       :documentation "A <var>name</var> of <code>nil</code> usually indicates an anonymous definition."))</code></pre>
-                <p>Provides a <code>print-object</code> method that includes the name of the object in its output.</p>
-              </section>
-
-            </article>
-
-          </section>
-
-          <section id="dictionary_name">
-
-            <h1 class="breadcrumbs-bar">
-              <span class="section-relative-nav">
-                <a href="#dictionary_name" class="anchor">⚓</a>
-              </span>
-              <span class="breadcrumbs">
-                <a href="#dictionary">Dictionary</a>
-                <span class="crumb"><span class="s"> » </span><a class="here">name</a></span>
-              </span>
-            </h1>
-
-            <article class="generic-function reader definition">
-
-              <h1><span class="type">Generic Function</span> <span class="name self">defsys:name</span></h1>
-
-              <p class="args-and-retvals"><var>object</var> =&gt; <var>name</var></p>
-
-              <section class="description">
-                <h1>Description</h1>
-                <p>Returns the <var>name</var> of the <var>object</var>. Methods are defined for <code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code> and <code class="relevant"><a href="#dictionary_not-found">defsys:not-found</a></code>.</p>
-              </section>
-
-            </article>
-
-          </section>
-
-          <section id="dictionary_owner-mixin">
-
-            <h1 class="breadcrumbs-bar">
-              <span class="section-relative-nav">
-                <a href="#dictionary_owner-mixin" class="anchor">⚓</a>
-              </span>
-              <span class="breadcrumbs">
-                <a href="#dictionary">Dictionary</a>
-                <span class="crumb"><span class="s"> » </span><a class="here">owner-mixin</a></span>
-              </span>
-            </h1>
-
-            <article class="class definition">
-
-              <h1><span class="type">Class</span> <span class="name self">defsys:owner-mixin</span></h1>
-
-              <section class="description">
-                <h1>Description</h1>
-                <p>Slots:</p>
-                <pre><code>((<var>owner</var> :reader <code class="relevant"><a href="#dictionary_owner">defsys:owner</a></code>
-        :type (or null <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>)
-        :initform nil))</code></pre>
-              </section>
-
-            </article>
-
-            <article class="method definition" id="dictionary_make-load-form_owner-mixin">
-
-              <h1><span class="type">Method</span> <span class="name self">make-load-form</span></h1>
-
-              <p class="args-and-retvals">(<var>definition</var> <code class="specializer relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>) &amp;optional environment =&gt; <var>creation-form</var>, <var>initialization-form</var></p>
-
-              <section class="description">
-                <h1>Description</h1>
-                <p>If <var>definition</var> does not have an <code class="relevant"><a href="#dictionary_owner">owner</a></code>, then throw an error of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a>.</p>
-                <p>Else, return a <var>creation-form</var> and <var>initialization-form</var> based on the results <var>owner-locate</var> and <var>owner-init</var> returned by <code>(make-load-form <var>owner</var> <var>environment</var>)</code>.<br /><var>creation-form</var> is <code>`(defsys:locate ,<var>owner-locate</var> (defsys:name <var>definition</var>))</code> and <var>initialization-form</var> is <var>owner-init</var>.</p>
-              </section>
-
-            </article>
-
-          </section>
-
-          <section id="dictionary_owner">
-
-            <h1 class="breadcrumbs-bar">
-              <span class="section-relative-nav">
-                <a href="#dictionary_owner" class="anchor">⚓</a>
-              </span>
-              <span class="breadcrumbs">
-                <a href="#dictionary">Dictionary</a>
-                <span class="crumb"><span class="s"> » </span><a class="here">owner</a></span>
-              </span>
-            </h1>
-
-            <article class="generic-function reader definition">
-
-              <h1><span class="type">Generic Function</span> <span class="name self">defsys:owner</span></h1>
-
-              <p class="args-and-retvals"><var>object</var> =&gt; <var>owner</var></p>
-
-              <section class="description">
-                <h1>Description</h1>
-                <p>Returns the <var>owner</var> of the <var>object</var> if it has one, else <code>nil</code>. A method is defined for <code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>.</p>
               </section>
 
             </article>
@@ -933,6 +804,270 @@
               </section>
 
             </article>
+
+          </section>
+
+          <section id="dictionary_bindings-tracking">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_bindings-tracking" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary">Dictionary</a>
+                <span class="crumb"><span class="s"> » </span><a class="here">Bindings tracking</a></span>
+              </span>
+            </h1>
+
+            <nav class="tabs">
+              <ul>
+                <li><a href="#dictionary_name-mixin"><span class="type">Class</span> <code>name-mixin</code></a></li>
+                <li><a href="#dictionary_name"><span class="type">Generic Function</span> <code>name</code></a></li>
+                <li><a href="#dictionary_owner-mixin"><span class="type">Class</span> <code>owner-mixin</code></a></li>
+                <li><a href="#dictionary_owner"><span class="type">Generic Function</span> <code>owner</code></a></li>
+                <li><a href="#dictionary_primary-binding-mixin"><span class="type">Class</span> <code>primary-binding-mixin</code></a></li>
+                <li><a href="#dictionary_alias-bindings-mixin"><span class="type">Class</span> <code>alias-bindings-mixin</code></a></li>
+                <li><a href="#dictionary_map-aliasing-systems"><span class="type">Generic Function</span> <code>map-aliasing-systems</code></a></li>
+              </ul>
+            </nav>
+
+            <section id="dictionary_name-mixin">
+
+              <h1 class="breadcrumbs-bar">
+                <span class="section-relative-nav">
+                  <a href="#dictionary_name-mixin" class="anchor">⚓</a>
+                </span>
+                <span class="breadcrumbs">
+                  <a href="#dictionary">Dictionary</a>
+                  <span class="crumb"><span class="s"> » </span><a class="here">name-mixin</a></span>
+                </span>
+              </h1>
+
+              <article class="class definition">
+
+                <h1><span class="type">Class</span> <span class="name self">defsys:name-mixin</span></h1>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>Slots:</p>
+                  <pre><code>((<var>name</var> :initarg :name
+       :reader <code class="relevant"><a href="#dictionary_name">defsys:name</a></code>
+       :initform nil
+       :documentation "A <var>name</var> of <code>nil</code> usually indicates an anonymous definition."))</code></pre>
+                  <p>Provides a <code>print-object</code> method that includes the name of the object in its output.</p>
+                </section>
+
+              </article>
+
+            </section>
+
+            <section id="dictionary_name">
+
+              <h1 class="breadcrumbs-bar">
+                <span class="section-relative-nav">
+                  <a href="#dictionary_name" class="anchor">⚓</a>
+                </span>
+                <span class="breadcrumbs">
+                  <a href="#dictionary">Dictionary</a>
+                  <span class="crumb"><span class="s"> » </span><a class="here">name</a></span>
+                </span>
+              </h1>
+
+              <article class="generic-function reader definition">
+
+                <h1><span class="type">Generic Function</span> <span class="name self">defsys:name</span></h1>
+
+                <p class="args-and-retvals"><var>object</var> =&gt; <var>name</var></p>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>Returns the <var>name</var> of the <var>object</var>. Methods are defined for <code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code> and <code class="relevant"><a href="#dictionary_not-found">defsys:not-found</a></code>.</p>
+                </section>
+
+              </article>
+
+            </section>
+
+            <section id="dictionary_owner-mixin">
+
+              <h1 class="breadcrumbs-bar">
+                <span class="section-relative-nav">
+                  <a href="#dictionary_owner-mixin" class="anchor">⚓</a>
+                </span>
+                <span class="breadcrumbs">
+                  <a href="#dictionary">Dictionary</a>
+                  <span class="crumb"><span class="s"> » </span><a class="here">owner-mixin</a></span>
+                </span>
+              </h1>
+
+              <article class="class definition">
+
+                <h1><span class="type">Class</span> <span class="name self">defsys:owner-mixin</span></h1>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>Slots:</p>
+                  <pre><code>((<var>owner</var> :reader <code class="relevant"><a href="#dictionary_owner">defsys:owner</a></code>
+        :type (or null <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>)
+        :initform nil))</code></pre>
+                </section>
+
+              </article>
+
+              <article class="method definition" id="dictionary_make-load-form_owner-mixin">
+
+                <h1><span class="type">Method</span> <span class="name self">make-load-form</span></h1>
+
+                <p class="args-and-retvals">(<var>definition</var> <code class="specializer relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>) &amp;optional environment =&gt; <var>creation-form</var>, <var>initialization-form</var></p>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>If <var>definition</var> does not have an <code class="relevant"><a href="#dictionary_owner">owner</a></code>, then throw an error of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a>.</p>
+                  <p>Else, return a <var>creation-form</var> and <var>initialization-form</var> based on the results <var>owner-locate</var> and <var>owner-init</var> returned by <code>(make-load-form <var>owner</var> <var>environment</var>)</code>.<br /><var>creation-form</var> is <code>`(defsys:locate ,<var>owner-locate</var> (defsys:name <var>definition</var>))</code> and <var>initialization-form</var> is <var>owner-init</var>.</p>
+                </section>
+
+              </article>
+
+            </section>
+
+            <section id="dictionary_owner">
+
+              <h1 class="breadcrumbs-bar">
+                <span class="section-relative-nav">
+                  <a href="#dictionary_owner" class="anchor">⚓</a>
+                </span>
+                <span class="breadcrumbs">
+                  <a href="#dictionary">Dictionary</a>
+                  <span class="crumb"><span class="s"> » </span><a class="here">owner</a></span>
+                </span>
+              </h1>
+
+              <article class="generic-function reader definition">
+
+                <h1><span class="type">Generic Function</span> <span class="name self">defsys:owner</span></h1>
+
+                <p class="args-and-retvals"><var>object</var> =&gt; <var>owner</var></p>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>Returns the <var>owner</var> of the <var>object</var> if it has one, else <code>nil</code>. A method is defined for <code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>.</p>
+                </section>
+
+              </article>
+
+            </section>
+
+            <section id="dictionary_primary-binding-mixin">
+
+              <h1 class="breadcrumbs-bar">
+                <span class="section-relative-nav">
+                  <a href="#dictionary_primary-binding-mixin" class="anchor">⚓</a>
+                </span>
+                <span class="breadcrumbs">
+                  <a href="#dictionary">Dictionary</a>
+                  <span class="crumb"><span class="s"> » </span><a class="here">primary-binding-mixin</a></span>
+                </span>
+              </h1>
+
+              <article class="class definition">
+
+                <h1><span class="type">Class</span> <span class="name self">defsys:primary-binding-mixin</span></h1>
+
+                <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code> <code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code></p>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>Tracks the primary binding of this <var>definition</var>, that is, the <var>owner</var> system of which the <var>name</var> binding is this <var>definition</var>.</p>
+                </section>
+
+              </article>
+
+            </section>
+
+            <section id="dictionary_alias-bindings-mixin">
+
+              <h1 class="breadcrumbs-bar">
+                <span class="section-relative-nav">
+                  <a href="#dictionary_alias-bindings-mixin" class="anchor">⚓</a>
+                </span>
+                <span class="breadcrumbs">
+                  <a href="#dictionary">Dictionary</a>
+                  <span class="crumb"><span class="s"> » </span><a class="here">alias-bindings-mixin</a></span>
+                </span>
+              </h1>
+
+              <article class="class definition">
+
+                <h1><span class="type">Class</span> <span class="name self">defsys:alias-bindings-mixin</span></h1>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>Tracks the alias bindings of this <var>definition</var>, that is, the <var>owner</var> systems which have <var>names</var> pointing to this <var>definition</var>, excluding primary bindings.</p>
+                </section>
+
+              </article>
+
+            </section>
+
+            <section id="dictionary_map-aliasing-systems">
+
+              <h1 class="breadcrumbs-bar">
+                <span class="section-relative-nav">
+                  <a href="#dictionary_map-aliasing-systems" class="anchor">⚓</a>
+                </span>
+                <span class="breadcrumbs">
+                  <a href="#dictionary">Dictionary</a>
+                  <span class="crumb"><span class="s"> » </span><a class="here">map-aliasing-systems</a></span>
+                </span>
+              </h1>
+
+              <article class="generic-function definition">
+
+                <h1><span class="type">Generic Function</span> <span class="name self">defsys:map-aliasing-systems</span></h1>
+
+                <p class="args-and-retvals"><var>function</var> <var>definition</var> =&gt; <code>nil</code></p>
+
+                <section class="arguments-and-values">
+                  <h1>Arguments and Values</h1>
+                  <ul>
+                    <li><var>function</var> -- A function designator.</li>
+                    <li><var>definition</var> -- A definition.</li>
+                  </ul>
+                </section>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>Calls <var>function</var> with 2 arguments, <var>system</var> and <var>map-aliases</var>, for each <var>system</var> that has aliases for <var>definition</var>.</p>
+                  <p><var>map-aliases</var> is a function of 1 argument, <var>function</var>, which will be called with 1 argument <var>alias-name</var> for each alias that the <var>system</var> has for <var>definition</var>.</p>
+                </section>
+
+                <section class="methods">
+                  <h1>Methods</h1>
+
+                  <article class="method definition" id="dictionary_map-aliasing-systems_t_alias-bindings-mixin">
+
+                    <h1><span class="type">Method</span> <span class="name self">map-aliasing-systems</span></h1>
+
+                    <p class="args-and-retvals"><var>function</var> (<var>definition</var> <code class="specializer relevant"><a href="#dictionary_alias-bindings-mixin">defsys:alias-bindings-mixin</a></code>) =&gt; <code>nil</code></p>
+
+                    <section class="description">
+                      <h1>Description</h1>
+                      <p>Implements the specified behavior of the generic function.</p>
+                    </section>
+
+                  </article>
+
+                </section>
+
+              </article>
+
+            </section>
+
+            <nav class="end-of-section-indicator">
+              <a href="#dictionary_bindings-tracking">
+                "<span>Bindings tracking</span>" end.
+              </a>
+            </nav>
 
           </section>
 
