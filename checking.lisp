@@ -10,6 +10,16 @@
                            :type class
                            :initform (find-class 'defsys:definition))))
 
+(defmethod shared-initialize :around ((instance defsys:base-definition-class-mixin) slot-names
+                                      &rest keys &key (base-definition-class nil suppliedp))
+  (if suppliedp
+      (apply #'call-next-method instance slot-names
+             :base-definition-class (etypecase base-definition-class
+                                      (class base-definition-class)
+                                      (symbol (find-class base-definition-class)))
+             keys)
+      (call-next-method)))
+
 (define-condition defsys:unsuitable-definition-error (error)
   ((%system :initarg :system
             :reader defsys:system
