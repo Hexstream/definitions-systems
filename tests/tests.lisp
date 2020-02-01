@@ -6,6 +6,10 @@
 (defmacro are (comp expected form &optional description &rest format-args)
   `(is ,comp ,expected (multiple-value-list ,form) ,description ,@format-args))
 
+(defclass base-definition-class-system (defsys:base-definition-class-mixin
+                                        defsys:hash-table-mixin)
+  ())
+
 (define-test "main"
   (flet ((basic-tests (system)
            (flet ((check-unbound ()
@@ -27,9 +31,12 @@
              (defsys:unbind system 'key)
              (check-unbound))))
     (basic-tests (make-instance 'defsys:hash-table-mixin))
-    (basic-tests (make-instance 'defsys:standard-system :base-definition-class t))))
+    (basic-tests (make-instance 'defsys:standard-system :base-definition-class t))
+    (fail (setf (defsys:locate (make-instance 'base-definition-class-system) 'test)
+                'wrong-type)
+          'defsys:unsuitable-definition-error)))
 
-; base-definition-class-mixin
+
 ; primary-binding-mixin
 ; alias-bindings-mixin
 ; map-aliasing-systems
