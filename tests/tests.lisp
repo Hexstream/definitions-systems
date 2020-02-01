@@ -9,11 +9,9 @@
 (define-test "main"
   (flet ((basic-tests (system)
            (flet ((check-unbound ()
-                    (is eq nil
-                        (defsys:locate system 'key :errorp nil))
+                    (false (defsys:locate system 'key :errorp nil))
                     (fail (defsys:locate system 'key))
-                    (is eq nil
-                        (defsys:boundp system 'key))
+                    (false (defsys:boundp system 'key))
                     (is = 0
                         (defsys:count system))))
              (check-unbound)
