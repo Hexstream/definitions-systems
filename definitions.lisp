@@ -31,7 +31,7 @@
         (error "Don't know how to ~S for definition ~S because it has no owner."
                'make-load-form definition))))
 
-(defclass defsys:primary-binding-mixin (defsys:owner-mixin defsys:name-mixin)
+(defclass defsys:primary-binding-mixin (defsys:owner-mixin defsys:name-mixin defsys:definition)
   ())
 
 (defmethod shared-initialize :after ((definition defsys:primary-binding-mixin) slot-names
@@ -52,7 +52,7 @@
 (defmethod (setf defsys:name) (new-name (definition defsys:primary-binding-mixin))
   (reinitialize-instance definition :name new-name))
 
-(defclass defsys:alias-bindings-mixin ()
+(defclass defsys:alias-bindings-mixin (defsys:definition)
   ((%aliasing-systems :reader %aliasing-systems
                       :type hash-table
                       :initform (make-hash-table :test 'eq))))

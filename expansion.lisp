@@ -1,6 +1,6 @@
 (in-package #:definitions-systems)
 
-(defclass defsys:default-definition-class-mixin ()
+(defclass defsys:default-definition-class-mixin (defsys:system)
   ((%default-definition-class :initarg :default-definition-class
                               :type (or null class)
                               :initform nil)))

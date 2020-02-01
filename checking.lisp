@@ -1,6 +1,6 @@
 (in-package #:definitions-systems)
 
-(defclass defsys:check-definition-mixin () ())
+(defclass defsys:check-definition-mixin (defsys:system) ())
 
 (defgeneric defsys:base-definition-class (system))
 
