@@ -7,7 +7,7 @@
 
   :description "Provides a simple unified extensible way of processing named definitions."
 
-  :depends-on (#:incognito-keywords)
+  :depends-on ()
 
   :version "1.0"
   :serial cl:t
