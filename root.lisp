@@ -6,13 +6,12 @@
   ((%location :initarg :location
               :initform nil)))
 
-(defgeneric defsys:location (system &key errorp)
+(defgeneric defsys:location (system &key)
   (:method :around (system &key (errorp t))
     (or (call-next-method)
         (when errorp
           (error "There is no ~S for system ~S." 'defsys:location system))))
-  (:method ((system defsys:location-mixin) &key (errorp t))
-    (declare (ignore errorp))
+  (:method ((system defsys:location-mixin) &key)
     (slot-value system '%location)))
 
 (defmethod make-load-form ((mixin defsys:location-mixin) &optional environment)
@@ -22,7 +21,7 @@
 
 (defclass defsys:standard-root-system (defsys:simple-expansion-mixin defsys:location-mixin defsys:root-system defsys:standard-system)
   ()
-  (:default-initargs :explicit-definition-class-p t))
+  :default-initargs (:explicit-definition-class-p t))
 
 (defmethod defsys:locate ((system defsys:standard-root-system) definition-name &key (errorp t))
   (declare (ignore errorp))

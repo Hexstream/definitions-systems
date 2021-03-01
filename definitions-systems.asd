@@ -2,14 +2,16 @@
 
   :author "Jean-Philippe Paradis <hexstream@hexstreamsoft.com>"
 
-  ;; See the UNLICENSE file for details.
-  :license "Public Domain"
+  :license "Unlicense"
 
   :description "Provides a simple unified extensible way of processing named definitions."
 
-  :depends-on ()
+  :depends-on ("canonicalized-initargs"
+               "enhanced-defclass"
+               "shared-preferences"
+               "enhanced-find-class")
 
-  :version "1.0"
+  :version "2.0"
   :serial cl:t
   :components ((:file "package")
                (:file "definitions")

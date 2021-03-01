@@ -1,8 +1,13 @@
 (cl:defpackage #:definitions-systems_tests
   (:use #:cl #:parachute)
-  (:import-from #:defsys #:locate))
+  (:import-from #:defsys #:locate)
+  (:shadowing-import-from #:enhanced-defclass #:defclass))
 
 (cl:in-package #:definitions-systems_tests)
+
+(enhanced-eval-when:eval-when t
+  (setf (shared-preferences:preferences-1 *package*)
+        (find-package '#:definitions-systems)))
 
 (defmacro are (comp expected form &optional description &rest format-args)
   `(is ,comp ,expected (multiple-value-list ,form) ,description ,@format-args))
@@ -61,7 +66,6 @@
       (eq 'name-d (defsys:name definition)))))
 
 
-; primary-binding-mixin
 ; alias-bindings-mixin
 ; map-aliasing-systems
 ; ensure, expand, define, map, count

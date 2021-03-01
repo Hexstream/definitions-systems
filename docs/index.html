@@ -44,7 +44,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2020-01-27">27 january 2020</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2021-03-01">1 march 2021</time><span>.</span></p>
 
     </nav>
 
@@ -277,6 +277,7 @@
             <article class="class definition">
 
               <h1><span class="type">Class</span> <span class="name self">defsys:standard-system</span></h1>
+
               <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code> <code class="relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code> <code class="relevant"><a href="#dictionary_standard-definition">defsys:standard-definition</a></code> <code class="relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code></p>
 
               <section class="description">
@@ -357,12 +358,15 @@
 
                 <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_check-definition-mixin">defsys:check-definition-mixin</a></code></p>
 
+                <p class="metaclass"><b>Metaclass:</b> <a href="https://www.hexstreamsoft.com/libraries/canonicalized-initargs/#dictionary_standard-class" target="_blank">canonicalized-initargs:standard-class</a></p>
+
                 <section class="description">
                   <h1>Description</h1>
                   <p>Slots:</p>
                   <pre><code>((<var>base-definition-class</var> :initarg :base-definition-class
                         :reader <code class="relevant"><a href="#dictionary_base-definition-class">defsys:base-definition-class</a></code>
                         :type class
+                        :canonicalize #'<a href="https://www.hexstreamsoft.com/libraries/enhanced-find-class/#dictionary_find-class" target="_blank">enhanced-find-class:find-class</a>
                         :initform (find-class '<code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code>)))</code></pre>
                   <p>Provides a method on <code class="relevant"><a href="#dictionary_check-definition">defsys:check-definition</a></code> that ensures that the <var>definition</var> is a generalized instance of the <var>system</var>'s <code class="relevant"><a href="#dictionary_base-definition-class">defsys:base-definition-class</a></code>.</p>
                 </section>
@@ -727,6 +731,7 @@
               <article class="class definition">
 
                 <h1><span class="type">Class</span> <span class="name self">defsys:standard-root-system</span></h1>
+
                 <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code> <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code></p>
 
                 <section class="description">
@@ -1056,6 +1061,8 @@
 
                 <p class="args-and-retvals"><var>function</var> <var>definition</var> =&gt; <code>nil</code></p>
 
+                <p class="argument-precedence-order"><b>Argument precedence order:</b> <var>definition</var> <var>function</var></p>
+
                 <section class="arguments-and-values">
                   <h1>Arguments and Values</h1>
                   <ul>
@@ -1155,14 +1162,13 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:locate</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> &amp;key errorp =&gt; <var>definition-or-nil</var></p>
+              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> &amp;key =&gt; <var>definition-or-nil</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
                 <ul>
                   <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
                   <li><var>definition-name</var> -- A definition name.</li>
-                  <li><var>errorp</var> -- A generalized boolean. The default is true.</li>
                   <li><var>definition-or-nil</var> -- An object or nil.</li>
                 </ul>
               </section>
@@ -1192,7 +1198,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
 
-                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;rest <var>options</var> =&gt; <var>definition-or-nil</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1205,7 +1211,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">locate</span></h1>
 
-                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>definition-or-nil</var></p>
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key =&gt; <var>definition-or-nil</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1251,7 +1257,7 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">(setf defsys:locate)</span></h1>
 
-              <p class="args-and-retvals"><var>new-definition</var> <var>system</var> <var>definition-name</var> &amp;key <var>errorp</var> =&gt; <var>new-definition</var></p>
+              <p class="args-and-retvals"><var>new-definition</var> <var>system</var> <var>definition-name</var> &amp;key =&gt; <var>new-definition</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
@@ -1259,7 +1265,6 @@
                   <li><var>new-definition</var> -- A non-nil object.</li>
                   <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
                   <li><var>definition-name</var> -- A definition name.</li>
-                  <li><var>errorp</var> -- Ignored.</li>
                 </ul>
               </section>
 
@@ -1275,7 +1280,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">(setf locate)</span></h1>
 
-                  <p class="args-and-retvals"><var>new-definition</var> (<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> &amp;rest <var>options</var> =&gt; <var>new-definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1288,7 +1293,7 @@
 
                   <h1><span class="type">Before-Method</span> <span class="name self">(setf locate)</span></h1>
 
-                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_check-definition-mixin">defsys:check-definition-mixin</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_check-definition-mixin">defsys:check-definition-mixin</a></code>) <var>definition-name</var> &amp;key =&gt; <var>new-definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1301,7 +1306,7 @@
 
                   <h1><span class="type">After-Method</span> <span class="name self">(setf locate)</span></h1>
 
-                  <p class="args-and-retvals">(<var>new-definition</var> <code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>) (<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+                  <p class="args-and-retvals">(<var>new-definition</var> <code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code>) (<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition-name</var> &amp;key =&gt; <var>new-definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1314,7 +1319,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">(setf locate)</span></h1>
 
-                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key (errorp t) =&gt; <var>new-definition</var></p>
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key =&gt; <var>new-definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1688,9 +1693,9 @@
                   <section class="description">
                     <h1>Description</h1>
                     <p>Gives the following simple syntax to <code class="relevant"><a href="#dictionary_define">defsys:define</a></code>: <code>(defsys:define (<var>kind</var> <var>definition-name</var>) [<var>definition-class</var>] &amp;rest <var>initargs</var>)</code></p>
-                    <p>If <code>(<code class="relevant"><a href="#dictionary_explicit-definition-class-p">defsys:explicit-definition-class-p</a></code> <var>system</var>)</code> is true at compile-time, then the <var>definition-class</var> is required and must evaluate (at runtime) to a class or to the symbol <code>t</code>, in which case the default class will be used.<br />Else, the <var>definition-class</var> is omitted and the default class will be used.</p>
-                    <p>(Finish writing later.)</p>
-
+                    <p>If <code>(<code class="relevant"><a href="#dictionary_explicit-definition-class-p">defsys:explicit-definition-class-p</a></code> <var>system</var>)</code> is true at compile-time, then the <var>definition-class</var> is required and must evaluate (at runtime) to a class or to the symbol <code>t</code>, in which case the <var>definition-class</var> is determined by calling <code class="relevant"><a href="#dictionary_definition-class">defsys:definition-class</a></code>. Else, the <var>definition-class</var> is omitted and is determined by calling <code class="relevant"><a href="#dictionary_definition-class">defsys:definition-class</a></code>.</p>
+                    <p>The <var>initargs</var> are computed by calling <code>(apply #'<code class="relevant"><a href="#dictionary_expand-args">defsys:expand-args</a></code> <var>system</var> <var>args</var>)</code> at compile-time, and the keywords of the resulting plist will be automatically quoted during expansion as appropriate if non-keyword symbols are used.</p>
+                    <p>We then call <code>(apply #'<code class="relevant"><a href="#dictionary_ensure">defsys:ensure</a></code> <var>system</var> '<var>name</var> <var>definition-class</var> <var>initargs</var>)</code>.</p>
                   </section>
 
                 </article>
@@ -1757,6 +1762,8 @@
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:map</span></h1>
 
               <p class="args-and-retvals"><var>function</var> <var>system</var> =&gt; nil</p>
+
+              <p class="argument-precedence-order"><b>Argument precedence order:</b> <var>system</var> <var>function</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
@@ -1966,13 +1973,12 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:default-definition-class</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> &amp;key errorp =&gt; <var>class-or-nil</var></p>
+              <p class="args-and-retvals"><var>system</var> &amp;key =&gt; <var>class-or-nil</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
                 <ul>
                   <li><var>system</var> -- A definitions-system.</li>
-                  <li><var>errorp</var> -- A generalized boolean. The default is true.</li>
                   <li><var>definition-or-nil</var> -- A class or nil.</li>
                 </ul>
               </section>
@@ -2002,7 +2008,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">default-definition-class</span></h1>
 
-                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_default-definition-class-mixin">defsys:default-definition-class-mixin</a></code>) &amp;key (errorp t) =&gt; <var>class-or-nil</var></p>
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_default-definition-class-mixin">defsys:default-definition-class-mixin</a></code>) &amp;key =&gt; <var>class-or-nil</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -2090,16 +2096,42 @@
               </span>
             </h1>
 
-            <article class="generic-function reader definition">
+            <article class="generic-function definition">
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:definition-class</span></h1>
 
               <p class="args-and-retvals"><var>system</var> &amp;rest <var>initargs</var> =&gt; <var>class</var></p>
 
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A definitions-system.</li>
+                  <li><var>initargs</var> -- A plist.</li>
+                  <li><var>class</var> -- A class.</li>
+                </ul>
+              </section>
+
               <section class="description">
                 <h1>Description</h1>
                 <p>Returns the <var>class</var> that should be used for the definition according to <var>initargs</var> if no class has been explicitly specified.</p>
-                <p>(To be written: method. And this is not a reader.)</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_default-definition-class_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">definition-class</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) &amp;rest <var>initargs</var> =&gt; <var>class</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Calls <code>(<code class="relevant"><a href="#dictionary_default-definition-class">defsys:default-definition-class</a></code> <var>system</var>)</code> and returns what it returns.</p>
+                  </section>
+
+                </article>
+
               </section>
 
             </article>

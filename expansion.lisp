@@ -5,13 +5,12 @@
                               :type (or null class)
                               :initform nil)))
 
-(defgeneric defsys:default-definition-class (system &key errorp)
+(defgeneric defsys:default-definition-class (system &key)
   (:method :around (system &key (errorp t))
     (or (call-next-method)
         (when errorp
           (error "There is no ~S for system ~S." 'defsys:default-definition-class system))))
-  (:method ((system defsys:default-definition-class-mixin) &key (errorp t))
-    (declare (ignore errorp))
+  (:method ((system defsys:default-definition-class-mixin) &key)
     (slot-value system '%default-definition-class)))
 
 
@@ -39,6 +38,34 @@
       implicit-definition-class
       maybe-explicit-definition-class))
 
+(defun %every-other (function)
+  (let ((processp t))
+    (lambda (key value)
+      (prog1 (when processp
+               (funcall function key value))
+        (setf processp (not processp))))))
+
+(defun %mappc (function plist)
+  (mapc (%every-other function) plist (cdr plist)))
+
+(defun %mappcon (function plist)
+  (mapcan (%every-other function) plist (cdr plist)))
+
+(defun %fix-args (args)
+  (if (block nil
+        (%mappc (lambda (key value)
+                  (declare (ignore value))
+                  (unless (keywordp key)
+                    (return t)))
+                args))
+      (%mappcon (lambda (key value)
+                  (list (if (keywordp key)
+                            key
+                            `',key)
+                        value))
+                args)
+      args))
+
 (defmethod defsys:expand ((system defsys:simple-expansion-mixin) name environment args &key)
   (declare (ignore environment))
   (let ((initargs-var (gensym (string '#:initargs))))
@@ -51,5 +78,5 @@
                                                          ,implicit-definition-class-form)
                         args))
               (values implicit-definition-class-form args)))
-      `(let ((,initargs-var (list ,@(apply #'defsys:expand-args system args))))
+      `(let ((,initargs-var (list ,@(%fix-args (apply #'defsys:expand-args system args)))))
          (apply #'defsys:ensure ,system ',name ,definition-class-form ,initargs-var)))))

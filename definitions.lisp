@@ -36,6 +36,7 @@
 
 (defmethod shared-initialize :after ((definition defsys:primary-binding-mixin) slot-names
                                      &key (owner nil owner-supplied-p) (name nil name-supplied-p))
+  (declare (ignore slot-names))
   (when (or owner-supplied-p name-supplied-p)
     (let ((previous-owner (defsys:owner definition))
           (previous-name (defsys:name definition)))
@@ -62,6 +63,8 @@
     (maphash (lambda (system aliases)
                (funcall function system (lambda (function)
                                           (mapcar function aliases))))
-             (%aliasing-systems definition))))
+             (%aliasing-systems definition)))
+  (:argument-precedence-order definition function))
 
-(defclass defsys:standard-definition (defsys:primary-binding-mixin defsys:alias-bindings-mixin defsys:definition) ())
+(defclass defsys:standard-definition (defsys:primary-binding-mixin defsys:alias-bindings-mixin defsys:definition)
+  ())

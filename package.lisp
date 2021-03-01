@@ -1,6 +1,8 @@
 (cl:defpackage #:definitions-systems
   (:nicknames #:defsys)
   (:use #:cl)
+  (:shadowing-import-from #:enhanced-defclass #:defclass)
+  (:shadowing-import-from #:enhanced-find-class #:find-class)
   (:shadow #:boundp
            #:map
            #:count)
@@ -47,3 +49,7 @@
            #:location-mixin
            #:location
            #:standard-root-system))
+
+(setf (shared-preferences:preferences-1 (find-package '#:definitions-systems))
+      (make-instance 'enhanced-defclass:preferences
+                     'enhanced-defclass:default-metaclass-advisor (find-class 'canon-initargs:standard-class)))
