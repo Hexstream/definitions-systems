@@ -44,7 +44,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2021-03-01">1 march 2021</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2021-03-04">4 march 2021</time><span>.</span></p>
 
     </nav>
 
@@ -358,7 +358,7 @@
 
                 <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_check-definition-mixin">defsys:check-definition-mixin</a></code></p>
 
-                <p class="metaclass"><b>Metaclass:</b> <a href="https://www.hexstreamsoft.com/libraries/canonicalized-initargs/#dictionary_standard-class" target="_blank">canonicalized-initargs:standard-class</a></p>
+                <p class="metaclass"><b>Metaclass:</b> <a href="https://www.hexstreamsoft.com/libraries/canonicalized-initargs/#dictionary_standard-class" target="_blank">canon-initargs:standard-class</a></p>
 
                 <section class="description">
                   <h1>Description</h1>
@@ -1942,15 +1942,20 @@
 
               <h1><span class="type">Class</span> <span class="name self">defsys:default-definition-class-mixin</span></h1>
 
+              <p class="metaclass"><b>Metaclass:</b> <a href="https://www.hexstreamsoft.com/libraries/canonicalized-initargs/#dictionary_standard-class" target="_blank">canon-initargs:standard-class</a></p>
+
               <section class="description">
                 <h1>Description</h1>
                 <p>Slots:</p>
                 <pre><code>((<var>default-definition-class</var> :initarg :default-definition-class
                            :reader <code class="relevant"><a href="#dictionary_default-definition-class">defsys:default-definition-class</a></code>
                            :type (or null class)
+                           :canonicalize #'<var>%maybe-find-class</var>
                            :initform nil
                            :documentation "A value of nil means there is no default definition class for this system."))</code></pre>
               </section>
+
+              <p><var>%maybe-find-class</var> is an internal function that forwards its argument to <a href="https://www.hexstreamsoft.com/libraries/enhanced-find-class/#dictionary_find-class" target="_blank">enhanced-find-class:find-class</a> unless its argument is <code>nil</code>, in which case it returns <code>nil</code>.</p>
 
             </article>
 

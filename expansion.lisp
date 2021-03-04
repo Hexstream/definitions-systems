@@ -1,8 +1,13 @@
 (in-package #:definitions-systems)
 
+(defun %maybe-find-class (class-designator)
+  (when class-designator
+    (find-class class-designator)))
+
 (defclass defsys:default-definition-class-mixin (defsys:system)
   ((%default-definition-class :initarg :default-definition-class
                               :type (or null class)
+                              :canonicalize #'%maybe-find-class
                               :initform nil)))
 
 (defgeneric defsys:default-definition-class (system &key)
