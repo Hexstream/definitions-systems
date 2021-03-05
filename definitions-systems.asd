@@ -11,7 +11,7 @@
                "shared-preferences"
                "enhanced-find-class")
 
-  :version "2.0"
+  :version "2.0.1"
   :serial cl:t
   :components ((:file "package")
                (:file "definitions")

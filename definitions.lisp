@@ -26,7 +26,7 @@
   (let ((owner (defsys:owner definition)))
     (if owner
         (multiple-value-bind (owner-locate owner-init) (make-load-form owner environment)
-          (values `(defsys:locate ,owner-locate (defsys:name definition))
+          (values `(defsys:locate ,owner-locate ',(defsys:name definition))
                   owner-init))
         (error "Don't know how to ~S for definition ~S because it has no owner."
                'make-load-form definition))))
