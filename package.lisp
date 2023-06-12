@@ -38,13 +38,6 @@
            #:map
            #:count
 
-           #:default-definition-class-mixin
-           #:default-definition-class
-           #:simple-expansion-mixin
-           #:explicit-definition-class-p
-           #:definition-class
-           #:expand-args
-
            #:root-system
            #:location-mixin
            #:location

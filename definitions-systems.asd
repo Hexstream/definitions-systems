@@ -11,14 +11,13 @@
                "shared-preferences"
                "enhanced-find-class")
 
-  :version "2.0.1"
+  :version "3.0"
   :serial cl:t
   :components ((:file "package")
                (:file "definitions")
                (:file "systems")
                (:file "checking")
                (:file "protocols")
-               (:file "expansion")
                (:file "root"))
 
   :in-order-to ((asdf:test-op (asdf:test-op #:definitions-systems_tests))))

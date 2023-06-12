@@ -19,9 +19,7 @@
   (or (defsys:location mixin :errorp nil)
       (call-next-method)))
 
-(defclass defsys:standard-root-system (defsys:simple-expansion-mixin defsys:location-mixin defsys:root-system defsys:standard-system)
-  ()
-  :default-initargs (:explicit-definition-class-p t))
+(defclass defsys:standard-root-system (defsys:location-mixin defsys:root-system defsys:standard-system) ())
 
 (defmethod defsys:locate ((system defsys:standard-root-system) definition-name &key (errorp t))
   (declare (ignore errorp))
