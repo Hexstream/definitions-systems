@@ -104,13 +104,13 @@
 
 (defgeneric defsys:expand (definition-prototype definition-name environment args &rest options)
   (:method ((prototype defsys:standard-definition) name env args &rest options)
-    (declare (ignore options))
+    (declare (ignore env options))
     `(defsys:ensure ,(defsys:default-system prototype)
                     ',name
                     ,(class-of prototype)
                     ,@args))
   (:method ((prototype defsys:standard-system) name env args &rest options)
-    (declare (ignore options))
+    (declare (ignore env args options))
     `(progn
        (cl:defclass ,name (defsys:definition) ())
        ,(append (call-next-method) `(:base-definition-class ',name))
