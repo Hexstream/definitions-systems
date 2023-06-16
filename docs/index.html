@@ -52,7 +52,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2023-06-12">12 june 2023</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2023-06-16">16 june 2023</time><span>.</span></p>
 
     </nav>
 
@@ -290,6 +290,7 @@
               <section class="description">
                 <h1>Description</h1>
                 <p>A ready-to-use implementation of <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>.</p>
+                <p>A method is defined for <code class="relevant"><a href="#dictionary_default-system">defsys:default-system</a></code>.</p>
               </section>
 
             </article>
@@ -739,12 +740,12 @@
 
                 <h1><span class="type">Class</span> <span class="name self">defsys:standard-root-system</span></h1>
 
-                <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code> <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code></p>
+                <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_location-mixin">defsys:location-mixin</a></code> <code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code> <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code></p>
 
                 <section class="description">
                   <h1>Description</h1>
                   <p>The standard root definitions-systems (as returned by function <code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code>) inherits from this class.</p>
-                  <p>Provides a <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_mk_ld_.htm" target="_blank">make-load-form</a> method that returns the form <code>(<code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code>)</code>.</p>
+                  <p>A method is defined for <code class="relevant"><a href="#dictionary_default-system">defsys:default-system</a></code>.</p>
                 </section>
 
               </article>
@@ -1145,6 +1146,7 @@
               <li><a href="#dictionary_unbind-definition"><span class="type">Generic Function</span> <code>unbind-definition</code></a></li>
               <li><a href="#dictionary_boundp"><span class="type">Generic Function</span> <code>boundp</code></a></li>
               <li><a href="#dictionary_ensure"><span class="type">Generic Function</span> <code>ensure</code></a></li>
+              <li><a href="#dictionary_default-system"><span class="type">Generic Function</span> <code>default-system</code></a></li>
               <li><a href="#dictionary_expand"><span class="type">Generic Function</span> <code>expand</code></a></li>
               <li><a href="#dictionary_define"><span class="type">Macro</span> <code>define</code></a></li>
               <li><a href="#dictionary_map"><span class="type">Generic Function</span> <code>map</code></a></li>
@@ -1583,14 +1585,14 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:ensure</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>definition-class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
                 <ul>
                   <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
                   <li><var>definition-name</var> -- A definition name.</li>
-                  <li><var>class</var> -- A class designator.</li>
+                  <li><var>definition-class</var> -- A class designator.</li>
                   <li><var>definition</var> -- An object.</li>
                 </ul>
               </section>
@@ -1607,7 +1609,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">ensure</span></h1>
 
-                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>definition-class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1620,7 +1622,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">ensure</span></h1>
 
-                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_system">defsys:system</a></span>) <var>definition-name</var> <var>class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_system">defsys:system</a></span>) <var>definition-name</var> <var>definition-class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -1630,6 +1632,100 @@
                       <li>If <var>existing</var> is already of the class designated by <var>definition-class</var>, then call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_reinit.htm#reinitialize-instance" target="_blank">reinitialize-instance</a> with <var>existing</var> and <var>initargs</var>.</li>
                       <li>Else, call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_chg_cl.htm" target="_blank">change-class</a> with <var>existing</var>, <var>definition-class</var> and <var>initargs</var>.</li>
                     </ul>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_default-system">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_default-system" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary" class="ellipsis">...</a>
+                <span class="crumb"><span class="s"> » </span><a href="#dictionary_protocols">Protocols</a></span>
+                <span class="crumb"><span class="s"> » </span><a class="here">default-system</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:default-system</span></h1>
+
+              <p class="args-and-retvals"><var>object</var> =&gt; <var>system</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>object</var> -- An object.</li>
+                  <li><var>system</var> -- A system.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Returns the default <var>system</var> associated with <var>object</var>.</p>
+                <p>Base <code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code> classes should define an appropriate method.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_default-system_symbol">
+
+                  <h1><span class="type">Method</span> <span class="name self">default-system</span></h1>
+
+                  <p class="args-and-retvals">(<var>definition-class-name</var> <span class="specializer">symbol</span>) =&gt; <var>system</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Returns <code>(<code class="relevant"><a href="#dictionary_default-system">defsys:default-system</a></code> (find-class <var>definition-class-name</var>))</code>.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_default-system_class">
+
+                  <h1><span class="type">Method</span> <span class="name self">default-system</span></h1>
+
+                  <p class="args-and-retvals">(<var>definition-class</var> <span class="specializer">class</span>) =&gt; <var>system</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Returns <code>(<code class="relevant"><a href="#dictionary_default-system">defsys:default-system</a></code> (<a href="https://clos-mop.hexstreamsoft.com/generic-functions-and-methods/#class-prototype" target="_blank">c2mop:class-prototype</a> (c2mop:ensure-finalized <var>definition-class</var>)))</code>.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_default-system_standard-system">
+
+                  <h1><span class="type">Method</span> <span class="name self">default-system</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code>) =&gt; <var>system</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Returns <code>(<code class="relevant"><a href="#dictionary_root-system">defsys:root-system</a></code>)</code>.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_default-system_standard-root-system">
+
+                  <h1><span class="type">Method</span> <span class="name self">default-system</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_standard-root-system">defsys:standard-root-system</a></code>) =&gt; |</p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Throws an error of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a>.</p>
                   </section>
 
                 </article>
@@ -1657,12 +1753,12 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:expand</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest <var>options</var> =&gt; <var>expansion</var></p>
+              <p class="args-and-retvals"><var>definition-prototype</var> <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest <var>options</var> =&gt; <var>expansion</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
                 <ul>
-                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>definition-prototype</var> -- A (possibly uninitialized) <code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code>.</li>
                   <li><var>definition-name</var> -- A definition name.</li>
                   <li><var>environment</var> -- The environment captured by <code>defsys:define</code>.</li>
                   <li><var>args</var> -- A list. The body of the definition.</li>
@@ -1678,15 +1774,37 @@
               <section class="methods">
                 <h1>Methods</h1>
 
-                <article class="method definition" id="dictionary_expand_symbol_t_t_t">
+                <article class="method definition" id="dictionary_expand_standard-definition_t_t_t">
 
                   <h1><span class="type">Method</span> <span class="name self">expand</span></h1>
 
-                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) <var>definition-name</var> <var>environment</var> <var>args</var> &amp;rest options =&gt; <var>expansion</var></p>
+                  <p class="args-and-retvals">(<var>prototype</var> <code class="specializer relevant"><a href="#dictionary_standard-definition">defsys:standard-definition</a></code>) <var>name</var> <var>environment</var> <var>args</var> &amp;rest options =&gt; <var>expansion</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
-                    <p><a class="relevant" href="#concepts_definitions-system-designator">Forwards appropriately.</a></p>
+                    <p>Provides a flexible default syntax for <code class="relevant"><a href="#dictionary_define">defsys:define</a></code> by straightforwardly expanding to a call to <code class="relevant"><a href="#dictionary_ensure">defsys:ensure</a></code>.</p>
+                    <p>Returns <code>`(<code class="relevant"><a href="#dictionary_ensure">defsys:ensure</a></code> ,(<code class="relevant"><a href="#dictionary_default-system">defsys:default-system</a></code> <var>prototype</var>) ',<var>name</var> ,(class-of <var>prototype</var>) ,@<var>args</var>)</code>.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_expand_standard-system_t_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">expand</span></h1>
+
+                  <p class="args-and-retvals">(<var>prototype</var> <code class="specializer relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code>) <var>name</var> <var>environment</var> <var>args</var> &amp;rest options =&gt; <var>expansion</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>
+                      Similar to the above method, but provides additional conveniences regarding systems, based on a convention.
+                      <br />
+                      The convention is that the name of your system is the same as that of your base definition class.
+                    </p>
+                    <p>First, a new class named <var>name</var> is defined, inheriting from <code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code>.</p>
+                    <p>Then, the <a href="#dictionary_expand_standard-definition_t_t_t">next method (above)</a> is called to generate a call to <code class="relevant"><a href="#dictionary_ensure">defsys:ensure</a></code>, except that <code>:base-definition-class '<var>name</var></code> will be appended at the end.</p>
+                    <p>Lastly, a new method is defined on <code class="relevant"><a href="#dictionary_default-system">defsys:default-system</a></code>, specializing on the new base definition class, which returns the newly defined system.</p>
+                    <p>You should then create a new standard class for your definitions, inheriting from <var>name</var> (your base definition class) and <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code>.</p>
                   </section>
 
                 </article>
@@ -1714,21 +1832,23 @@
 
               <h1><span class="type">Macro</span> <span class="name self">defsys:define</span></h1>
 
-              <p class="args-and-retvals">(<var>kind</var> <var>definition-name</var> &amp;body <var>options</var>) &amp;body <var>args</var></p>
+              <p class="args-and-retvals">(<var>definition-class-name</var> <var>definition-name</var> &amp;body <var>options</var>) &amp;body <var>args</var> &amp;environment <var>env</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
                 <ul>
-                  <li><var>kind</var> -- A symbol naming the kind of definition.</li>
+                  <li><var>definition-class-name</var> -- A symbol.</li>
                   <li><var>definition-name</var> -- A definition name.</li>
                   <li><var>options</var> -- A list.</li>
                   <li><var>args</var> -- A list. The body of the definition.</li>
+                  <li><var>env</var> -- An environment.</li>
                 </ul>
               </section>
 
               <section class="description">
                 <h1>Description</h1>
                 <p>Calls <code class="relevant"><a href="#dictionary_expand">defsys:expand</a></code> and returns whatever it returns.</p>
+                <p>The first argument is <code>(<a href="https://clos-mop.hexstreamsoft.com/generic-functions-and-methods/#class-prototype" target="_blank">c2mop:class-prototype</a> (c2mop:ensure-finalized (find-class <var>definition-class-name</var>)))</code>.</p>
               </section>
 
             </article>

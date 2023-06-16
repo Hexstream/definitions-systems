@@ -33,6 +33,7 @@
            #:unbind-definition
            #:boundp
            #:ensure
+           #:default-system
            #:expand
            #:define
            #:map

@@ -77,11 +77,11 @@
     (not (null (defsys:locate system definition-name :errorp nil)))))
 
 
-(defgeneric defsys:ensure (system definition-name class &rest initargs)
-  (:method ((system-name symbol) definition-name class &rest initargs)
+(defgeneric defsys:ensure (system definition-name definition-class &rest initargs)
+  (:method ((system-name symbol) definition-name definition-class &rest initargs)
     (apply #'defsys:ensure
            (defsys:locate (defsys:root-system) system-name)
-           definition-name class initargs))
+           definition-name definition-class initargs))
   (:method ((system defsys:system) definition-name definition-class &rest initargs)
     (let ((existing (defsys:locate system definition-name :errorp nil)))
       (if existing
@@ -92,16 +92,35 @@
           (setf (defsys:locate system definition-name)
                 (apply #'make-instance definition-class :name definition-name initargs))))))
 
+(defgeneric defsys:default-system (object)
+  (:method ((definition-class-name symbol))
+    (defsys:default-system (find-class definition-class-name)))
+  (:method ((definition-class class))
+    (defsys:default-system (c2mop:class-prototype (c2mop:ensure-finalized definition-class))))
+  (:method ((system defsys:standard-system))
+    (defsys:root-system))
+  (:method ((system defsys:standard-root-system))
+    (error "~S does not define a ~S." 'defsys:standard-root-system 'defsys:default-system)))
 
-(defgeneric defsys:expand (system definition-name environment args &rest options)
-  (:method ((system-name symbol) definition-name environment args &rest options)
-    (apply #'defsys:expand
-           (defsys:locate (defsys:root-system) system-name)
-           definition-name environment args options)))
+(defgeneric defsys:expand (definition-prototype definition-name environment args &rest options)
+  (:method ((prototype defsys:standard-definition) name env args &rest options)
+    (declare (ignore options))
+    `(defsys:ensure ,(defsys:default-system prototype)
+                    ',name
+                    ,(class-of prototype)
+                    ,@args))
+  (:method ((prototype defsys:standard-system) name env args &rest options)
+    (declare (ignore options))
+    `(progn
+       (cl:defclass ,name (defsys:definition) ())
+       ,(append (call-next-method) `(:base-definition-class ',name))
+       (defmethod defsys:default-system ((definition ,name))
+         (load-time-value (defsys:locate 'defsys:system ',name))))))
 
-(defmacro defsys:define ((kind definition-name &body options)
+(defmacro defsys:define ((definition-class-name definition-name &body options)
                          &body args &environment env)
-  (apply #'defsys:expand kind definition-name env args options))
+  (apply #'defsys:expand (c2mop:class-prototype (c2mop:ensure-finalized (find-class definition-class-name)))
+         definition-name env args options))
 
 
 (defgeneric defsys:map (function system)

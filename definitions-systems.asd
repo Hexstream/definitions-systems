@@ -9,7 +9,8 @@
   :depends-on ("canonicalized-initargs"
                "enhanced-defclass"
                "shared-preferences"
-               "enhanced-find-class")
+               "enhanced-find-class"
+               "closer-mop")
 
   :version "3.0"
   :serial cl:t
@@ -17,7 +18,7 @@
                (:file "definitions")
                (:file "systems")
                (:file "checking")
-               (:file "protocols")
-               (:file "root"))
+               (:file "root")
+               (:file "protocols"))
 
   :in-order-to ((asdf:test-op (asdf:test-op #:definitions-systems_tests))))
