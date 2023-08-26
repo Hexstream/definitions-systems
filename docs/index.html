@@ -52,7 +52,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2023-06-17">17 june 2023</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2023-08-26">26 august 2023</time><span>.</span></p>
 
     </nav>
 
@@ -292,6 +292,8 @@
 
               <h1><span class="type">Class</span> <span class="name self">defsys:hash-table-mixin</span></h1>
 
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
+
               <section class="description">
                 <h1>Description</h1>
                 <p>This class provides implementations for all generic functions required by marker class <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>, backed by an internal <code>eq</code> hash-table. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> inherits from this class.</p>
@@ -318,7 +320,7 @@
 
               <h1><span class="type">Class</span> <span class="name self">defsys:standard-system</span></h1>
 
-              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code> <code class="relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code> <code class="relevant"><a href="#dictionary_standard-definition">defsys:standard-definition</a></code> <code class="relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code></p>
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code> <code class="relevant"><a href="#dictionary_standard-definition">defsys:standard-definition</a></code> <code class="relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code> <code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
 
               <section class="description">
                 <h1>Description</h1>
@@ -370,6 +372,8 @@
               <article class="class definition">
 
                 <h1><span class="type">Class</span> <span class="name self">defsys:check-definition-mixin</span></h1>
+
+                <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
 
                 <section class="description">
                   <h1>Description</h1>
@@ -863,7 +867,7 @@
             <article class="class definition">
 
               <h1><span class="type">Class</span> <span class="name self">defsys:standard-definition</span></h1>
-              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code> <code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code> <code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code></p>
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_primary-binding-mixin">defsys:primary-binding-mixin</a></code> <code class="relevant"><a href="#dictionary_alias-bindings-mixin">defsys:alias-bindings-mixin</a></code> <code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code></p>
 
               <section class="description">
                 <h1>Description</h1>
@@ -1046,7 +1050,7 @@
 
                 <h1><span class="type">Class</span> <span class="name self">defsys:primary-binding-mixin</span></h1>
 
-                <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code> <code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code></p>
+                <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></code> <code class="relevant"><a href="#dictionary_name-mixin">defsys:name-mixin</a></code> <code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code></p>
 
                 <section class="description">
                   <h1>Description</h1>
@@ -1073,6 +1077,8 @@
               <article class="class definition">
 
                 <h1><span class="type">Class</span> <span class="name self">defsys:alias-bindings-mixin</span></h1>
+
+                <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_definition">defsys:definition</a></code></p>
 
                 <section class="description">
                   <h1>Description</h1>
