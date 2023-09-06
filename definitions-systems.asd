@@ -20,6 +20,7 @@
                (:file "checking")
                (:file "root")
                (:file "protocols")
-               (:file "forwarding"))
+               (:file "forwarding")
+               (:file "hash-table-mixin"))
 
   :in-order-to ((asdf:test-op (asdf:test-op #:definitions-systems_tests))))

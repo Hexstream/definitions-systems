@@ -4,9 +4,7 @@
   (:method :around (system definition-name &key (errorp t))
     (or (call-next-method)
         (when errorp
-          (error 'defsys:not-found :system system :name definition-name))))
-  (:method ((system defsys:hash-table-mixin) definition-name &key)
-    (identity (gethash definition-name (%hash system)))))
+          (error 'defsys:not-found :system system :name definition-name)))))
 
 (define-condition defsys:not-found (error)
   ((%system :initarg :system
@@ -35,10 +33,7 @@
                    &key (binding-type :auto))
     (when (or (and (eq binding-type :auto) (defsys:owner new-definition))
               (eq binding-type :alias))
-      (pushnew definition-name (gethash system (%aliasing-systems new-definition)) :test #'eq)))
-  (:method (new-definition (system defsys:hash-table-mixin) definition-name &key)
-    (setf (gethash definition-name (%hash system))
-          new-definition)))
+      (pushnew definition-name (gethash system (%aliasing-systems new-definition)) :test #'eq))))
 
 (defgeneric defsys:unbind (system definition-name)
   (:method ((system defsys:system) definition-name)
@@ -47,9 +42,6 @@
         (defsys:unbind-definition system definition definition-name)))))
 
 (defgeneric defsys:unbind-definition (system definition definition-name)
-  (:method ((system defsys:hash-table-mixin) definition definition-name)
-    (declare (ignore definition))
-    (remhash definition-name (%hash system)))
   (:method :after ((system defsys:system) (definition defsys:primary-binding-mixin) definition-name)
     (declare (ignore definition-name))
     (let ((owner (defsys:owner definition)))
@@ -109,8 +101,6 @@
 
 
 (defgeneric defsys:map (function system)
-  (:method (function (system defsys:hash-table-mixin))
-    (maphash function (%hash system)))
   (:argument-precedence-order system function))
 
 (defgeneric defsys:count (system)
@@ -121,6 +111,4 @@
                     (declare (ignore name definition))
                     (incf count))
                   system)
-      count))
-  (:method ((system defsys:hash-table-mixin))
-    (hash-table-count (%hash system))))
+      count)))
