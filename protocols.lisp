@@ -5,9 +5,6 @@
     (or (call-next-method)
         (when errorp
           (error 'defsys:not-found :system system :name definition-name))))
-  (:method ((system-name symbol) definition-name &rest options)
-    (apply #'defsys:locate (defsys:locate (defsys:root-system) system-name)
-           definition-name options))
   (:method ((system defsys:hash-table-mixin) definition-name &key)
     (identity (gethash definition-name (%hash system)))))
 
@@ -22,11 +19,6 @@
                      (defsys:name condition) (defsys:system condition)))))
 
 (defgeneric (setf defsys:locate) (new-definition system definition-name &key)
-  (:method (new-definition (system-name symbol) definition-name &rest options &key &allow-other-keys)
-    (setf (apply #'defsys:locate (defsys:locate (defsys:root-system) system-name)
-                 definition-name
-                 options)
-          new-definition))
   (:method :before (new-definition (system defsys:check-definition-mixin) definition-name &key)
     (declare (ignore definition-name))
     (check-definition system new-definition))
@@ -49,9 +41,6 @@
           new-definition)))
 
 (defgeneric defsys:unbind (system definition-name)
-  (:method ((system-name symbol) definition-name)
-    (defsys:unbind (defsys:locate (defsys:root-system) system-name)
-                   definition-name))
   (:method ((system defsys:system) definition-name)
     (let ((definition (defsys:locate system definition-name :errorp nil)))
       (when definition
@@ -78,10 +67,6 @@
 
 
 (defgeneric defsys:ensure (system definition-name definition-class &rest initargs)
-  (:method ((system-name symbol) definition-name definition-class &rest initargs)
-    (apply #'defsys:ensure
-           (defsys:locate (defsys:root-system) system-name)
-           definition-name definition-class initargs))
   (:method ((system defsys:system) definition-name definition-class &rest initargs)
     (let ((existing (defsys:locate system definition-name :errorp nil)))
       (if existing
@@ -124,15 +109,11 @@
 
 
 (defgeneric defsys:map (function system)
-  (:method (function (system-name symbol))
-    (defsys:map function (defsys:locate (defsys:root-system) system-name)))
   (:method (function (system defsys:hash-table-mixin))
     (maphash function (%hash system)))
   (:argument-precedence-order system function))
 
 (defgeneric defsys:count (system)
-  (:method ((system-name symbol))
-    (defsys:count (defsys:locate (defsys:root-system) system-name)))
   (:method ((system defsys:system))
     (warn "Using slow ~S." 'defsys:count)
     (let ((count 0))

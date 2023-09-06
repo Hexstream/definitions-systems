@@ -19,6 +19,7 @@
                (:file "systems")
                (:file "checking")
                (:file "root")
-               (:file "protocols"))
+               (:file "protocols")
+               (:file "forwarding"))
 
   :in-order-to ((asdf:test-op (asdf:test-op #:definitions-systems_tests))))
