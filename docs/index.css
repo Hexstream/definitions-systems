@@ -14,7 +14,6 @@
     opacity: 0.6;
 }
 
-ul li.setfable .writer:hover,
-ul li.setfable .writer:focus {
+ul li.setfable .writer:is(:hover, :focus) {
     opacity: 1;
 }
