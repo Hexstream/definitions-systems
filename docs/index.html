@@ -1667,7 +1667,7 @@
                     <h1>Description</h1>
                     <p>If there is not already a definition named <var>definition-name</var> in <var>system</var>, then create such a definition by calling <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_mk_ins.htm" target="_blank">make-instance</a> with <var>definition-class</var>, <code>:name <var>definition-name</var></code> and <var>initargs</var>, and then associate this new definition with the system using <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>.</p>
                     <p>If there <em>is</em> already a definition named <var>definition-name</var> in <var>system</var>, then reinitialize that <var>existing</var> definition:</p>
-                    <ul>
+                    <ul class="list">
                       <li>If <var>existing</var> is already of the class designated by <var>definition-class</var>, then call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_reinit.htm#reinitialize-instance" target="_blank">reinitialize-instance</a> with <var>existing</var> and <var>initargs</var>.</li>
                       <li>Else, call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_chg_cl.htm" target="_blank">change-class</a> with <var>existing</var>, <var>definition-class</var> and <var>initargs</var>.</li>
                     </ul>
