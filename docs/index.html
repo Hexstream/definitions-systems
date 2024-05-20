@@ -464,7 +464,7 @@
               <article class="class definition">
 
                 <h1><span class="type">Condition</span> <span class="name self">defsys:unsuitable-definition-error</span></h1>
-                <p class="direct-superclasses"><a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a></p>
+                <p class="direct-superclasses"><a href="https://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a></p>
 
                 <section class="description">
                   <h1>Description</h1>
@@ -480,7 +480,7 @@
           :reader <code class="relevant"><a href="#dictionary_details">defsys:details</a></code>
           :initform nil
           :documentation "Provides further details on the problem that makes the <var>definition</var>
-                          be unsuitable as a binding in <var>system</var>, usually in the form of a <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_cnd.htm" target="_blank">condition</a>."))</code></pre>
+                          be unsuitable as a binding in <var>system</var>, usually in the form of a <a href="https://www.lispworks.com/documentation/HyperSpec/Body/e_cnd.htm" target="_blank">condition</a>."))</code></pre>
                   <p>The consequences are undefined if the <code>:system</code> or <code>:definition</code> initargs is unsupplied.</p>
                 </section>
 
@@ -509,7 +509,7 @@
 
                 <section class="description">
                   <h1>Description</h1>
-                  <p>Returns the <var>details</var> (usually a <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_cnd.htm" target="_blank">condition</a>) associated with the <var>object</var>. A method is defined for <code class="relevant"><a href="#dictionary_unsuitable-definition-error">defsys:unsuitable-definition-error</a></code>.</p>
+                  <p>Returns the <var>details</var> (usually a <a href="https://www.lispworks.com/documentation/HyperSpec/Body/e_cnd.htm" target="_blank">condition</a>) associated with the <var>object</var>. A method is defined for <code class="relevant"><a href="#dictionary_unsuitable-definition-error">defsys:unsuitable-definition-error</a></code>.</p>
                 </section>
 
               </article>
@@ -572,7 +572,7 @@
 
                     <section class="description">
                       <h1>Description</h1>
-                      <p>Returns <var>definition</var> if it is a subtype of <code>(<code class="relevant"><a href="#dictionary_base-definition-class">defsys:base-definition-class</a></code> <var>system</var>)</code>, else throws an error of type <code class="relevant"><a href="#dictionary_unsuitable-definition-error">unsuitable-definition-error</a></code> of which the <code class="relevant"><a href="#dictionary_details">details</a></code> is a condition of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_tp_err.htm" target="_blank">type-error</a>.</p>
+                      <p>Returns <var>definition</var> if it is a subtype of <code>(<code class="relevant"><a href="#dictionary_base-definition-class">defsys:base-definition-class</a></code> <var>system</var>)</code>, else throws an error of type <code class="relevant"><a href="#dictionary_unsuitable-definition-error">unsuitable-definition-error</a></code> of which the <code class="relevant"><a href="#dictionary_details">details</a></code> is a condition of type <a href="https://www.lispworks.com/documentation/HyperSpec/Body/e_tp_err.htm" target="_blank">type-error</a>.</p>
                     </section>
 
                   </article>
@@ -736,7 +736,7 @@
 
                     <section class="description">
                       <h1>Description</h1>
-                      <p>Calls the next method and throws an error of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm">error</a> if there is no location and <var>errorp</var> is true.</p>
+                      <p>Calls the next method and throws an error of type <a href="https://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm">error</a> if there is no location and <var>errorp</var> is true.</p>
                     </section>
 
                   </article>
@@ -997,7 +997,7 @@
 
                 <section class="description">
                   <h1>Description</h1>
-                  <p>If <var>definition</var> does not have an <code class="relevant"><a href="#dictionary_owner">owner</a></code>, then throw an error of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a>.</p>
+                  <p>If <var>definition</var> does not have an <code class="relevant"><a href="#dictionary_owner">owner</a></code>, then throw an error of type <a href="https://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a>.</p>
                   <p>Else, return a <var>creation-form</var> and <var>initialization-form</var> based on the results <var>owner-locate</var> and <var>owner-init</var> returned by <code>(make-load-form <var>owner</var> <var>environment</var>)</code>.<br /><var>creation-form</var> is <code>`(defsys:locate ,<var>owner-locate</var> (defsys:name <var>definition</var>))</code> and <var>initialization-form</var> is <var>owner-init</var>.</p>
                 </section>
 
@@ -1398,7 +1398,7 @@
             <article class="class definition">
 
               <h1><span class="type">Condition</span> <span class="name self">defsys:not-found</span></h1>
-              <p class="direct-superclasses"><a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a></p>
+              <p class="direct-superclasses"><a href="https://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a></p>
 
               <section class="description">
                 <h1>Description</h1>
@@ -1665,11 +1665,11 @@
 
                   <section class="description">
                     <h1>Description</h1>
-                    <p>If there is not already a definition named <var>definition-name</var> in <var>system</var>, then create such a definition by calling <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_mk_ins.htm" target="_blank">make-instance</a> with <var>definition-class</var>, <code>:name <var>definition-name</var></code> and <var>initargs</var>, and then associate this new definition with the system using <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>.</p>
+                    <p>If there is not already a definition named <var>definition-name</var> in <var>system</var>, then create such a definition by calling <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_mk_ins.htm" target="_blank">make-instance</a> with <var>definition-class</var>, <code>:name <var>definition-name</var></code> and <var>initargs</var>, and then associate this new definition with the system using <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>.</p>
                     <p>If there <em>is</em> already a definition named <var>definition-name</var> in <var>system</var>, then reinitialize that <var>existing</var> definition:</p>
                     <ul class="list">
-                      <li>If <var>existing</var> is already of the class designated by <var>definition-class</var>, then call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_reinit.htm#reinitialize-instance" target="_blank">reinitialize-instance</a> with <var>existing</var> and <var>initargs</var>.</li>
-                      <li>Else, call <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_chg_cl.htm" target="_blank">change-class</a> with <var>existing</var>, <var>definition-class</var> and <var>initargs</var>.</li>
+                      <li>If <var>existing</var> is already of the class designated by <var>definition-class</var>, then call <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_reinit.htm#reinitialize-instance" target="_blank">reinitialize-instance</a> with <var>existing</var> and <var>initargs</var>.</li>
+                      <li>Else, call <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_chg_cl.htm" target="_blank">change-class</a> with <var>existing</var>, <var>definition-class</var> and <var>initargs</var>.</li>
                     </ul>
                   </section>
 
@@ -1764,7 +1764,7 @@
 
                   <section class="description">
                     <h1>Description</h1>
-                    <p>Throws an error of type <a href="http://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a>.</p>
+                    <p>Throws an error of type <a href="https://www.lispworks.com/documentation/HyperSpec/Body/e_error.htm" target="_blank">error</a>.</p>
                   </section>
 
                 </article>
@@ -1953,7 +1953,7 @@
 
                   <section class="description">
                     <h1>Description</h1>
-                    <p>Calls <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_maphas.htm" target="_blank">maphash</a> on <var>function</var> and <var>system</var>'s internal hash-table.</p>
+                    <p>Calls <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_maphas.htm" target="_blank">maphash</a> on <var>function</var> and <var>system</var>'s internal hash-table.</p>
                   </section>
 
                 </article>
@@ -2033,7 +2033,7 @@
 
                   <section class="description">
                     <h1>Description</h1>
-                    <p>Calls <a href="http://www.lispworks.com/documentation/HyperSpec/Body/f_hash_1.htm" target="_blank">hash-table-count</a> on <var>system</var>'s internal hash-table.</p>
+                    <p>Calls <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_hash_1.htm" target="_blank">hash-table-count</a> on <var>system</var>'s internal hash-table.</p>
                   </section>
 
                 </article>
