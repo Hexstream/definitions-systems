@@ -269,7 +269,7 @@
 
               <section class="description">
                 <h1>Description</h1>
-                <p>All definitions-systems inherit from this class. At least <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code>, <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code>, <code class="relevant"><a href="#dictionary_unbind">defsys:unbind</a></code> and <code class="relevant"><a href="#dictionary_boundp">defsys:boundp</a></code> must be supported. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> provides a ready-to-use implementation.</p>
+                <p>All definitions-systems inherit from this class. At least <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code>, <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code> and <code class="relevant"><a href="#dictionary_unbind">defsys:unbind</a></code> must be supported. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> provides a ready-to-use implementation.</p>
               </section>
 
             </article>
@@ -1213,7 +1213,6 @@
               <li><a href="#dictionary_not-found"><span class="type">Condition</span> <code>not-found</code></a></li>
               <li><a href="#dictionary_unbind"><span class="type">Generic Function</span> <code>unbind</code></a></li>
               <li><a href="#dictionary_unbind-definition"><span class="type">Generic Function</span> <code>unbind-definition</code></a></li>
-              <li><a href="#dictionary_boundp"><span class="type">Generic Function</span> <code>boundp</code></a></li>
               <li><a href="#dictionary_ensure"><span class="type">Generic Function</span> <code>ensure</code></a></li>
               <li><a href="#dictionary_default-system"><span class="type">Generic Function</span> <code>default-system</code></a></li>
               <li><a href="#dictionary_expand"><span class="type">Generic Function</span> <code>expand</code></a></li>
@@ -1598,61 +1597,6 @@
                   <section class="description">
                     <h1>Description</h1>
                     <p>If <var>definition</var>'s <code class="relevant"><a href="#dictionary_owner">defsys:owner</a></code> is <var>system</var>, then set it to <code>nil</code>.</p>
-                  </section>
-
-                </article>
-
-              </section>
-
-            </article>
-
-          </section>
-
-          <section id="dictionary_boundp">
-
-            <h1 class="breadcrumbs-bar">
-              <span class="section-relative-nav">
-                <a href="#dictionary_boundp" class="anchor">⚓</a>
-              </span>
-              <span class="breadcrumbs">
-                <a href="#dictionary" class="ellipsis">...</a>
-                <span class="crumb"><span class="s"> » </span><a href="#dictionary_protocols">Protocols</a></span>
-                <span class="crumb"><span class="s"> » </span><a class="here">boundp</a></span>
-              </span>
-            </h1>
-
-            <article class="generic-function definition">
-
-              <h1><span class="type">Generic Function</span> <span class="name self">defsys:boundp</span></h1>
-
-              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>generalized-boolean</var></p>
-
-              <section class="arguments-and-values">
-                <h1>Arguments and Values</h1>
-                <ul>
-                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
-                  <li><var>definition-name</var> -- A definition name.</li>
-                  <li><var>generalized-boolean</var> -- A generalized boolean.</li>
-                </ul>
-              </section>
-
-              <section class="description">
-                <h1>Description</h1>
-                <p>Returns true if there is a definition named <var>definition-name</var> in <var>system</var>, else returns false.</p>
-              </section>
-
-              <section class="methods">
-                <h1>Methods</h1>
-
-                <article class="method definition" id="dictionary_boundp_t_t">
-
-                  <h1><span class="type">Method</span> <span class="name self">boundp</span></h1>
-
-                  <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>generalized-boolean</var></p>
-
-                  <section class="description">
-                    <h1>Description</h1>
-                    <p>Simply attempts to <code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> the <var>definition-name</var> with <var>errorp</var> being false, returns true if this was successful, else false.</p>
                   </section>
 
                 </article>

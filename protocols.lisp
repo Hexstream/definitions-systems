@@ -63,10 +63,6 @@
       (when (member definition-name aliases :test #'eq)
         (setf (gethash system aliasing-systems) (remove definition-name aliases :test #'eq))))))
 
-(defgeneric defsys:boundp (system definition-name)
-  (:method (system definition-name)
-    (not (null (defsys:locate system definition-name :errorp nil)))))
-
 
 (defgeneric defsys:ensure (system definition-name definition-class &rest initargs)
   (:method ((system defsys:system) definition-name definition-class &rest initargs)

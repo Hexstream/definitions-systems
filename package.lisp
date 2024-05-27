@@ -3,8 +3,7 @@
   (:use #:cl)
   (:shadowing-import-from #:enhanced-defclass #:defclass)
   (:shadowing-import-from #:enhanced-find-class #:find-class)
-  (:shadow #:boundp
-           #:map
+  (:shadow #:map
            #:count)
   (:export #:definition
            #:name-mixin
@@ -32,7 +31,6 @@
            #:locate
            #:unbind
            #:unbind-definition
-           #:boundp
            #:ensure
            #:default-system
            #:expand
