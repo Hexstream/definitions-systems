@@ -1,6 +1,6 @@
 (in-package #:definitions-systems)
 
-(defmethod defsys:locate ((system-name symbol) definition-name &rest options)
+(defmethod defsys:locate ((system-name symbol) definition-name &rest options &key &allow-other-keys)
   (apply #'defsys:locate (defsys:locate (defsys:root-system) system-name)
          definition-name options))
 
@@ -10,17 +10,21 @@
                options)
         new-definition))
 
-(defmethod defsys:unbind ((system-name symbol) definition-name)
-  (defsys:unbind (defsys:locate (defsys:root-system) system-name)
-                 definition-name))
+(defmethod defsys:unbind ((system-name symbol) definition-name &rest options &key &allow-other-keys)
+  (apply #'defsys:unbind
+           (defsys:locate (defsys:root-system) system-name)
+           definition-name
+           options))
 
 (defmethod defsys:ensure ((system-name symbol) definition-name definition-class &rest initargs)
   (apply #'defsys:ensure
          (defsys:locate (defsys:root-system) system-name)
          definition-name definition-class initargs))
 
-(defmethod defsys:map (function (system-name symbol))
-  (defsys:map function (defsys:locate (defsys:root-system) system-name)))
+(defmethod defsys:map (function (system-name symbol) &rest options &key &allow-other-keys)
+  (apply #'defsys:map function (defsys:locate (defsys:root-system) system-name)
+           options))
 
-(defmethod defsys:count ((system-name symbol))
-  (defsys:count (defsys:locate (defsys:root-system) system-name)))
+(defmethod defsys:count ((system-name symbol) &rest options &key &allow-other-keys)
+  (apply #'defsys:count (defsys:locate (defsys:root-system) system-name)
+         options))

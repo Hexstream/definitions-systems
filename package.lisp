@@ -29,6 +29,8 @@
            #:check-definition
 
            #:locate
+           #:bind-definition
+           #:replace-definition
            #:unbind
            #:unbind-definition
            #:ensure

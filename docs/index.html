@@ -720,6 +720,19 @@
 
               </article>
 
+              <article class="method definition" id="dictionary_make-load-form_owner-mixin">
+
+                <h1><span class="type">Method</span> <span class="name self">make-load-form</span></h1>
+
+                <p class="args-and-retvals">(<var>mixin</var> <code class="specializer relevant"><a href="#dictionary_location-mixin">defsys:location-mixin</a></code>) &amp;optional <var>environment</var> =&gt; <var>creation-form</var>, <var>initialization-form</var></p>
+
+                <section class="description">
+                  <h1>Description</h1>
+                  <p>Returns <code>(or (<code class="relevant"><a href="#dictionary_location">defsys:location</a></code> mixin :errorp nil) (call-next-method))</code>.</p>
+                </section>
+
+              </article>
+
             </section>
 
             <section id="dictionary_location">
@@ -1211,12 +1224,20 @@
                 <a href="#dictionary_setf_locate" class="writer">(setfable)</a>
               </li>
               <li><a href="#dictionary_not-found"><span class="type">Condition</span> <code>not-found</code></a></li>
+              <li><a href="#dictionary_bind-definition"><span class="type">Generic Function</span> <code>bind-definition</code></a></li>
+              <li><a href="#dictionary_replace-definition"><span class="type">Generic Function</span> <code>replace-definition</code></a></li>
+            </ul>
+            <ul>
               <li><a href="#dictionary_unbind"><span class="type">Generic Function</span> <code>unbind</code></a></li>
               <li><a href="#dictionary_unbind-definition"><span class="type">Generic Function</span> <code>unbind-definition</code></a></li>
+            </ul>
+            <ul>
               <li><a href="#dictionary_ensure"><span class="type">Generic Function</span> <code>ensure</code></a></li>
               <li><a href="#dictionary_default-system"><span class="type">Generic Function</span> <code>default-system</code></a></li>
               <li><a href="#dictionary_expand"><span class="type">Generic Function</span> <code>expand</code></a></li>
               <li><a href="#dictionary_define"><span class="type">Macro</span> <code>define</code></a></li>
+            </ul>
+            <ul>
               <li><a href="#dictionary_map"><span class="type">Generic Function</span> <code>map</code></a></li>
               <li><a href="#dictionary_count"><span class="type">Generic Function</span> <code>count</code></a></li>
             </ul>
@@ -1366,19 +1387,6 @@
 
                 </article>
 
-                <article class="method definition" id="dictionary_before_setf_locate_t_system_t">
-
-                  <h1><span class="type">Before-Method</span> <span class="name self">(setf locate)</span></h1>
-
-                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_check-definition-mixin">defsys:check-definition-mixin</a></code>) <var>definition-name</var> &amp;key</p>
-
-                  <section class="description">
-                    <h1>Description</h1>
-                    <p>Calls <code>(<code class="relevant"><a href="#dictionary_check-definition">defsys:check-definition</a></code> <var>system</var> <var>new-definition</var> <var>definition-name</var>)</code>.</p>
-                  </section>
-
-                </article>
-
                 <article class="method definition" id="dictionary_after_setf_locate_owner-mixin_system_t">
 
                   <h1><span class="type">After-Method</span> <span class="name self">(setf locate)</span></h1>
@@ -1392,15 +1400,18 @@
 
                 </article>
 
-                <article class="method definition" id="dictionary_setf_locate_t_hash-table-mixin_t">
+                <article class="method definition" id="dictionary_setf_locate_t_system_t">
 
                   <h1><span class="type">Method</span> <span class="name self">(setf locate)</span></h1>
 
-                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) <var>definition-name</var> &amp;key =&gt; <var>new-definition</var></p>
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) <var>definition-name</var><br />&amp;key ((defsys:locate <var>locate-options</var>)) ((defsys:replace-definition <var>replace-options</var>)) ((defsys:bind-definition <var>bind-options</var>))<br />=&gt; <var>new-definition</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
-                    <p>Sets the definition using the internal hash-table.</p>
+                    <p>First, let <var>old-definition</var> be the result of <code>(apply #'<code class="relevant"><a href="#dictionary_locate">defsys:locate</a></code> <var>system</var> <var>definition-name</var> :errorp nil <var>locate-options</var>)</code>.</p>
+                    <p>If <var>old-definition</var> is nil, then return <code>(apply #'<code class="relevant"><a href="#dictionary_bind-definition">defsys:bind-definition</a></code> <var>system</var> <var>new-definition</var> <var>definition-name</var> <var>bind-options</var>)</code>.</p>
+                    <p>Else, if <var>new-definition</var> is <var>old-definition</var>, then return <var>new-definition</var>.</p>
+                    <p>Else, return <code>(apply #'<code class="relevant"><a href="#dictionary_replace-definition">defsys:replace-definition</a></code> <var>system</var> <var>old-definition</var> <var>new-definition</var> <var>definition-name</var> <var>replace-options</var>)</code>,<br />except if <var>bind-options</var> was provided then append the result of <code>(list 'defsys:bind-definition <var>bind-options</var>)</code> to the end of <var>replace-options</var>.</p>
                   </section>
 
                 </article>
@@ -1457,6 +1468,136 @@
 
           </section>
 
+          <section id="dictionary_bind-definition">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_bind-definition" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary" class="ellipsis">...</a>
+                <span class="crumb"><span class="s"> » </span><a href="#dictionary_protocols">Protocols</a></span>
+                <span class="crumb"><span class="s"> » </span><a class="here">bind-definition</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:bind-definition</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> <var>new-definition</var> <var>definition-name</var> &amp;key =&gt; <var>new-definition</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>new-definition</var> -- A definition.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Sets <var>new-definition</var> as the definition named <var>definition-name</var> in <var>system</var>.</p>
+                <p>The consequences are undefined if there is already a definition named <var>definition-name</var> in <var>system</var>.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_bind-definition_hash-table-mixin_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">defsys:bind-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></span>) <var>new-definition</var> <var>definition-name</var> &amp;key =&gt; <var>new-definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Sets the definition using the internal hash-table.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_before_bind-definition_check-definition-mixin_t_t">
+
+                  <h1><span class="type">Before-Method</span> <span class="name self">defsys:bind-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_check-definition-mixin">defsys:check-definition-mixin</a></code>) <var>new-definition</var> <var>definition-name</var> &amp;key</p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Calls <code>(<code class="relevant"><a href="#dictionary_check-definition">defsys:check-definition</a></code> <var>system</var> <var>new-definition</var> <var>definition-name</var>)</code>.</p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
+          <section id="dictionary_replace-definition">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_replace-definition" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary" class="ellipsis">...</a>
+                <span class="crumb"><span class="s"> » </span><a href="#dictionary_protocols">Protocols</a></span>
+                <span class="crumb"><span class="s"> » </span><a class="here">replace-definition</a></span>
+              </span>
+            </h1>
+
+            <article class="generic-function definition">
+
+              <h1><span class="type">Generic Function</span> <span class="name self">defsys:replace-definition</span></h1>
+
+              <p class="args-and-retvals"><var>system</var> <var>old-definition</var> <var>new-definition</var> <var>definition-name</var><br />&amp;key ((defsys:unbind-definition <var>unbind-options</var>)) ((defsys:bind-definition <var>bind-options</var>))<br />=&gt; <var>new-definition</var></p>
+
+              <section class="arguments-and-values">
+                <h1>Arguments and Values</h1>
+                <ul>
+                  <li><var>system</var> -- A <a href="#concepts_definitions-system-designator">definitions-system designator</a>.</li>
+                  <li><var>old-definition</var> -- A definition.</li>
+                  <li><var>new-definition</var> -- A definition.</li>
+                  <li><var>definition-name</var> -- A definition name.</li>
+                </ul>
+              </section>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>Sets <var>new-definition</var> as the definition named <var>definition-name</var> in <var>system</var>, thereby replacing <var>old-definition</var>.</p>
+                <p>The consequences are undefined if <var>old-definition</var> is not the definition named <var>definition-name</var> in <var>system</var>.</p>
+              </section>
+
+              <section class="methods">
+                <h1>Methods</h1>
+
+                <article class="method definition" id="dictionary_replace-definition_system_t_t_t">
+
+                  <h1><span class="type">Method</span> <span class="name self">defsys:bind-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_system">defsys:system</a></span>) <var>old-definition</var> <var>new-definition</var> <var>definition-name</var> &amp;key =&gt; <var>new-definition</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>
+                      Calls <code>(apply #'defsys:unbind-definition system old-definition definition-name unbind-options)</code>,
+                      <br />
+                      then <code>(apply #'defsys:bind-definition system new-definition definition-name bind-options)</code>.
+                    </p>
+                  </section>
+
+                </article>
+
+              </section>
+
+            </article>
+
+          </section>
+
           <section id="dictionary_unbind">
 
             <h1 class="breadcrumbs-bar">
@@ -1474,7 +1615,13 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:unbind</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> =&gt; <var>removedp</var></p>
+              <p class="args-and-retvals">
+                <var>system</var> <var>definition-name</var>
+                <br />
+                &amp;key ((defsys:locate <var>locate-options</var>)) ((defsys:unbind-definition <var>unbind-options</var>))
+                <br />
+                =&gt; <var>removedp</var>
+              </p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
@@ -1588,19 +1735,6 @@
 
                 </article>
 
-                <article class="method definition" id="dictionary_unbind-definition_hash-table-mixin_t_t">
-
-                  <h1><span class="type">After-Method</span> <span class="name self">defsys:unbind-definition</span></h1>
-
-                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_system">defsys:system</a></span>) (<var>definition</var> <span class="specializer relevant"><a href="#dictionary_owner-mixin">defsys:owner-mixin</a></span>) <var>definition-name</var></p>
-
-                  <section class="description">
-                    <h1>Description</h1>
-                    <p>If <var>definition</var>'s <code class="relevant"><a href="#dictionary_owner">defsys:owner</a></code> is <var>system</var>, then set it to <code>nil</code>.</p>
-                  </section>
-
-                </article>
-
               </section>
 
             </article>
@@ -1624,7 +1758,7 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:ensure</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>definition-class</var> &amp;rest <var>initargs</var> =&gt; <var>definition</var></p>
+              <p class="args-and-retvals"><var>system</var> <var>definition-name</var> <var>definition-class</var> &amp;rest <var>initargs</var> &amp;key &amp;allow-other-keys =&gt; <var>definition</var></p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
@@ -1994,7 +2128,7 @@
 
               <h1><span class="type">Generic Function</span> <span class="name self">defsys:count</span></h1>
 
-              <p class="args-and-retvals"><var>system</var> =&gt; count</p>
+              <p class="args-and-retvals"><var>system</var> &amp;key =&gt; count</p>
 
               <section class="arguments-and-values">
                 <h1>Arguments and Values</h1>
@@ -2016,7 +2150,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">count</span></h1>
 
-                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) =&gt; <var>count</var></p>
+                  <p class="args-and-retvals">(<var>system-name</var> <span class="specializer">symbol</span>) &amp;key =&gt; <var>count</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -2029,7 +2163,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">count</span></h1>
 
-                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) =&gt; <var>count</var></p>
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_system">defsys:system</a></code>) &amp;key ((defsys:map <var>map-options</var>)) =&gt; <var>count</var></p>
 
                   <section class="description">
                     <h1>Description</h1>
@@ -2042,7 +2176,7 @@
 
                   <h1><span class="type">Method</span> <span class="name self">count</span></h1>
 
-                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) =&gt; <var>count</var></p>
+                  <p class="args-and-retvals">(<var>system</var> <code class="specializer relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code>) &amp;key =&gt; <var>count</var></p>
 
                   <section class="description">
                     <h1>Description</h1>

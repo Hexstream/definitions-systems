@@ -43,7 +43,8 @@
       (let ((new-owner (if owner-supplied-p owner previous-owner))
             (new-name (if name-supplied-p name previous-name)))
         (if new-owner
-            (setf (defsys:locate new-owner new-name :binding-type :primary) definition)
+            (setf (defsys:locate new-owner new-name 'defsys:bind-definition '(:binding-type :primary))
+                  definition)
             (when previous-owner
               (defsys:unbind previous-owner previous-name)))))))
 
