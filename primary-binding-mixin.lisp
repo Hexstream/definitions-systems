@@ -1,21 +1,5 @@
 (in-package #:definitions-systems)
 
-(defclass defsys:definition () ())
-
-(defgeneric defsys:name (definition))
-
-(defclass defsys:name-mixin ()
-  ((%name :reader defsys:name
-          :writer (setf %name)
-          :type symbol
-          :initform nil)))
-
-(defmethod print-object ((mixin name-mixin) stream)
-  (print-unreadable-object (mixin stream :type t)
-    (prin1 (defsys:name mixin) stream)))
-
-(defgeneric defsys:owner (definition))
-
 (defclass defsys:owner-mixin ()
   ((%owner :reader defsys:owner
            :writer (setf %owner)
@@ -30,6 +14,18 @@
                   owner-init))
         (error "Don't know how to ~S for definition ~S because it has no owner."
                'make-load-form definition))))
+
+
+(defclass defsys:name-mixin ()
+  ((%name :reader defsys:name
+          :writer (setf %name)
+          :type symbol
+          :initform nil)))
+
+(defmethod print-object ((mixin name-mixin) stream)
+  (print-unreadable-object (mixin stream :type t)
+    (prin1 (defsys:name mixin) stream)))
+
 
 (defclass defsys:primary-binding-mixin (defsys:owner-mixin defsys:name-mixin defsys:definition)
   ())
@@ -54,18 +50,19 @@
 (defmethod (setf defsys:name) (new-name (definition defsys:primary-binding-mixin))
   (reinitialize-instance definition :name new-name))
 
-(defclass defsys:alias-bindings-mixin (defsys:definition)
-  ((%aliasing-systems :reader %aliasing-systems
-                      :type hash-table
-                      :initform (make-hash-table :test 'eq))))
 
-(defgeneric defsys:map-aliasing-systems (function definition)
-  (:method (function (definition defsys:alias-bindings-mixin))
-    (maphash (lambda (system aliases)
-               (funcall function system (lambda (function)
-                                          (mapcar function aliases))))
-             (%aliasing-systems definition)))
-  (:argument-precedence-order definition function))
+(defmethod defsys:bind-definition :after ((system defsys:system) (new-definition defsys:primary-binding-mixin) definition-name
+                                          &key (binding-type :auto))
+  (let ((previous-owner (defsys:owner new-definition)))
+    (when (or (and (eq binding-type :auto) (not previous-owner))
+              (eq binding-type :primary))
+      (when previous-owner
+        (defsys:unbind previous-owner (defsys:name new-definition)))
+      (setf (%owner new-definition) system
+            (%name new-definition) definition-name))))
 
-(defclass defsys:standard-definition (defsys:primary-binding-mixin defsys:alias-bindings-mixin defsys:definition)
-  ())
+(defmethod defsys:unbind-definition :after ((system defsys:system) (definition defsys:primary-binding-mixin) definition-name &key)
+  (declare (ignore definition-name))
+  (let ((owner (defsys:owner definition)))
+    (when (eq owner system)
+      (setf (%owner definition) nil))))

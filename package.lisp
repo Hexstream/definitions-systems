@@ -5,45 +5,64 @@
   (:shadowing-import-from #:enhanced-find-class #:find-class)
   (:shadow #:map
            #:count)
-  (:export #:definition
-           #:name-mixin
-           #:name
-           #:owner-mixin
-           #:owner
-           #:primary-binding-mixin
-           #:alias-bindings-mixin
-           #:map-aliasing-systems
-           #:standard-definition
-
-           #:system
-           #:hash-table-mixin
-           #:definition-order-mapping-mixin
-           #:standard-system
-           #:not-found
-
-           #:check-definition-mixin
-           #:base-definition-class-mixin
-           #:base-definition-class
-           #:unsuitable-definition-error
-           #:details
-           #:check-definition
-
-           #:locate
-           #:bind-definition
-           #:replace-definition
+           ;;; generic-functions.lisp
+  (:export #:locate
            #:unbind
-           #:unbind-definition
-           #:ensure
-           #:default-system
-           #:expand
-           #:define
            #:map
            #:count
 
+           #:owner
+           #:name
+
+           #:bind-definition
+           #:unbind-definition
+           #:replace-definition
+
+           #:ensure
+           #:default-system
+           #:expand
+
+           ;;; classes.lisp
+           #:definition
+           #:standard-definition
+
+           #:system
+           #:standard-system
+
+           #:not-found
+
+           ;;; bindings.lisp
+           #:owner-mixin
+           #:name-mixin
+           #:primary-binding-mixin
+
+           #:alias-bindings-mixin
+           #:map-aliasing-systems
+
+           ;;; checking.lisp
+           #:check-definition-mixin
+           #:check-definition
+
+           #:base-definition-class-mixin
+           #:base-definition-class
+
+           #:unsuitable-definition-error
+           #:details
+
+           ;;; hash-table-mixin.lisp
+           #:hash-table-mixin
+
+           ;;; definition-order-mapping-mixin.lisp
+           #:definition-order-mapping-mixin
+
+           ;;; root.lisp
            #:root-system
            #:location-mixin
            #:location
-           #:standard-root-system))
+           #:standard-root-system
+
+           ;;; expansion.lisp
+           #:define))
 
 (setf (shared-preferences:preferences-1 (find-package '#:definitions-systems))
       (make-instance 'enhanced-defclass:preferences

@@ -25,3 +25,9 @@
 
 (defun defsys:root-system ()
   *root-system*)
+
+(defmethod defsys:default-system ((system defsys:standard-system))
+  (defsys:root-system))
+
+(defmethod defsys:default-system ((system defsys:standard-root-system))
+  (error "~S does not define a ~S." 'defsys:standard-root-system 'defsys:default-system))

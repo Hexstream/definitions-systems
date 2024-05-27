@@ -1,6 +1,9 @@
 (in-package #:definitions-systems)
 
-;; See systems.lisp for (defclass defsys:hash-table-mixin).
+(defclass defsys:hash-table-mixin (defsys:system)
+  ((%hash :reader %hash
+          :type hash-table
+          :initform (make-hash-table :test 'eq))))
 
 (defmethod defsys:locate ((system defsys:hash-table-mixin) definition-name &key)
   (identity (gethash definition-name (%hash system))))

@@ -2,6 +2,11 @@
 
 (defclass defsys:check-definition-mixin (defsys:system) ())
 
+(defgeneric defsys:check-definition (system definition)
+  (:method ((system defsys:system) definition)
+    definition))
+
+
 (defgeneric defsys:base-definition-class (system))
 
 (defclass defsys:base-definition-class-mixin (defsys:check-definition-mixin)
@@ -27,15 +32,17 @@
                              Details: ~S"
                      (defsys:definition error) (defsys:system error) (defsys:details error)))))
 
-(defgeneric defsys:check-definition (system definition)
-  (:method ((system defsys:system) definition)
-    definition)
-  (:method ((system defsys:base-definition-class-mixin) definition)
-    (let ((base-definition-class (defsys:base-definition-class system)))
-      (if (typep definition base-definition-class)
-          definition
-          (error 'defsys:unsuitable-definition-error
-                 :system system :definition definition
-                 :details (make-condition 'type-error
-                                          :datum definition
-                                          :expected-type base-definition-class))))))
+(defmethod defsys:check-definition ((system defsys:base-definition-class-mixin) definition)
+  (let ((base-definition-class (defsys:base-definition-class system)))
+    (if (typep definition base-definition-class)
+        definition
+        (error 'defsys:unsuitable-definition-error
+               :system system :definition definition
+               :details (make-condition 'type-error
+                                        :datum definition
+                                        :expected-type base-definition-class)))))
+
+
+(defmethod defsys:bind-definition :before ((system defsys:check-definition-mixin) new-definition definition-name &key)
+  (declare (ignore definition-name))
+  (check-definition system new-definition))
