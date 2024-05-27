@@ -4,7 +4,11 @@
   (:method :around (system definition-name &key (errorp t))
     (or (call-next-method)
         (when errorp
-          (error 'defsys:not-found :system system :name definition-name)))))
+          (error 'defsys:not-found :system system :name definition-name))))
+  (:method ((system defsys:standard-root-system) definition-name &key)
+    (if (eq definition-name 'defsys:system)
+        system
+        (call-next-method))))
 
 (define-condition defsys:not-found (error)
   ((%system :initarg :system

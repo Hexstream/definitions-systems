@@ -21,12 +21,6 @@
 
 (defclass defsys:standard-root-system (defsys:location-mixin defsys:root-system defsys:standard-system) ())
 
-(defmethod defsys:locate ((system defsys:standard-root-system) definition-name &key (errorp t))
-  (declare (ignore errorp))
-  (if (eq definition-name 'defsys:system)
-      system
-      (call-next-method)))
-
 (defvar *root-system* (make-instance 'defsys:standard-root-system :name 'defsys:system :location '(defsys:root-system)))
 
 (defun defsys:root-system ()
