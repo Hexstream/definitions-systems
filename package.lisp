@@ -18,6 +18,7 @@
 
            #:system
            #:hash-table-mixin
+           #:definition-order-mapping-mixin
            #:standard-system
            #:not-found
 

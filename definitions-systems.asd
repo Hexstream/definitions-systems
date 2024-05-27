@@ -12,9 +12,10 @@
                "enhanced-find-class"
                "closer-mop")
 
-  :version "3.0"
+  :version "4.0"
   :serial cl:t
   :components ((:file "package")
+               (:file "insertion-ordered-list")
                (:file "definitions")
                (:file "systems")
                (:file "checking")

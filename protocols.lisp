@@ -37,7 +37,11 @@
                    &key (binding-type :auto))
     (when (or (and (eq binding-type :auto) (defsys:owner new-definition))
               (eq binding-type :alias))
-      (pushnew definition-name (gethash system (%aliasing-systems new-definition)) :test #'eq))))
+      (pushnew definition-name (gethash system (%aliasing-systems new-definition)) :test #'eq)))
+  (:method :after (new-definition (system defsys:definition-order-mapping-mixin) definition-name &key)
+    (%insert (%definition-ordered-list system)
+             definition-name
+             (cons definition-name new-definition))))
 
 (defgeneric defsys:unbind (system definition-name)
   (:method ((system defsys:system) definition-name)
@@ -46,6 +50,8 @@
         (defsys:unbind-definition system definition definition-name)))))
 
 (defgeneric defsys:unbind-definition (system definition definition-name)
+  (:method :after ((system defsys:definition-order-mapping-mixin) definition definition-name)
+    (%remove (%definition-ordered-list system) definition-name))
   (:method :after ((system defsys:system) (definition defsys:primary-binding-mixin) definition-name)
     (declare (ignore definition-name))
     (let ((owner (defsys:owner definition)))
@@ -105,6 +111,10 @@
 
 
 (defgeneric defsys:map (function system)
+  (:method (function (system defsys:definition-order-mapping-mixin))
+    (%map (lambda (entry)
+            (funcall function (car entry) (cdr entry)))
+          (%definition-ordered-list system)))
   (:argument-precedence-order system function))
 
 (defgeneric defsys:count (system)

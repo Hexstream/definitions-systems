@@ -52,7 +52,7 @@
 
       </div>
 
-      <p id="last-updated"><span>This page was last updated on </span><time datetime="2023-09-06">6 september 2023</time><span>.</span></p>
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2024-05-27">27 may 2024</time><span>.</span></p>
 
     </nav>
 
@@ -243,6 +243,7 @@
             <ul>
               <li><a href="#dictionary_system"><span class="type">Class</span> <code>system</code></a></li>
               <li><a href="#dictionary_hash-table-mixin"><span class="type">Class</span> <code>hash-table-mixin</code></a></li>
+              <li><a href="#dictionary_definition-order-mapping-mixin"><span class="type">Class</span> <code>definition-order-mapping-mixin</code></a></li>
               <li><a href="#dictionary_standard-system"><span class="type">Class</span> <code>standard-system</code></a></li>
               <li><a href="#dictionary_definition-checking">Definition checking</a></li>
               <li><a href="#dictionary_root-systems">Root systems</a></li>
@@ -303,6 +304,35 @@
 
           </section>
 
+          <section id="dictionary_definition-order-mapping-mixin">
+
+            <h1 class="breadcrumbs-bar">
+              <span class="section-relative-nav">
+                <a href="#dictionary_definition-order-mapping-mixin" class="anchor">⚓</a>
+              </span>
+              <span class="breadcrumbs">
+                <a href="#dictionary" class="ellipsis">...</a>
+                <span class="crumb"><span class="s"> » </span><a href="#dictionary_systems">Systems</a></span>
+                <span class="crumb"><span class="s"> » </span><a class="here">definition-order-mapping-mixin</a></span>
+              </span>
+            </h1>
+
+            <article class="class definition">
+
+              <h1><span class="type">Class</span> <span class="name self">defsys:definition-order-mapping-mixin</span></h1>
+
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
+
+              <section class="description">
+                <h1>Description</h1>
+                <p>This class provides a method on <code class="relevant"><a href="#dictionary_map">defsys:map</a></code> that guarantees mapping in the same order that definitions were added to the <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>. <code class="relevant"><a href="#dictionary_standard-system">defsys:standard-system</a></code> inherits from this class.</p>
+                <p>After-methods are also defined on <code class="relevant"><a href="#dictionary_setf_locate">(setf defsys:locate)</a></code> and <code class="relevant"><a href="#dictionary_unbind-definition">defsys:unbind-definition</a></code> to keep track of definition order.</p>
+              </section>
+
+            </article>
+
+          </section>
+
           <section id="dictionary_standard-system">
 
             <h1 class="breadcrumbs-bar">
@@ -320,7 +350,7 @@
 
               <h1><span class="type">Class</span> <span class="name self">defsys:standard-system</span></h1>
 
-              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code> <code class="relevant"><a href="#dictionary_standard-definition">defsys:standard-definition</a></code> <code class="relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code> <code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
+              <p class="direct-superclasses"><code class="relevant"><a href="#dictionary_base-definition-class-mixin">defsys:base-definition-class-mixin</a></code> <code class="relevant"><a href="#dictionary_standard-definition">defsys:standard-definition</a></code> <code class="relevant"><a href="#dictionary_definition-order-mapping-mixin">defsys:definition-order-mapping-mixin</a></code> <code class="relevant"><a href="#dictionary_hash-table-mixin">defsys:hash-table-mixin</a></code> <code class="relevant"><a href="#dictionary_system">defsys:system</a></code></p>
 
               <section class="description">
                 <h1>Description</h1>
@@ -1376,6 +1406,19 @@
 
                 </article>
 
+                <article class="method definition" id="dictionary_setf_locate_t_definition-order-mapping-mixin_t">
+
+                  <h1><span class="type">After-Method</span> <span class="name self">(setf locate)</span></h1>
+
+                  <p class="args-and-retvals"><var>new-definition</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_definition-order-mapping-mixin">defsys:definition-order-mapping-mixin</a></code>) <var>definition-name</var> &amp;key</p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Keeps track of the <var>new-definition</var> for definition-order mapping.</p>
+                  </section>
+
+                </article>
+
               </section>
 
             </article>
@@ -1529,6 +1572,19 @@
                   <section class="description">
                     <h1>Description</h1>
                     <p>Removes the definition named <var>definition-name</var> from the internal hash-table.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_unbind-definition_definition-order-mapping-mixin_t_t">
+
+                  <h1><span class="type">After-Method</span> <span class="name self">defsys:unbind-definition</span></h1>
+
+                  <p class="args-and-retvals">(<var>system</var> <span class="specializer relevant"><a href="#dictionary_definition-order-mapping-mixin">defsys:definition-order-mapping-mixin</a></span>) <var>definition</var> <var>definition-name</var></p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Keeps track of the removal of <var>definition</var> for definition-order mapping.</p>
                   </section>
 
                 </article>
@@ -1954,6 +2010,19 @@
                   <section class="description">
                     <h1>Description</h1>
                     <p>Calls <a href="https://www.lispworks.com/documentation/HyperSpec/Body/f_maphas.htm" target="_blank">maphash</a> on <var>function</var> and <var>system</var>'s internal hash-table.</p>
+                  </section>
+
+                </article>
+
+                <article class="method definition" id="dictionary_map_t_definition-order-mapping-mixin">
+
+                  <h1><span class="type">Method</span> <span class="name self">map</span></h1>
+
+                  <p class="args-and-retvals"><var>function</var> (<var>system</var> <code class="specializer relevant"><a href="#dictionary_definition-order-mapping-mixin">defsys:definition-order-mapping-mixin</a></code>) =&gt; nil</p>
+
+                  <section class="description">
+                    <h1>Description</h1>
+                    <p>Guarantees mapping in the same order that definitions were added to the <code class="relevant"><a href="#dictionary_system">defsys:system</a></code>.</p>
                   </section>
 
                 </article>
